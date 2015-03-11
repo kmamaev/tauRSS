@@ -4,7 +4,7 @@
 
 @interface SourcesListVC ()
 
-@property (nonatomic, strong) NSArray *sources;
+@property (nonatomic, strong) SourcesController *sourcesController;
 
 @end
 
@@ -14,15 +14,8 @@
 - (instancetype)init {
     self = [super init];
     if (self != nil) {
-        self.sources = @[@"",
-                         @"",
-                         @"Все новости",
-                         @"Закладки",
-                         @"",
-                         @"Лента RSS",
-                         @"НГС RSS",
-                         @"Яндекс RSS"];
-        self.articlesListVC = [[ArticlesListVC alloc] init];
+        _sourcesController = [[SourcesController alloc] init];
+        _articlesListVC = [[ArticlesListVC alloc] init];
     }
     return self;
 }
@@ -32,14 +25,15 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.sources.count;
+    return self.sourcesController.sources.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                    reuseIdentifier:@"reuseID1"];
-    cell.textLabel.text = self.sources[indexPath.row];
+    Source *source = self.sourcesController.sources[indexPath.row];
+    cell.textLabel.text = source.title;
     return cell;
 }
 
