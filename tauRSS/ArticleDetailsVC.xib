@@ -6,6 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ArticleDetailsVC">
             <connections>
+                <outlet property="descriptionLabel" destination="lH8-pU-shn" id="5xZ-YG-ej1"/>
+                <outlet property="titleLabel" destination="kAl-Sn-ntX" id="H8E-ot-YXm"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -13,7 +15,29 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAl-Sn-ntX">
+                    <rect key="frame" x="20" y="70" width="560" height="26.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lH8-pU-shn">
+                    <rect key="frame" x="20" y="106.5" width="560" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="kAl-Sn-ntX" secondAttribute="trailing" constant="20" symbolic="YES" id="Hmz-J2-yGn"/>
+                <constraint firstAttribute="trailing" secondItem="lH8-pU-shn" secondAttribute="trailing" constant="20" symbolic="YES" id="Ppv-if-Cj3"/>
+                <constraint firstItem="lH8-pU-shn" firstAttribute="top" secondItem="kAl-Sn-ntX" secondAttribute="bottom" constant="10" id="Sdn-Yz-nTL"/>
+                <constraint firstItem="kAl-Sn-ntX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="70" id="cHr-Zr-pcz"/>
+                <constraint firstItem="lH8-pU-shn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="hLh-Lc-aRD"/>
+                <constraint firstItem="kAl-Sn-ntX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="hpK-Tl-b8K"/>
+            </constraints>
         </view>
     </objects>
 </document>

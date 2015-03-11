@@ -30,7 +30,9 @@
 }
 
 - (void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)ip {
-    [self.navigationController pushViewController:[[ArticleDetailsVC alloc] init] animated:YES];
+    Article *article = self.articles[ip.row];
+    [self.navigationController pushViewController:[[ArticleDetailsVC alloc] initWithArticle:article]
+                                         animated:YES];
 }
 
 @end
