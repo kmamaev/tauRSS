@@ -38,7 +38,9 @@
 }
 
 - (void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)ip {
-    // TODO: send to articlesVC updated articles list    
+    Source *source = self.sourcesController.sources[ip.row];
+    self.articlesListVC.articles = source.articles;
+    [self.articlesListVC.articlesTable reloadData];
     [self.viewDeckController closeLeftViewAnimated:YES];
 }
 

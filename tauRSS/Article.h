@@ -13,4 +13,6 @@
 @property (nonatomic, assign) BOOL isFavorite;
 @property (nonatomic, strong) NSDate *publishDate;
 
+- (instancetype)initWithTitle:(NSString *)title;
+
 @end

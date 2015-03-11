@@ -3,25 +3,10 @@
 
 
 @interface ArticlesListVC ()
-
-@property (nonatomic, strong) NSArray *articles;
-
 @end
 
 
 @implementation ArticlesListVC
-
-- (instancetype)init {
-    self = [super init];
-    if (self != nil) {
-        self.articles = @[@"Доллар подорожал",
-                          @"Выпало рекордное количество снега",
-                          @"13ый трамвай устроил дтп",
-                          @"Apple продали много iphone'ов",
-                          @"Президент подписал указ"];
-    }
-    return self;
-}
 
 - (void)viewDidLoad {
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
@@ -39,7 +24,8 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                    reuseIdentifier:@"reuseID2"];
-    cell.textLabel.text = self.articles[indexPath.row];
+    Article *article = self.articles[indexPath.row];
+    cell.textLabel.text = article.title;
     return cell;
 }
 
