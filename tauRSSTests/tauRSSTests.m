@@ -1,17 +1,10 @@
-//
-//  tauRSSTests.m
-//  tauRSSTests
-//
-//  Created by Konstantin on 05/03/15.
-//  Copyright (c) 2015 Noveo. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
-@interface tauRSSTests : XCTestCase
 
+@interface tauRSSTests : XCTestCase
 @end
+
 
 @implementation tauRSSTests
 
