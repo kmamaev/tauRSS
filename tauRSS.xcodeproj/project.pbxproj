@@ -22,6 +22,7 @@
 		B549E4551AB054AC00371CBD /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = B549E4541AB054AC00371CBD /* Article.m */; };
 		B549E4581AB054EC00371CBD /* Source.m in Sources */ = {isa = PBXBuildFile; fileRef = B549E4571AB054EC00371CBD /* Source.m */; };
 		B549E45B1AB059C500371CBD /* SourcesController.m in Sources */ = {isa = PBXBuildFile; fileRef = B549E45A1AB059C500371CBD /* SourcesController.m */; };
+		B549E45E1AB07C6F00371CBD /* StorageController.m in Sources */ = {isa = PBXBuildFile; fileRef = B549E45D1AB07C6F00371CBD /* StorageController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,8 @@
 		B549E4571AB054EC00371CBD /* Source.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Source.m; sourceTree = "<group>"; };
 		B549E4591AB059C500371CBD /* SourcesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesController.h; sourceTree = "<group>"; };
 		B549E45A1AB059C500371CBD /* SourcesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourcesController.m; sourceTree = "<group>"; };
+		B549E45C1AB07C6F00371CBD /* StorageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageController.h; sourceTree = "<group>"; };
+		B549E45D1AB07C6F00371CBD /* StorageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +135,8 @@
 				B549E4571AB054EC00371CBD /* Source.m */,
 				B549E4591AB059C500371CBD /* SourcesController.h */,
 				B549E45A1AB059C500371CBD /* SourcesController.m */,
+				B549E45C1AB07C6F00371CBD /* StorageController.h */,
+				B549E45D1AB07C6F00371CBD /* StorageController.m */,
 				B53CDBEE1AA78E3600CDD070 /* Images.xcassets */,
 				B53CDBF01AA78E3600CDD070 /* LaunchScreen.xib */,
 				B53CDBE11AA78E3600CDD070 /* Supporting Files */,
@@ -319,6 +324,7 @@
 				B53CDBE41AA78E3600CDD070 /* main.m in Sources */,
 				B549E45B1AB059C500371CBD /* SourcesController.m in Sources */,
 				B52CCF271AAEED6900E7828A /* ArticlesListVC.m in Sources */,
+				B549E45E1AB07C6F00371CBD /* StorageController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

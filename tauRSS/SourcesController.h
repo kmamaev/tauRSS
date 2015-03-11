@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "Source.h"
 #import "Article.h"
+#import "StorageController.h"
 
 
 @interface SourcesController : NSObject
