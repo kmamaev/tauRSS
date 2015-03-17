@@ -5,7 +5,7 @@
 
 @interface ArticlesListVC : UIViewController
 
-@property (nonatomic, strong) NSArray *articles;
+@property (copy, nonatomic) NSArray *articles;
 @property (strong, nonatomic) IBOutlet UITableView *articlesTable;
 
 @end

@@ -8,6 +8,14 @@
 
 @implementation ArticlesListVC
 
+- (instancetype)init {
+    self = [super init];
+    if (self != nil) {
+        _articles = [NSArray array];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
                                              initWithTitle:@"left"

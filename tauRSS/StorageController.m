@@ -17,10 +17,10 @@
 #warning resolve TODO mark
     // TODO: Implement get sources from database and remove hard code
     
-    Source *s1 = [[Source alloc] initWithTitle:@"Все новости"];
-    Source *s2 = [[Source alloc] initWithTitle:@"Закладки"];
-    Source *s3 = [[Source alloc] initWithTitle:@"Лента RSS"];
-    Source *s4 = [[Source alloc] initWithTitle:@"НГС RSS"];
+    Source *s1 = [[Source alloc] init];
+    s1.title = @"Лента RSS";
+    Source *s2 = [[Source alloc] init];
+    s2.title = @"НГС RSS";
     
     NSDateFormatter *dateFormetter = [[NSDateFormatter alloc] init];
     dateFormetter.timeStyle = NSDateFormatterNoStyle;
@@ -61,7 +61,7 @@
                                         imageURL:[NSURL URLWithString:@"http://icdn.lenta.ru/images/2015/03/11/16/20150311160344122/pic_9a9ada46365f59ac02a06f0bcfbbe95a.jpg"]
                                      publishDate:[dateFormetter dateFromString:@"Wed, 11 Mar 2015 16:44:00 +0300"]];
     
-    s3.articles = @[a1, a2, a3, a4, a5];
+    s1.articles = @[a1, a2, a3, a4, a5];
     
     Article *a6 = [[Article alloc] initWithTitle:@"Фигурант по делу «Интерры» провел на свободе 13 дней"
                                             link:[NSURL URLWithString:@"http://news.ngs.ru/more/2090792/"]
@@ -98,9 +98,9 @@
                                          imageURL:nil
                                       publishDate:[dateFormetter dateFromString:@"Wed, 11 Mar 2015 16:16:00 +0700"]];
     
-    s4.articles = @[a6, a7, a8, a9, a10];
+    s2.articles = @[a6, a7, a8, a9, a10];
     
-    return @[s1, s2, s3, s4];
+    return @[s1, s2];
 }
 
 @end

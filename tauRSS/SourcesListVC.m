@@ -4,7 +4,9 @@
 
 @interface SourcesListVC ()
 
-@property (nonatomic, strong) SourcesController *sourcesController;
+@property (strong, nonatomic) SourcesController *sourcesController;
+@property (weak, nonatomic, readonly) NSArray *sources;
+#warning property sources in sourceController should not be (copy)
 
 @end
 
@@ -16,6 +18,7 @@
     if (self != nil) {
         _sourcesController = [[SourcesController alloc] init];
         _articlesListVC = [[ArticlesListVC alloc] init];
+        _sources = _sourcesController.sources;
     }
     return self;
 }
@@ -25,20 +28,20 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.sourcesController.sources.count;
+    return self.sources.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                    reuseIdentifier:@"reuseID1"];
-    Source *source = self.sourcesController.sources[indexPath.row];
+    Source *source = self.sources[indexPath.row];
     cell.textLabel.text = source.title;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)ip {
-    Source *source = self.sourcesController.sources[ip.row];
+    Source *source = self.sources[ip.row];
     self.articlesListVC.articles = source.articles;
     [self.articlesListVC.articlesTable reloadData];
     [self.viewDeckController closeLeftViewAnimated:YES];

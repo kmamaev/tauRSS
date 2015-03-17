@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B3ECC070EDAAF4C4297B8B83 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E864111EC9C9498C507FF24 /* libPods.a */; };
+		B5046D5B1AB733E7006D5183 /* ArticlesController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5046D5A1AB733E7006D5183 /* ArticlesController.m */; };
 		B52CCF221AAEE95F00E7828A /* SourcesListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B52CCF201AAEE95F00E7828A /* SourcesListVC.m */; };
 		B52CCF231AAEE95F00E7828A /* SourcesListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B52CCF211AAEE95F00E7828A /* SourcesListVC.xib */; };
 		B52CCF271AAEED6900E7828A /* ArticlesListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B52CCF251AAEED6900E7828A /* ArticlesListVC.m */; };
@@ -39,6 +40,8 @@
 		3E3123729005DA975C61A5B4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		5E864111EC9C9498C507FF24 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1828B58CF9C625BCFDBC4F7 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B5046D591AB733E7006D5183 /* ArticlesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticlesController.h; sourceTree = "<group>"; };
+		B5046D5A1AB733E7006D5183 /* ArticlesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesController.m; sourceTree = "<group>"; };
 		B52CCF1F1AAEE95F00E7828A /* SourcesListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesListVC.h; sourceTree = "<group>"; };
 		B52CCF201AAEE95F00E7828A /* SourcesListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourcesListVC.m; sourceTree = "<group>"; };
 		B52CCF211AAEE95F00E7828A /* SourcesListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SourcesListVC.xib; sourceTree = "<group>"; };
@@ -135,6 +138,8 @@
 				B549E4571AB054EC00371CBD /* Source.m */,
 				B549E4591AB059C500371CBD /* SourcesController.h */,
 				B549E45A1AB059C500371CBD /* SourcesController.m */,
+				B5046D591AB733E7006D5183 /* ArticlesController.h */,
+				B5046D5A1AB733E7006D5183 /* ArticlesController.m */,
 				B549E45C1AB07C6F00371CBD /* StorageController.h */,
 				B549E45D1AB07C6F00371CBD /* StorageController.m */,
 				B53CDBEE1AA78E3600CDD070 /* Images.xcassets */,
@@ -316,6 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5046D5B1AB733E7006D5183 /* ArticlesController.m in Sources */,
 				B52CCF361AAF50F700E7828A /* ArticleDetailsVC.m in Sources */,
 				B52CCF221AAEE95F00E7828A /* SourcesListVC.m in Sources */,
 				B549E4581AB054EC00371CBD /* Source.m in Sources */,
