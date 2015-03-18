@@ -32,6 +32,7 @@
                                         category:@"Бизнес"
                                         imageURL:[NSURL URLWithString:@"http://icdn.lenta.ru/images/2015/03/11/16/20150311162956926/pic_eac0cee430fbcd74e6e4b12d5f3c3a9d.jpg"]
                                      publishDate:[dateFormetter dateFromString:@"Wed, 11 Mar 2015 17:01:02 +0300"]];
+    a1.isFavorite = YES;
     
     Article *a2 = [[Article alloc] initWithTitle:@"В России организуют прямую трансляцию полного солнечного затмения"
                                             link:[NSURL URLWithString:@"http://lenta.ru/news/2015/03/11/sun/"]
@@ -39,6 +40,7 @@
                                         category:@"Наука и техника"
                                         imageURL:[NSURL URLWithString:@"http://icdn.lenta.ru/images/2015/03/11/16/201503111"]
                                      publishDate:[dateFormetter dateFromString:@"Wed, 11 Mar 2015 17:01:00 +0300"]];
+    a2.isFavorite = YES;
     
     Article *a3 = [[Article alloc] initWithTitle:@"МИД назвал швейцарские санкции несуразными"
                                             link:[NSURL URLWithString:@"http://lenta.ru/news/2015/03/11/mid/"]
@@ -69,6 +71,7 @@
                                         category:@"новости"
                                         imageURL:nil
                                      publishDate:[dateFormetter dateFromString:@"Wed, 11 Mar 2015 17:54:00 +0700"]];
+    a6.isFavorite = YES;
     
     Article *a7 = [[Article alloc] initWithTitle:@"Курс доллара взлетел на 2 рубля"
                                             link:[NSURL URLWithString:@"http://news.ngs.ru/more/2090682/"]
@@ -76,6 +79,7 @@
                                         category:@"новости"
                                         imageURL:nil
                                      publishDate:[dateFormetter dateFromString:@"Wed, 11 Mar 2015 17:29:00 +0700"]];
+    a7.isFavorite = YES;
     
     Article *a8 = [[Article alloc] initWithTitle:@"Дело о групповом изнасиловании студентки дошло до суда"
                                             link:[NSURL URLWithString:@"http://news.ngs.ru/more/2090642/"]

@@ -36,9 +36,14 @@
 }
 
 - (NSArray *)favoriteArticles {
-#warning resolve TODO mark
-    // TODO: Implement this
-    return nil;
+    NSArray *allArticles = [self allArticles];
+    NSMutableArray *favoriteArticles = [NSMutableArray array];
+    for (Article *article in allArticles) {
+        if (article.isFavorite) {
+            [favoriteArticles addObject:article];
+        }
+    }
+    return favoriteArticles;
 }
 
 @end

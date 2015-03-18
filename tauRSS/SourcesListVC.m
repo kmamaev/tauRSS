@@ -6,7 +6,6 @@
 
 @property (strong, nonatomic) SourcesController *sourcesController;
 @property (weak, nonatomic, readonly) NSArray *sources;
-#warning property sources in sourceController should not be (copy)
 
 @end
 
