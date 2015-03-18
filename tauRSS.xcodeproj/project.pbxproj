@@ -20,6 +20,8 @@
 		B53CDBEF1AA78E3600CDD070 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B53CDBEE1AA78E3600CDD070 /* Images.xcassets */; };
 		B53CDBF21AA78E3600CDD070 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B53CDBF01AA78E3600CDD070 /* LaunchScreen.xib */; };
 		B53CDBFE1AA78E3600CDD070 /* tauRSSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B53CDBFD1AA78E3600CDD070 /* tauRSSTests.m */; };
+		B5463EAC1ABA05CF002AE579 /* ArticleWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B5463EAA1ABA05CF002AE579 /* ArticleWebVC.m */; };
+		B5463EAD1ABA05CF002AE579 /* ArticleWebVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5463EAB1ABA05CF002AE579 /* ArticleWebVC.xib */; };
 		B549E4551AB054AC00371CBD /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = B549E4541AB054AC00371CBD /* Article.m */; };
 		B549E4581AB054EC00371CBD /* Source.m in Sources */ = {isa = PBXBuildFile; fileRef = B549E4571AB054EC00371CBD /* Source.m */; };
 		B549E45B1AB059C500371CBD /* SourcesController.m in Sources */ = {isa = PBXBuildFile; fileRef = B549E45A1AB059C500371CBD /* SourcesController.m */; };
@@ -61,6 +63,9 @@
 		B53CDBF71AA78E3600CDD070 /* tauRSSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tauRSSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B53CDBFC1AA78E3600CDD070 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B53CDBFD1AA78E3600CDD070 /* tauRSSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tauRSSTests.m; sourceTree = "<group>"; };
+		B5463EA91ABA05CF002AE579 /* ArticleWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleWebVC.h; sourceTree = "<group>"; };
+		B5463EAA1ABA05CF002AE579 /* ArticleWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleWebVC.m; sourceTree = "<group>"; };
+		B5463EAB1ABA05CF002AE579 /* ArticleWebVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleWebVC.xib; sourceTree = "<group>"; };
 		B549E4531AB054AC00371CBD /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Article.h; sourceTree = "<group>"; };
 		B549E4541AB054AC00371CBD /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Article.m; sourceTree = "<group>"; };
 		B549E4561AB054EC00371CBD /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Source.h; sourceTree = "<group>"; };
@@ -132,6 +137,9 @@
 				B52CCF331AAF50F700E7828A /* ArticleDetailsVC.h */,
 				B52CCF341AAF50F700E7828A /* ArticleDetailsVC.m */,
 				B52CCF351AAF50F700E7828A /* ArticleDetailsVC.xib */,
+				B5463EA91ABA05CF002AE579 /* ArticleWebVC.h */,
+				B5463EAA1ABA05CF002AE579 /* ArticleWebVC.m */,
+				B5463EAB1ABA05CF002AE579 /* ArticleWebVC.xib */,
 				B549E4531AB054AC00371CBD /* Article.h */,
 				B549E4541AB054AC00371CBD /* Article.m */,
 				B549E4561AB054EC00371CBD /* Source.h */,
@@ -266,6 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5463EAD1ABA05CF002AE579 /* ArticleWebVC.xib in Resources */,
 				B53CDBF21AA78E3600CDD070 /* LaunchScreen.xib in Resources */,
 				B53CDBEF1AA78E3600CDD070 /* Images.xcassets in Resources */,
 				B52CCF371AAF50F700E7828A /* ArticleDetailsVC.xib in Resources */,
@@ -329,6 +338,7 @@
 				B53CDBE71AA78E3600CDD070 /* AppDelegate.m in Sources */,
 				B53CDBE41AA78E3600CDD070 /* main.m in Sources */,
 				B549E45B1AB059C500371CBD /* SourcesController.m in Sources */,
+				B5463EAC1ABA05CF002AE579 /* ArticleWebVC.m in Sources */,
 				B52CCF271AAEED6900E7828A /* ArticlesListVC.m in Sources */,
 				B549E45E1AB07C6F00371CBD /* StorageController.m in Sources */,
 			);

@@ -1,4 +1,5 @@
 #import "ArticleDetailsVC.h"
+#import "ArticleWebVC.h"
 
 
 @interface ArticleDetailsVC ()
@@ -27,6 +28,13 @@
     [super viewDidLoad];
     self.titleLabel.text = self.article.title;
     self.descriptionLabel.text = self.article.articleDescription;
+}
+
+- (IBAction)didTapLinkButton:(UIButton *)sender {
+    ArticleWebVC *articleWebVC = [[ArticleWebVC alloc] initWithURL:self.article.link];
+    [self.navigationController pushViewController:articleWebVC
+                                         animated:YES];
+
 }
 
 @end
