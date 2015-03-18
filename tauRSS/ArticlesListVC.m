@@ -28,12 +28,23 @@
     return self.articles.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 120.0f;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                                    reuseIdentifier:@"reuseID2"];
     Article *article = self.articles[indexPath.row];
+    
     cell.textLabel.text = article.title;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@\n%@\n%@",
+                                 article.category,
+                                 article.publishDate,
+                                 article.articleDescription];
+    cell.detailTextLabel.numberOfLines = 0;
+    [cell.detailTextLabel sizeToFit];
     return cell;
 }
 

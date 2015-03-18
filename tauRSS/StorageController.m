@@ -23,8 +23,7 @@
     s2.title = @"НГС RSS";
     
     NSDateFormatter *dateFormetter = [[NSDateFormatter alloc] init];
-    dateFormetter.timeStyle = NSDateFormatterNoStyle;
-    dateFormetter.dateFormat = @"ccc, dd MMM yyyy hh:mm:ss Z";
+    dateFormetter.dateFormat = @"ccc, dd MMM yyyy HH:mm:ss Z";
     
     Article *a1 = [[Article alloc] initWithTitle:@"Совет директоров «Башнефти» возглавил первый замглавы Минэнерго"
                                             link:[NSURL URLWithString:@"http://lenta.ru/news/2015/03/11/bashneft/"]

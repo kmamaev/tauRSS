@@ -13,7 +13,7 @@
     else return _articles;
 }
 
-+ (instancetype)allNewsSourceWithArticlesController:(ArticlesController *)articlesController  {
++ (instancetype)allNewsSourceWithArticlesController:(ArticlesController *)articlesController {
     Source *source = [[self alloc] init];
     source.title = @"Все новости";
 #warning resolve TODO mark
