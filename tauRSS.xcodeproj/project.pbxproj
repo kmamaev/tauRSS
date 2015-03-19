@@ -26,6 +26,10 @@
 		B549E4581AB054EC00371CBD /* Source.m in Sources */ = {isa = PBXBuildFile; fileRef = B549E4571AB054EC00371CBD /* Source.m */; };
 		B549E45B1AB059C500371CBD /* SourcesController.m in Sources */ = {isa = PBXBuildFile; fileRef = B549E45A1AB059C500371CBD /* SourcesController.m */; };
 		B549E45E1AB07C6F00371CBD /* StorageController.m in Sources */ = {isa = PBXBuildFile; fileRef = B549E45D1AB07C6F00371CBD /* StorageController.m */; };
+		B5D4BCDE1ABB360100B31627 /* image_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D4BCDD1ABB360100B31627 /* image_placeholder.png */; };
+		B5D4BCE21ABB600100B31627 /* NSDate+DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D4BCE11ABB600100B31627 /* NSDate+DateHelper.m */; };
+		C0DA933B1ABAEBF200A1F062 /* ArticlesListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA93391ABAEBF200A1F062 /* ArticlesListCell.m */; };
+		C0DA933C1ABAEBF200A1F062 /* ArticlesListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0DA933A1ABAEBF200A1F062 /* ArticlesListCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +78,12 @@
 		B549E45A1AB059C500371CBD /* SourcesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourcesController.m; sourceTree = "<group>"; };
 		B549E45C1AB07C6F00371CBD /* StorageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageController.h; sourceTree = "<group>"; };
 		B549E45D1AB07C6F00371CBD /* StorageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageController.m; sourceTree = "<group>"; };
+		B5D4BCDD1ABB360100B31627 /* image_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image_placeholder.png; path = Assets/image_placeholder.png; sourceTree = "<group>"; };
+		B5D4BCE01ABB600100B31627 /* NSDate+DateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateHelper.h"; sourceTree = "<group>"; };
+		B5D4BCE11ABB600100B31627 /* NSDate+DateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateHelper.m"; sourceTree = "<group>"; };
+		C0DA93381ABAEBF200A1F062 /* ArticlesListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticlesListCell.h; sourceTree = "<group>"; };
+		C0DA93391ABAEBF200A1F062 /* ArticlesListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesListCell.m; sourceTree = "<group>"; };
+		C0DA933A1ABAEBF200A1F062 /* ArticlesListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticlesListCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +136,8 @@
 		B53CDBE01AA78E3600CDD070 /* tauRSS */ = {
 			isa = PBXGroup;
 			children = (
+				B5D4BCDF1ABB5FD900B31627 /* Categories */,
+				B5D4BCDA1ABB358600B31627 /* Assets */,
 				B53CDBE51AA78E3600CDD070 /* AppDelegate.h */,
 				B53CDBE61AA78E3600CDD070 /* AppDelegate.m */,
 				B52CCF1F1AAEE95F00E7828A /* SourcesListVC.h */,
@@ -134,6 +146,9 @@
 				B52CCF241AAEED6900E7828A /* ArticlesListVC.h */,
 				B52CCF251AAEED6900E7828A /* ArticlesListVC.m */,
 				B52CCF261AAEED6900E7828A /* ArticlesListVC.xib */,
+				C0DA93381ABAEBF200A1F062 /* ArticlesListCell.h */,
+				C0DA93391ABAEBF200A1F062 /* ArticlesListCell.m */,
+				C0DA933A1ABAEBF200A1F062 /* ArticlesListCell.xib */,
 				B52CCF331AAF50F700E7828A /* ArticleDetailsVC.h */,
 				B52CCF341AAF50F700E7828A /* ArticleDetailsVC.m */,
 				B52CCF351AAF50F700E7828A /* ArticleDetailsVC.xib */,
@@ -181,6 +196,23 @@
 				B53CDBFC1AA78E3600CDD070 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B5D4BCDA1ABB358600B31627 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				B5D4BCDD1ABB360100B31627 /* image_placeholder.png */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		B5D4BCDF1ABB5FD900B31627 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				B5D4BCE01ABB600100B31627 /* NSDate+DateHelper.h */,
+				B5D4BCE11ABB600100B31627 /* NSDate+DateHelper.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		C7810488F06A96528750DEAF /* Pods */ = {
@@ -275,9 +307,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5463EAD1ABA05CF002AE579 /* ArticleWebVC.xib in Resources */,
+				C0DA933C1ABAEBF200A1F062 /* ArticlesListCell.xib in Resources */,
 				B53CDBF21AA78E3600CDD070 /* LaunchScreen.xib in Resources */,
 				B53CDBEF1AA78E3600CDD070 /* Images.xcassets in Resources */,
 				B52CCF371AAF50F700E7828A /* ArticleDetailsVC.xib in Resources */,
+				B5D4BCDE1ABB360100B31627 /* image_placeholder.png in Resources */,
 				B52CCF231AAEE95F00E7828A /* SourcesListVC.xib in Resources */,
 				B52CCF281AAEED6900E7828A /* ArticlesListVC.xib in Resources */,
 			);
@@ -334,6 +368,7 @@
 				B52CCF361AAF50F700E7828A /* ArticleDetailsVC.m in Sources */,
 				B52CCF221AAEE95F00E7828A /* SourcesListVC.m in Sources */,
 				B549E4581AB054EC00371CBD /* Source.m in Sources */,
+				C0DA933B1ABAEBF200A1F062 /* ArticlesListCell.m in Sources */,
 				B549E4551AB054AC00371CBD /* Article.m in Sources */,
 				B53CDBE71AA78E3600CDD070 /* AppDelegate.m in Sources */,
 				B53CDBE41AA78E3600CDD070 /* main.m in Sources */,
@@ -341,6 +376,7 @@
 				B5463EAC1ABA05CF002AE579 /* ArticleWebVC.m in Sources */,
 				B52CCF271AAEED6900E7828A /* ArticlesListVC.m in Sources */,
 				B549E45E1AB07C6F00371CBD /* StorageController.m in Sources */,
+				B5D4BCE21ABB600100B31627 /* NSDate+DateHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

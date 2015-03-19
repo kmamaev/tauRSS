@@ -30,7 +30,7 @@
                                      description:@"Совет директоров одной из крупнейших нефтекомпаний России «Башнефть» выбрал своим председателем первого заместителя министра энергетики РФ Алексея Текслера. Также акционеры «Башнефти» на состоявшемся ранее внеочередном собрании  утвердили новый состав совета директоров компании."
                                         category:@"Бизнес"
                                         imageURL:[NSURL URLWithString:@"http://icdn.lenta.ru/images/2015/03/11/16/20150311162956926/pic_eac0cee430fbcd74e6e4b12d5f3c3a9d.jpg"]
-                                     publishDate:[dateFormetter dateFromString:@"Wed, 11 Mar 2015 17:01:02 +0300"]];
+                                     publishDate:[NSDate date]];//[dateFormetter dateFromString:@"Wed, 11 Mar 2015 17:01:02 +0300"]];
     a1.isFavorite = YES;
     
     Article *a2 = [[Article alloc] initWithTitle:@"В России организуют прямую трансляцию полного солнечного затмения"
