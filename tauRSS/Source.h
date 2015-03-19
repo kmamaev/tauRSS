@@ -2,15 +2,14 @@
 #import "ArticlesController.h"
 
 
-typedef NS_ENUM(NSInteger, SourceType) {
-    sourceTypeAllNews   = -1,
-    sourceTypeFavorites = -2,
+typedef NS_ENUM(NSInteger, SourceId) {
+    sourceIdAllNews   = -1,
+    sourceIdFavorites = -2,
 };
 
 
 @interface Source : NSObject
 
-@property (weak, nonatomic) ArticlesController *articlesController;
 @property (assign, nonatomic) NSInteger sourceId;
 @property (copy, nonatomic) NSString *title;
 @property (strong, nonatomic) NSArray *articles;

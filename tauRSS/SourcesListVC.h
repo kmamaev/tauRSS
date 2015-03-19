@@ -5,6 +5,6 @@
 
 @interface SourcesListVC : UIViewController
 
-@property (nonatomic, strong) ArticlesListVC *articlesListVC;
+@property (nonatomic, strong, readonly) ArticlesListVC *articlesListVC;
 
 @end

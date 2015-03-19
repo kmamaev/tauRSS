@@ -10,8 +10,8 @@
 
 - (void)updateAllArticles;
 - (void)updateArticlesForSourceWithId:(NSString *)sourceId;
-- (void)markArticleAsRead:(Article *)article;
-- (void)markArticleAsFavorite:(Article *)article;
+- (void)setRead:(BOOL)isRead forArticle:(Article *)article;
+- (void)setFavorite:(BOOL)isFavorite forArticle:(Article *)article;
 - (NSArray *)allArticles;
 - (NSArray *)favoriteArticles;
 

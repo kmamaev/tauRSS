@@ -28,6 +28,11 @@
     return self.articles.count;
 }
 
+- (void)setArticles:(NSArray *)articles {
+    _articles = [articles copy];
+    [self.articlesTable reloadData];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 120.0f;
 }

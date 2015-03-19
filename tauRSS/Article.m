@@ -11,10 +11,10 @@
                publishDate:(NSDate *)publishDate {
     self = [self init];
     if (self != nil) {
-        _title = title;
+        _title = [title copy];
         _link = link;
-        _articleDescription = articleDescription;
-        _category = category;
+        _articleDescription = [articleDescription copy];
+        _category = [category copy];
         _imageURL = imageURL;
         _publishDate = publishDate;
     }
