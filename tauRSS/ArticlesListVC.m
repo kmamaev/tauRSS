@@ -27,15 +27,21 @@ static const CGFloat cellHeight = 96.0f;
 {
     [super viewDidLoad];
     
+    // Initialize main menu button
+    UIButton *mainMenuButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIImage *barsIcon = [UIImage imageNamed:@"bars_icon.png"];
+    [mainMenuButton setImage:barsIcon forState:UIControlStateNormal];
+    mainMenuButton.frame = (CGRect){0, 0, 20, 24};
+    [mainMenuButton addTarget:self.viewDeckController
+        action:@selector(toggleLeftView) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-        initWithTitle:@"left" style:UIBarButtonItemStylePlain target:self.viewDeckController
-        action:@selector(toggleLeftView)];
+        initWithCustomView:mainMenuButton];
     
+    // Initialize custom cells for articles table
     [self.articlesTable
         registerNib:[UINib nibWithNibName:NSStringFromClass([ArticlesListCell class])
             bundle:[NSBundle mainBundle]]
         forCellReuseIdentifier:reuseIDcellWithImage];
-    
     [self.articlesTable
         registerNib:[UINib nibWithNibName:NSStringFromClass([ArticlesListCell class])
             bundle:[NSBundle mainBundle]]
@@ -75,8 +81,9 @@ static const CGFloat cellHeight = 96.0f;
     return cell;
 }
 
-- (void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)ip {
-    Article *article = self.articles[ip.row];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    Article *article = self.articles[indexPath.row];
     [self.navigationController pushViewController:[[ArticleDetailsVC alloc] initWithArticle:article]
                                          animated:YES];
 }

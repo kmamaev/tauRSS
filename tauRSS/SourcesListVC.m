@@ -42,6 +42,7 @@
 - (void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)ip {
     Source *source = self.sources[ip.row];
     self.articlesListVC.articles = source.articles;
+    self.articlesListVC.title = source.title;
     [self.viewDeckController closeLeftViewAnimated:YES];
 }
 

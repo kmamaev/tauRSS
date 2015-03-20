@@ -28,6 +28,7 @@
 		B549E45E1AB07C6F00371CBD /* StorageController.m in Sources */ = {isa = PBXBuildFile; fileRef = B549E45D1AB07C6F00371CBD /* StorageController.m */; };
 		B5D4BCDE1ABB360100B31627 /* image_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D4BCDD1ABB360100B31627 /* image_placeholder.png */; };
 		B5D4BCE21ABB600100B31627 /* NSDate+DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D4BCE11ABB600100B31627 /* NSDate+DateHelper.m */; };
+		B5D4BCE41ABBFA9900B31627 /* bars_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D4BCE31ABBFA9900B31627 /* bars_icon.png */; };
 		C0DA933B1ABAEBF200A1F062 /* ArticlesListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA93391ABAEBF200A1F062 /* ArticlesListCell.m */; };
 		C0DA933C1ABAEBF200A1F062 /* ArticlesListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0DA933A1ABAEBF200A1F062 /* ArticlesListCell.xib */; };
 /* End PBXBuildFile section */
@@ -81,6 +82,7 @@
 		B5D4BCDD1ABB360100B31627 /* image_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image_placeholder.png; path = Assets/image_placeholder.png; sourceTree = "<group>"; };
 		B5D4BCE01ABB600100B31627 /* NSDate+DateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateHelper.h"; sourceTree = "<group>"; };
 		B5D4BCE11ABB600100B31627 /* NSDate+DateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateHelper.m"; sourceTree = "<group>"; };
+		B5D4BCE31ABBFA9900B31627 /* bars_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bars_icon.png; path = Assets/bars_icon.png; sourceTree = "<group>"; };
 		C0DA93381ABAEBF200A1F062 /* ArticlesListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticlesListCell.h; sourceTree = "<group>"; };
 		C0DA93391ABAEBF200A1F062 /* ArticlesListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesListCell.m; sourceTree = "<group>"; };
 		C0DA933A1ABAEBF200A1F062 /* ArticlesListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticlesListCell.xib; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 		B5D4BCDA1ABB358600B31627 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				B5D4BCE31ABBFA9900B31627 /* bars_icon.png */,
 				B5D4BCDD1ABB360100B31627 /* image_placeholder.png */,
 			);
 			name = Assets;
@@ -306,6 +309,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5D4BCE41ABBFA9900B31627 /* bars_icon.png in Resources */,
 				B5463EAD1ABA05CF002AE579 /* ArticleWebVC.xib in Resources */,
 				C0DA933C1ABAEBF200A1F062 /* ArticlesListCell.xib in Resources */,
 				B53CDBF21AA78E3600CDD070 /* LaunchScreen.xib in Resources */,
