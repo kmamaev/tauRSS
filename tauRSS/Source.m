@@ -30,18 +30,14 @@
 
 + (instancetype)allNewsSourceWithArticlesController:(ArticlesController *)articlesController {
     Source *source = [[self alloc] initWithArticlesController:articlesController];
-    source.title = @"Все новости";
-#warning resolve TODO mark
-    // TODO: title value should not be hardcoded
+    source.title = NSLocalizedString(@"allNews", );
     source.sourceId = sourceIdAllNews;
     return source;
 }
 
 + (instancetype)favoritesSourceWithArticlesController:(ArticlesController *)articlesController {
     Source *source = [[self alloc] initWithArticlesController:articlesController];
-    source.title = @"Закладки";
-#warning resolve TODO mark
-    // TODO: title value should not be hardcoded
+    source.title = NSLocalizedString(@"favorites", );
     source.sourceId = sourceIdFavorites;
     return source;
 }
