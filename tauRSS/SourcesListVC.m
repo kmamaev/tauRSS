@@ -2,12 +2,16 @@
 #import "IIViewDeckController.h"
 #import "SettingsVC.h"
 #import "NewSourceVC.h"
+#import "SourcesListCell.h"
+
+static NSString *const reuseIDSourceCell = @"SourceListCell";
 
 
 @interface SourcesListVC ()
 
 @property (strong, nonatomic) SourcesController *sourcesController;
 @property (weak, nonatomic, readonly) NSArray *sources;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 - (IBAction)didTapSettingsBarButtonItem:(UIBarButtonItem *)sender;
 - (IBAction)didTapAddSourceBarButtonItem:(UIBarButtonItem *)sender;
@@ -29,6 +33,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (self.navigationItem)
+    {
+        self.navigationItem.title = @"tauRSS";
+    }
+    
+    [self.tableView
+     registerNib:[UINib nibWithNibName:NSStringFromClass([SourcesListCell class])
+                                bundle:[NSBundle mainBundle]]
+     forCellReuseIdentifier:reuseIDSourceCell];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -37,10 +51,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                                   reuseIdentifier:@"reuseID1"];
+    SourcesListCell *cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIDSourceCell];;
     Source *source = self.sources[indexPath.row];
-    cell.textLabel.text = source.title;
+    cell.titleLabel.text = source.title;
+    cell.countLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)[source.articles count]];
     return cell;
 }
 
@@ -49,6 +63,7 @@
     self.articlesListVC.articles = source.articles;
     self.articlesListVC.title = source.title;
     [self.viewDeckController closeLeftViewAnimated:YES];
+    [self.tableView deselectRowAtIndexPath:ip animated:YES];
 }
 
 - (IBAction)didTapSettingsBarButtonItem:(UIBarButtonItem *)sender

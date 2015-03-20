@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SourcesListVC">
             <connections>
+                <outlet property="tableView" destination="qjg-jX-4rD" id="SJ8-ik-2bH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -14,8 +15,8 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="qjg-jX-4rD">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="qjg-jX-4rD">
+                    <rect key="frame" x="0.0" y="0.0" width="558" height="600"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="DCE-WP-Fpg"/>
@@ -42,8 +43,12 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="qjg-jX-4rD" secondAttribute="bottom" id="3YE-SZ-IvU"/>
+                <constraint firstItem="qjg-jX-4rD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="66o-xH-f3O"/>
                 <constraint firstAttribute="bottom" secondItem="etZ-k5-w3p" secondAttribute="bottom" id="Bl8-Ee-wqp"/>
                 <constraint firstAttribute="trailing" secondItem="etZ-k5-w3p" secondAttribute="trailing" id="WPH-ty-92V"/>
+                <constraint firstItem="qjg-jX-4rD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eq4-b6-uC7"/>
+                <constraint firstAttribute="trailing" secondItem="qjg-jX-4rD" secondAttribute="trailing" constant="42" id="iaM-Q5-3aA"/>
                 <constraint firstItem="etZ-k5-w3p" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vSa-Qd-CZl"/>
             </constraints>
         </view>

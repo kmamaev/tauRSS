@@ -13,6 +13,8 @@
 		A8259AD61ABC790A007D8B9E /* SettingsSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8259AD41ABC790A007D8B9E /* SettingsSwitchCell.xib */; };
 		A8259ADA1ABC8299007D8B9E /* NewSourceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A8259AD81ABC8299007D8B9E /* NewSourceVC.m */; };
 		A8259ADB1ABC8299007D8B9E /* NewSourceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8259AD91ABC8299007D8B9E /* NewSourceVC.xib */; };
+		A8259ADF1ABC8912007D8B9E /* SourcesListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A8259ADD1ABC8912007D8B9E /* SourcesListCell.m */; };
+		A8259AE01ABC8912007D8B9E /* SourcesListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8259ADE1ABC8912007D8B9E /* SourcesListCell.xib */; };
 		B3ECC070EDAAF4C4297B8B83 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E864111EC9C9498C507FF24 /* libPods.a */; };
 		B5046D5B1AB733E7006D5183 /* ArticlesController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5046D5A1AB733E7006D5183 /* ArticlesController.m */; };
 		B52CCF221AAEE95F00E7828A /* SourcesListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B52CCF201AAEE95F00E7828A /* SourcesListVC.m */; };
@@ -61,6 +63,9 @@
 		A8259AD71ABC8299007D8B9E /* NewSourceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewSourceVC.h; sourceTree = "<group>"; };
 		A8259AD81ABC8299007D8B9E /* NewSourceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewSourceVC.m; sourceTree = "<group>"; };
 		A8259AD91ABC8299007D8B9E /* NewSourceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewSourceVC.xib; sourceTree = "<group>"; };
+		A8259ADC1ABC8912007D8B9E /* SourcesListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SourcesListCell.h; sourceTree = "<group>"; };
+		A8259ADD1ABC8912007D8B9E /* SourcesListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourcesListCell.m; sourceTree = "<group>"; };
+		A8259ADE1ABC8912007D8B9E /* SourcesListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SourcesListCell.xib; sourceTree = "<group>"; };
 		B1828B58CF9C625BCFDBC4F7 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B5046D591AB733E7006D5183 /* ArticlesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticlesController.h; sourceTree = "<group>"; };
 		B5046D5A1AB733E7006D5183 /* ArticlesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticlesController.m; sourceTree = "<group>"; };
@@ -160,6 +165,9 @@
 				B52CCF1F1AAEE95F00E7828A /* SourcesListVC.h */,
 				B52CCF201AAEE95F00E7828A /* SourcesListVC.m */,
 				B52CCF211AAEE95F00E7828A /* SourcesListVC.xib */,
+				A8259ADC1ABC8912007D8B9E /* SourcesListCell.h */,
+				A8259ADD1ABC8912007D8B9E /* SourcesListCell.m */,
+				A8259ADE1ABC8912007D8B9E /* SourcesListCell.xib */,
 				A8259ACD1ABC4D3C007D8B9E /* SettingsVC.h */,
 				A8259ACE1ABC4D3C007D8B9E /* SettingsVC.m */,
 				A8259ACF1ABC4D3C007D8B9E /* SettingsVC.xib */,
@@ -336,6 +344,7 @@
 				A8259ADB1ABC8299007D8B9E /* NewSourceVC.xib in Resources */,
 				B5D4BCE41ABBFA9900B31627 /* bars_icon.png in Resources */,
 				B5463EAD1ABA05CF002AE579 /* ArticleWebVC.xib in Resources */,
+				A8259AE01ABC8912007D8B9E /* SourcesListCell.xib in Resources */,
 				C0DA933C1ABAEBF200A1F062 /* ArticlesListCell.xib in Resources */,
 				A8259AD61ABC790A007D8B9E /* SettingsSwitchCell.xib in Resources */,
 				B53CDBF21AA78E3600CDD070 /* LaunchScreen.xib in Resources */,
@@ -405,6 +414,7 @@
 				B549E4551AB054AC00371CBD /* Article.m in Sources */,
 				B53CDBE71AA78E3600CDD070 /* AppDelegate.m in Sources */,
 				B53CDBE41AA78E3600CDD070 /* main.m in Sources */,
+				A8259ADF1ABC8912007D8B9E /* SourcesListCell.m in Sources */,
 				B549E45B1AB059C500371CBD /* SourcesController.m in Sources */,
 				B5463EAC1ABA05CF002AE579 /* ArticleWebVC.m in Sources */,
 				A8259ADA1ABC8299007D8B9E /* NewSourceVC.m in Sources */,
