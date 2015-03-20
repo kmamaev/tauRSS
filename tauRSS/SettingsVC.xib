@@ -15,9 +15,9 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="LcD-5h-QCe">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="LcD-5h-QCe">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="Vww-Wu-Qrq"/>
                         <outlet property="delegate" destination="-1" id="UWv-Xn-QAV"/>
@@ -25,6 +25,12 @@
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="LcD-5h-QCe" secondAttribute="bottom" id="a05-Gh-gnW"/>
+                <constraint firstAttribute="trailing" secondItem="LcD-5h-QCe" secondAttribute="trailing" id="dKS-jx-JNw"/>
+                <constraint firstItem="LcD-5h-QCe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nFc-b6-bQJ"/>
+                <constraint firstItem="LcD-5h-QCe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="qk1-QY-QMm"/>
+            </constraints>
         </view>
     </objects>
 </document>

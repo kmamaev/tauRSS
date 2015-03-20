@@ -20,8 +20,8 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0n-Z8-0k0">
-                        <rect key="frame" x="8" y="25" width="383" height="14.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0n-Z8-0k0">
+                        <rect key="frame" x="8" y="25" width="383" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14" id="05y-gg-tw0"/>
                         </constraints>
@@ -29,14 +29,14 @@
                         <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PDF-9p-5XJ">
-                        <rect key="frame" x="8" y="39.5" width="383" height="47"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PDF-9p-5XJ">
+                        <rect key="frame" x="8" y="40" width="383" height="47"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.25" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="sL3-X8-nvV">
-                        <rect key="frame" x="399" y="8" width="80" height="78.5"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="image_placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="sL3-X8-nvV">
+                        <rect key="frame" x="399" y="8" width="80" height="79"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="80" id="AAq-89-6ha"/>
                             <constraint firstAttribute="width" constant="80" id="aI7-jX-C2h"/>
