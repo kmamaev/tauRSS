@@ -1,7 +1,9 @@
 #import "ArticlesListVC.h"
-#import "IIViewDeckController.h"
+#import <IIViewDeckController.h>
 #import "ArticlesListCell.h"
 #import "NSDate+DateHelper.h"
+#import "Source.h"
+#import "ArticleDetailsVC.h"
 
 
 static NSString *const reuseIDcellWithImage = @"ArticlesListCell1";
@@ -15,7 +17,8 @@ static const CGFloat cellHeight = 96.0f;
 
 @implementation ArticlesListVC
 
-- (instancetype)init {
+- (instancetype)init
+{
     self = [super init];
     if (self != nil) {
         _articles = [NSArray array];
@@ -48,31 +51,34 @@ static const CGFloat cellHeight = 96.0f;
         forCellReuseIdentifier:reuseIDcellWithoutImage];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return self.articles.count;
 }
 
 // Set articles array and reload data of articles table
-- (void)setArticles:(NSArray *)articles {
+- (void)setArticles:(NSArray *)articles
+{
     _articles = [articles copy];
     [self.articlesTable reloadData];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return cellHeight;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     Article *article = self.articles[indexPath.row];
     
     NSString *reuseId = article.imageURL ? reuseIDcellWithImage : reuseIDcellWithoutImage;
     
     ArticlesListCell *cell = [self.articlesTable dequeueReusableCellWithIdentifier:reuseId];
     cell.titleLabel.text = article.title;
-#warning source of an article should not be hardcoded
     cell.infoLabel.text = [NSString stringWithFormat:@"%@・%@・%@",
-        [article.publishDate convertToSpecialString], article.category, @"НГС RSS"];
+        [article.publishDate convertToSpecialString], article.category, article.source.title];
     cell.descriptionLabel.text = article.articleDescription;
     if (article.imageURL == nil) {
         cell.imageWidth.constant = 0.0f;
@@ -81,7 +87,8 @@ static const CGFloat cellHeight = 96.0f;
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     Article *article = self.articles[indexPath.row];
     [self.navigationController pushViewController:[[ArticleDetailsVC alloc] initWithArticle:article]

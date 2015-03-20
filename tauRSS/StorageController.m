@@ -62,6 +62,7 @@
                                         imageURL:[NSURL URLWithString:@"http://icdn.lenta.ru/images/2015/03/11/16/20150311160344122/pic_9a9ada46365f59ac02a06f0bcfbbe95a.jpg"]
                                      publishDate:[dateFormetter dateFromString:@"Wed, 11 Mar 2015 16:44:00 +0300"]];
     
+    a1.source = a2.source = a3.source = a4.source = a5.source = s1;
     s1.articles = @[a1, a2, a3, a4, a5];
     
     Article *a6 = [[Article alloc] initWithTitle:@"Фигурант по делу «Интерры» провел на свободе 13 дней"
@@ -101,6 +102,7 @@
                                          imageURL:nil
                                       publishDate:[dateFormetter dateFromString:@"Wed, 11 Mar 2015 16:16:00 +0700"]];
     
+    a6.source = a7.source = a8.source = a9.source = a10.source = s2;
     s2.articles = @[a6, a7, a8, a9, a10];
     
     return @[s1, s2];
