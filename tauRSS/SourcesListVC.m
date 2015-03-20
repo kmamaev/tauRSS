@@ -1,6 +1,7 @@
 #import "SourcesListVC.h"
 #import "IIViewDeckController.h"
 #import "SettingsVC.h"
+#import "NewSourceVC.h"
 
 
 @interface SourcesListVC ()
@@ -9,6 +10,7 @@
 @property (weak, nonatomic, readonly) NSArray *sources;
 
 - (IBAction)didTapSettingsBarButtonItem:(UIBarButtonItem *)sender;
+- (IBAction)didTapAddSourceBarButtonItem:(UIBarButtonItem *)sender;
 
 @end
 
@@ -53,6 +55,13 @@
 {
     SettingsVC *settingsVC = [[SettingsVC alloc]init];
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:settingsVC];
+    [self presentViewController:navController animated:YES completion:nil];
+}
+
+- (IBAction)didTapAddSourceBarButtonItem:(UIBarButtonItem *)sender
+{
+    NewSourceVC *newVC = [[NewSourceVC alloc]init];
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:newVC];
     [self presentViewController:navController animated:YES completion:nil];
 }
 @end

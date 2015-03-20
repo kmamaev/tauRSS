@@ -25,7 +25,11 @@
                 <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="etZ-k5-w3p">
                     <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                     <items>
-                        <barButtonItem systemItem="add" id="AfZ-WV-AWK"/>
+                        <barButtonItem systemItem="add" id="AfZ-WV-AWK">
+                            <connections>
+                                <action selector="didTapAddSourceBarButtonItem:" destination="-1" id="Ii9-E4-xLq"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="WKx-2D-qEG"/>
                         <barButtonItem title="Настройки" id="N28-tb-G5K">
                             <connections>
