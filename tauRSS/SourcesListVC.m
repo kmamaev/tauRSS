@@ -1,11 +1,14 @@
 #import "SourcesListVC.h"
 #import "IIViewDeckController.h"
+#import "SettingsVC.h"
 
 
 @interface SourcesListVC ()
 
 @property (strong, nonatomic) SourcesController *sourcesController;
 @property (weak, nonatomic, readonly) NSArray *sources;
+
+- (IBAction)didTapSettingsBarButtonItem:(UIBarButtonItem *)sender;
 
 @end
 
@@ -46,4 +49,10 @@
     [self.viewDeckController closeLeftViewAnimated:YES];
 }
 
+- (IBAction)didTapSettingsBarButtonItem:(UIBarButtonItem *)sender
+{
+    SettingsVC *settingsVC = [[SettingsVC alloc]init];
+    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:settingsVC];
+    [self presentViewController:navController animated:YES completion:nil];
+}
 @end
