@@ -7,7 +7,7 @@
 static NSString *const reuseIDSourceCell = @"SourceListCell";
 
 
-@interface SourcesListVC ()
+@interface SourcesListVC () <NewSourceDelegate>
 
 @property (strong, nonatomic) SourcesController *sourcesController;
 @property (weak, nonatomic, readonly) NSArray *sources;
@@ -45,6 +45,9 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
      forCellReuseIdentifier:reuseIDSourceCell];
 }
 
+
+#pragma mark - UITableViewDataSource implementation
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.sources.count;
 }
@@ -58,6 +61,9 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
     return cell;
 }
 
+
+#pragma mark - UITableViewDelegate implementation
+
 - (void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)ip {
     Source *source = self.sources[ip.row];
     self.articlesListVC.articles = source.articles;
@@ -65,6 +71,9 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
     [self.viewDeckController closeLeftViewAnimated:YES];
     [self.tableView deselectRowAtIndexPath:ip animated:YES];
 }
+
+#pragma mark - Actions
+
 
 - (IBAction)didTapSettingsBarButtonItem:(UIBarButtonItem *)sender
 {
@@ -78,5 +87,20 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
     NewSourceVC *newVC = [[NewSourceVC alloc]init];
     UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:newVC];
     [self presentViewController:navController animated:YES completion:nil];
+}
+
+#pragma mark - NewSourceViewControllerDelegate implementation
+
+- (void)newSourceViewController:(NewSourceVC *)sender didFinishWithSource:(Source *)sourse
+{
+    sourse.sourceId = [self.sourcesController.sources count];
+    [self.sourcesController addSource:sourse];
+    
+    [self.tableView reloadData];
+    
+    [self dismissViewControllerAnimated:YES
+                             completion:nil];
+    
+    
 }
 @end

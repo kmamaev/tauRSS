@@ -1,5 +1,6 @@
 
 #import "NewSourceVC.h"
+#import "Source.h"
 
 @interface NewSourceVC ()
 
@@ -7,6 +8,9 @@
 @property (strong, nonatomic) IBOutlet UITextField *sourceNameTextField;
 @property (strong, nonatomic) IBOutlet UIImageView *sourceStatusImageView;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *checkingIndicator;
+
+
+@property (nonatomic) BOOL isSourceAddressCorrect;
 
 - (IBAction)didTapAddSourceButton:(UIButton *)sender;
 - (IBAction)doneEdittingSourceAddressTextField:(UITextField *)sender;
@@ -16,6 +20,16 @@
 @end
 
 @implementation NewSourceVC
+
+- (instancetype)init
+{
+    if (self = [super init])
+    {
+        _isSourceAddressCorrect = NO;
+    }
+    return self;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,29 +51,6 @@
 
 
 #define kOFFSET_FOR_KEYBOARD 80.0
-
--(void)keyboardWillShow {
-    // Animate the current view out of the way
-    if (self.view.frame.origin.y >= 0)
-    {
-        [self setViewMovedUp:YES];
-    }
-    else if (self.view.frame.origin.y < 0)
-    {
-        [self setViewMovedUp:NO];
-    }
-}
-
--(void)keyboardWillHide {
-    if (self.view.frame.origin.y >= 0)
-    {
-        [self setViewMovedUp:YES];
-    }
-    else if (self.view.frame.origin.y < 0)
-    {
-        [self setViewMovedUp:NO];
-    }
-}
 
 
 //method to move the view up/down whenever the keyboard is shown/dismissed
@@ -87,14 +78,34 @@
     [UIView commitAnimations];
 }
 
+#pragma mark - Actions
 
-- (IBAction)didTapAddSourceButton:(UIButton *)sender {
+- (IBAction)didTapAddSourceButton:(UIButton *)sender
+{
+    if ((self.isSourceAddressCorrect == YES) && (self.sourceNameTextField.text !=nil))
+    {
+        Source *source = [[Source alloc]init];
+        source.title = self.sourceNameTextField.text;
+        
+        NSMutableString *stringURL = [@"http://" mutableCopy];
+        [stringURL appendString:self.sourceAddressTextField.text];
+        NSURL *sourceURL = [NSURL URLWithString:stringURL];
+        
+        source.sourceURL = sourceURL;
+        
+        [self.delegate newSourceViewController:self didFinishWithSource:source];
+    }
+    else
+    {
+        
+    }
 }
 
 - (IBAction)doneEdittingSourceAddressTextField:(UITextField *)sender
 {
     [self.checkingIndicator startAnimating];
     self.sourceStatusImageView.hidden = YES;
+    
     
     #warning resolve TODO mark
     // TODO: send a check request
