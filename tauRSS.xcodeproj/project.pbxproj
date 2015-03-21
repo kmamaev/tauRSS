@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A81F6E921ABDA9A5002A96EB /* correct.png in Resources */ = {isa = PBXBuildFile; fileRef = A81F6E901ABDA9A5002A96EB /* correct.png */; };
+		A81F6E931ABDA9A5002A96EB /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = A81F6E911ABDA9A5002A96EB /* error.png */; };
 		A8259AD01ABC4D3C007D8B9E /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A8259ACE1ABC4D3C007D8B9E /* SettingsVC.m */; };
 		A8259AD11ABC4D3C007D8B9E /* SettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8259ACF1ABC4D3C007D8B9E /* SettingsVC.xib */; };
 		A8259AD51ABC790A007D8B9E /* SettingsSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A8259AD31ABC790A007D8B9E /* SettingsSwitchCell.m */; };
@@ -54,6 +56,8 @@
 /* Begin PBXFileReference section */
 		3E3123729005DA975C61A5B4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		5E864111EC9C9498C507FF24 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A81F6E901ABDA9A5002A96EB /* correct.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = correct.png; path = Assets/correct.png; sourceTree = "<group>"; };
+		A81F6E911ABDA9A5002A96EB /* error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = error.png; path = Assets/error.png; sourceTree = "<group>"; };
 		A8259ACD1ABC4D3C007D8B9E /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
 		A8259ACE1ABC4D3C007D8B9E /* SettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsVC.m; sourceTree = "<group>"; };
 		A8259ACF1ABC4D3C007D8B9E /* SettingsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsVC.xib; sourceTree = "<group>"; };
@@ -235,6 +239,8 @@
 		B5D4BCDA1ABB358600B31627 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				A81F6E901ABDA9A5002A96EB /* correct.png */,
+				A81F6E911ABDA9A5002A96EB /* error.png */,
 				B5D4BCE31ABBFA9900B31627 /* bars_icon.png */,
 				B5D4BCDD1ABB360100B31627 /* image_placeholder.png */,
 			);
@@ -343,6 +349,7 @@
 			files = (
 				A8259ADB1ABC8299007D8B9E /* NewSourceVC.xib in Resources */,
 				B5D4BCE41ABBFA9900B31627 /* bars_icon.png in Resources */,
+				A81F6E921ABDA9A5002A96EB /* correct.png in Resources */,
 				B5463EAD1ABA05CF002AE579 /* ArticleWebVC.xib in Resources */,
 				A8259AE01ABC8912007D8B9E /* SourcesListCell.xib in Resources */,
 				C0DA933C1ABAEBF200A1F062 /* ArticlesListCell.xib in Resources */,
@@ -351,6 +358,7 @@
 				B53CDBEF1AA78E3600CDD070 /* Images.xcassets in Resources */,
 				B52CCF371AAF50F700E7828A /* ArticleDetailsVC.xib in Resources */,
 				B5D4BCDE1ABB360100B31627 /* image_placeholder.png in Resources */,
+				A81F6E931ABDA9A5002A96EB /* error.png in Resources */,
 				B52CCF231AAEE95F00E7828A /* SourcesListVC.xib in Resources */,
 				B52CCF281AAEED6900E7828A /* ArticlesListVC.xib in Resources */,
 				A8259AD11ABC4D3C007D8B9E /* SettingsVC.xib in Resources */,
