@@ -6,8 +6,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ArticleDetailsVC">
             <connections>
-                <outlet property="descriptionLabel" destination="lH8-pU-shn" id="5xZ-YG-ej1"/>
-                <outlet property="titleLabel" destination="kAl-Sn-ntX" id="H8E-ot-YXm"/>
+                <outlet property="descriptionLabel" destination="t74-Rs-RRt" id="XmB-tH-5Kn"/>
+                <outlet property="imageHeight" destination="O6U-bb-2cj" id="Uqu-cr-h7c"/>
+                <outlet property="infoLabel" destination="ErK-Mh-q2A" id="Zvq-hz-h7w"/>
+                <outlet property="leftArrowButton" destination="89Z-J4-1cx" id="tYh-kO-3NX"/>
+                <outlet property="planetButton" destination="jaA-iP-hdP" id="Y8p-pn-qAA"/>
+                <outlet property="rightArrowButton" destination="Hmf-k3-tdT" id="uzw-UE-KH2"/>
+                <outlet property="starButton" destination="srb-Xz-g7u" id="QfL-SJ-gcZ"/>
+                <outlet property="titleLabel" destination="i7e-mo-261" id="uy4-Cx-vzE"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,43 +22,96 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAl-Sn-ntX">
-                    <rect key="frame" x="20" y="70" width="560" height="26.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lH8-pU-shn">
-                    <rect key="frame" x="20" y="106" width="560" height="20.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GTm-3I-WW2">
-                    <rect key="frame" x="196" y="540" width="208" height="30"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FMZ-vt-lAd">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7e-mo-261" userLabel="Title">
+                            <rect key="frame" x="8" y="8" width="584" height="19.5"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ErK-Mh-q2A" userLabel="Info">
+                            <rect key="frame" x="8" y="35" width="584" height="14.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t74-Rs-RRt" userLabel="Description">
+                            <rect key="frame" x="8" y="369" width="584" height="16.5"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="5S2-NG-QRp" userLabel="Image">
+                            <rect key="frame" x="148" y="57" width="304" height="304"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="304" id="O6U-bb-2cj"/>
+                                <constraint firstAttribute="width" constant="304" id="Oxn-aJ-af9"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcT-IY-fks" userLabel="Link Button">
+                            <rect key="frame" x="196" y="394" width="208" height="30"/>
+                            <state key="normal" title="Открыть статью в интернете">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="didTapLinkButton:" destination="-1" eventType="touchUpInside" id="tw6-fV-z5b"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="1LL-XH-HJo"/>
-                        <constraint firstAttribute="width" constant="208" id="nFU-1G-8Uc"/>
+                        <constraint firstAttribute="centerX" secondItem="EcT-IY-fks" secondAttribute="centerX" id="0So-cK-38l"/>
+                        <constraint firstItem="EcT-IY-fks" firstAttribute="top" secondItem="t74-Rs-RRt" secondAttribute="bottom" constant="8" id="3sh-eR-JdJ"/>
+                        <constraint firstAttribute="centerX" secondItem="5S2-NG-QRp" secondAttribute="centerX" id="3xR-Wj-Iru"/>
+                        <constraint firstItem="t74-Rs-RRt" firstAttribute="top" secondItem="5S2-NG-QRp" secondAttribute="bottom" constant="8" id="Cj4-G8-oCu"/>
+                        <constraint firstAttribute="trailing" secondItem="t74-Rs-RRt" secondAttribute="trailing" constant="8" id="NKB-dD-GlD"/>
+                        <constraint firstItem="i7e-mo-261" firstAttribute="trailing" secondItem="t74-Rs-RRt" secondAttribute="trailing" id="PB5-7p-Cwv"/>
+                        <constraint firstItem="i7e-mo-261" firstAttribute="leading" secondItem="t74-Rs-RRt" secondAttribute="leading" id="bDV-V3-M7A"/>
+                        <constraint firstItem="i7e-mo-261" firstAttribute="leading" secondItem="ErK-Mh-q2A" secondAttribute="leading" id="d1D-CP-RXU"/>
+                        <constraint firstAttribute="bottom" secondItem="EcT-IY-fks" secondAttribute="bottom" constant="8" id="fct-Nn-oYJ"/>
+                        <constraint firstItem="i7e-mo-261" firstAttribute="top" secondItem="FMZ-vt-lAd" secondAttribute="top" constant="8" id="n4E-66-jiq"/>
+                        <constraint firstItem="i7e-mo-261" firstAttribute="trailing" secondItem="ErK-Mh-q2A" secondAttribute="trailing" id="wGb-PY-4oa"/>
+                        <constraint firstItem="5S2-NG-QRp" firstAttribute="top" secondItem="ErK-Mh-q2A" secondAttribute="bottom" constant="8" id="xtm-GF-Ni5"/>
+                        <constraint firstItem="ErK-Mh-q2A" firstAttribute="top" secondItem="i7e-mo-261" secondAttribute="bottom" constant="8" id="ycQ-5n-xJT"/>
                     </constraints>
-                    <state key="normal" title="Открыть статью в интернете">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="didTapLinkButton:" destination="-1" eventType="touchUpInside" id="HDG-Ym-58o"/>
-                    </connections>
-                </button>
+                </scrollView>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OT5-d5-npc">
+                    <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                    <items>
+                        <barButtonItem title="Left" id="89Z-J4-1cx"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Fbu-dd-Itl"/>
+                        <barButtonItem title="Right" id="Hmf-k3-tdT"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="1dE-Wb-N9H"/>
+                        <barButtonItem title="Planet" id="jaA-iP-hdP"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="iLn-T0-aVm"/>
+                        <barButtonItem title="Star" id="srb-Xz-g7u"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="aQ4-Im-fI5"/>
+                        <barButtonItem systemItem="action" id="hdS-d2-nZu">
+                            <connections>
+                                <action selector="didTapActionButton:" destination="-1" id="XWy-3L-j7y"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="kAl-Sn-ntX" secondAttribute="trailing" constant="20" symbolic="YES" id="Hmz-J2-yGn"/>
-                <constraint firstAttribute="trailing" secondItem="lH8-pU-shn" secondAttribute="trailing" constant="20" symbolic="YES" id="Ppv-if-Cj3"/>
-                <constraint firstItem="lH8-pU-shn" firstAttribute="top" secondItem="kAl-Sn-ntX" secondAttribute="bottom" constant="10" id="Sdn-Yz-nTL"/>
-                <constraint firstItem="kAl-Sn-ntX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="70" id="cHr-Zr-pcz"/>
-                <constraint firstAttribute="centerX" secondItem="GTm-3I-WW2" secondAttribute="centerX" id="fl5-tF-Ksj"/>
-                <constraint firstItem="lH8-pU-shn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="hLh-Lc-aRD"/>
-                <constraint firstItem="kAl-Sn-ntX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" symbolic="YES" id="hpK-Tl-b8K"/>
-                <constraint firstAttribute="bottom" secondItem="GTm-3I-WW2" secondAttribute="bottom" constant="30" id="ueq-eB-rcl"/>
+                <constraint firstItem="OT5-d5-npc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="275-OF-csk"/>
+                <constraint firstItem="FMZ-vt-lAd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="4gZ-Pl-wS9"/>
+                <constraint firstItem="i7e-mo-261" firstAttribute="leading" secondItem="OT5-d5-npc" secondAttribute="leading" constant="8" id="Syu-nQ-4JC"/>
+                <constraint firstItem="OT5-d5-npc" firstAttribute="top" secondItem="FMZ-vt-lAd" secondAttribute="bottom" id="Wf6-C8-U9y"/>
+                <constraint firstItem="FMZ-vt-lAd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fUa-S8-8qA"/>
+                <constraint firstItem="i7e-mo-261" firstAttribute="trailing" secondItem="OT5-d5-npc" secondAttribute="trailing" constant="-8" id="goB-96-SEF"/>
+                <constraint firstAttribute="trailing" secondItem="FMZ-vt-lAd" secondAttribute="trailing" id="kI1-V2-HTk"/>
+                <constraint firstAttribute="bottom" secondItem="OT5-d5-npc" secondAttribute="bottom" id="npl-1t-a7k"/>
+                <constraint firstItem="OT5-d5-npc" firstAttribute="top" secondItem="FMZ-vt-lAd" secondAttribute="bottom" id="syc-g5-3x4"/>
+                <constraint firstAttribute="trailing" secondItem="OT5-d5-npc" secondAttribute="trailing" id="tQU-vJ-4Nr"/>
             </constraints>
+            <point key="canvasLocation" x="261" y="314"/>
         </view>
     </objects>
+    <resources>
+        <image name="image_placeholder.png" width="1500" height="1500"/>
+    </resources>
 </document>
