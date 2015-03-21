@@ -111,8 +111,14 @@
 }
 
 - (void)didTapPlanetButton:(UIButton *)sende {
+    UIApplication *app = [UIApplication sharedApplication];
+    if ([app canOpenURL:self.article.link]) {
+        [app openURL:self.article.link];
+    }
+    else {
 #warning resolve TODO mark
-    // TODO: implement this
+    // TODO: make correct handling
+    }
 }
 
 - (void)didTapEmptyStarButton:(UIButton *)sende {
