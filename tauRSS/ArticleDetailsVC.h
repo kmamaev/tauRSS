@@ -5,5 +5,6 @@
 @interface ArticleDetailsVC : UIViewController
 
 - (instancetype)initWithArticle:(Article *)article;
+- (void)didTapPlanetButton:(UIButton *)sender;
 
 @end

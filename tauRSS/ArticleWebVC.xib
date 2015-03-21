@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ArticleWebVC">
             <connections>
+                <outlet property="planetButton" destination="khw-UM-227" id="kWV-ce-bAp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="webView" destination="9Hy-Oq-63b" id="x1d-er-fiK"/>
             </connections>
@@ -16,27 +17,29 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Hy-Oq-63b">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </webView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wA2-ho-Opn">
-                    <rect key="frame" x="30" y="540" width="119" height="30"/>
-                    <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="Открыть в Safari">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
                     <connections>
-                        <action selector="didTapSafariButton:" destination="-1" eventType="touchUpInside" id="C0s-Sd-SgV"/>
+                        <outlet property="delegate" destination="-1" id="zga-hy-MkH"/>
                     </connections>
-                </button>
+                </webView>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ln-LP-0KM">
+                    <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                    <items>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="hxB-va-vll"/>
+                        <barButtonItem title="Planet" id="khw-UM-227" userLabel="Planet"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Ooa-w1-Xuh"/>
+                    </items>
+                </toolbar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="9Hy-Oq-63b" secondAttribute="bottom" id="8up-x3-CZV"/>
-                <constraint firstAttribute="bottom" secondItem="wA2-ho-Opn" secondAttribute="bottom" constant="30" id="BZx-2i-I6y"/>
+                <constraint firstItem="5Ln-LP-0KM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8nx-5Z-lJj"/>
+                <constraint firstAttribute="bottom" secondItem="5Ln-LP-0KM" secondAttribute="bottom" id="8wU-Bk-x6f"/>
                 <constraint firstItem="9Hy-Oq-63b" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Ig2-Ed-oPX"/>
+                <constraint firstItem="5Ln-LP-0KM" firstAttribute="top" secondItem="9Hy-Oq-63b" secondAttribute="bottom" id="ZPb-B7-jko"/>
                 <constraint firstItem="9Hy-Oq-63b" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="aMj-tP-8t3"/>
-                <constraint firstItem="wA2-ho-Opn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="beh-hP-wls"/>
+                <constraint firstAttribute="trailing" secondItem="5Ln-LP-0KM" secondAttribute="trailing" id="n4L-6O-FWN"/>
                 <constraint firstAttribute="trailing" secondItem="9Hy-Oq-63b" secondAttribute="trailing" id="sH4-JA-r2d"/>
             </constraints>
         </view>

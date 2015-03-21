@@ -96,21 +96,21 @@
 
 - (IBAction)didTapLinkButton:(UIButton *)sender {
     ArticleWebVC *articleWebVC = [[ArticleWebVC alloc] initWithURL:self.article.link];
-    [self.navigationController pushViewController:articleWebVC
-                                         animated:YES];
+    articleWebVC.articleDetailsVC = self;
+    [self.navigationController pushViewController:articleWebVC animated:YES];
 }
 
-- (void)didTapLeftArrowButton:(UIButton *)sende {
+- (void)didTapLeftArrowButton:(UIButton *)sender {
 #warning resolve TODO mark
     // TODO: implement this
 }
 
-- (void)didTapRightArrowButton:(UIButton *)sende {
+- (void)didTapRightArrowButton:(UIButton *)sender {
 #warning resolve TODO mark
     // TODO: implement this
 }
 
-- (void)didTapPlanetButton:(UIButton *)sende {
+- (void)didTapPlanetButton:(UIButton *)sender {
     UIApplication *app = [UIApplication sharedApplication];
     if ([app canOpenURL:self.article.link]) {
         [app openURL:self.article.link];
@@ -121,7 +121,7 @@
     }
 }
 
-- (void)didTapEmptyStarButton:(UIButton *)sende {
+- (void)didTapEmptyStarButton:(UIButton *)sender {
 #warning resolve TODO mark
     // TODO: implement this
 }

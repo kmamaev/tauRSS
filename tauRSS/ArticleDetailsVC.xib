@@ -38,20 +38,20 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t74-Rs-RRt" userLabel="Description">
-                            <rect key="frame" x="8" y="369" width="584" height="16.5"/>
+                            <rect key="frame" x="8" y="245" width="584" height="16.5"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="5S2-NG-QRp" userLabel="Image">
-                            <rect key="frame" x="148" y="57" width="304" height="304"/>
+                            <rect key="frame" x="210" y="57" width="180" height="180"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="304" id="O6U-bb-2cj"/>
-                                <constraint firstAttribute="width" constant="304" id="Oxn-aJ-af9"/>
+                                <constraint firstAttribute="height" constant="180" id="O6U-bb-2cj"/>
+                                <constraint firstAttribute="width" constant="180" id="Oxn-aJ-af9"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcT-IY-fks" userLabel="Link Button">
-                            <rect key="frame" x="196" y="394" width="208" height="30"/>
+                            <rect key="frame" x="196" y="270" width="208" height="30"/>
                             <state key="normal" title="Открыть статью в интернете">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
