@@ -13,7 +13,5 @@
 - (void)addSource:(Source *)source;
 - (void)deleteSource:(Source *)source;
 - (void)getSourceById:(NSString *)sourceId;
-- (void)updateAllArticles;
-- (void)updateArticlesForSource:(Source *)source;
 
 @end

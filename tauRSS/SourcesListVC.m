@@ -31,6 +31,7 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
     if (self != nil) {
         _sourcesController = [[SourcesController alloc] init];
         _articlesListVC = [[ArticlesListVC alloc] init];
+        _articlesListVC.articlesController = _sourcesController.articlesController;
         _sources = _sourcesController.sources;
         Source *allNewsSource = [Source allNewsSourceWithArticlesController:_sourcesController.articlesController];
         Source *favoritesSource = [Source favoritesSourceWithArticlesController:_sourcesController.articlesController];
@@ -65,8 +66,6 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
     return [self.sections count];
 }
 
-
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.sources.count;
 }
@@ -86,11 +85,8 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Source *source = self.sources[indexPath.row];
-    self.articlesListVC.articles = source.articles;
+    self.articlesListVC.source = source;
     self.articlesListVC.title = source.title;
-    
-    [self.sourcesController updateArticlesForSource:source];
-    
     [self.viewDeckController closeLeftViewAnimated:YES];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
