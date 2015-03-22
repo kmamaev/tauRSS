@@ -11,24 +11,21 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
 static const CGFloat cellHeight = 96.0f;
 
 
-@interface ArticlesListVC ()
+@interface ArticlesListVC () <ArticlesController>
+
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
+
 @end
 
 
 @implementation ArticlesListVC
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self != nil) {
-        _articles = [NSArray array];
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    // Add self to observers list of articles controller
+    [self.articlesController addObserver:self];
     
     // Initialize main menu button
     UIButton *mainMenuButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -50,18 +47,28 @@ static const CGFloat cellHeight = 96.0f;
         registerNib:[UINib nibWithNibName:NSStringFromClass([ArticlesListCell class])
             bundle:[NSBundle mainBundle]]
         forCellReuseIdentifier:reuseIDcellWithoutImage];
+    
+    // Initialize the refresh control
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refreshArticles)
+        forControlEvents:UIControlEventValueChanged];
+    [self.articlesTable addSubview:self.refreshControl];
+}
+
+- (void)dealloc
+{
+    // Remove self from observers list of articles controller
+    [self.articlesController removeObserver:self];
+}
+
+- (void)setSource:(Source *)source {
+    _source = source;
+    [self.articlesTable reloadData];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.articles.count;
-}
-
-// Set articles array and reload data of articles table
-- (void)setArticles:(NSArray *)articles
-{
-    _articles = [articles copy];
-    [self.articlesTable reloadData];
+    return self.source.articles.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -72,7 +79,7 @@ static const CGFloat cellHeight = 96.0f;
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Article *article = self.articles[indexPath.row];
+    Article *article = self.source.articles[indexPath.row];
     
     NSString *reuseId = article.imageURL ? reuseIDcellWithImage : reuseIDcellWithoutImage;
     
@@ -91,9 +98,20 @@ static const CGFloat cellHeight = 96.0f;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    Article *article = self.articles[indexPath.row];
+    Article *article = self.source.articles[indexPath.row];
     [self.navigationController pushViewController:[[ArticleDetailsVC alloc] initWithArticle:article]
                                          animated:YES];
+}
+
+- (void)refreshArticles
+{
+    [self.articlesController updateArticlesForSource:self.source];
+}
+
+- (void)articleControllerDidFinishUpdateArticles
+{
+    [self.refreshControl endRefreshing];
+    [self.articlesTable reloadData];
 }
 
 @end

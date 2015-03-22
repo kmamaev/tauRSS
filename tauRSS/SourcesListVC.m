@@ -5,7 +5,7 @@
 @interface SourcesListVC ()
 
 @property (strong, nonatomic) SourcesController *sourcesController;
-@property (weak, nonatomic, readonly) NSArray *sources;
+@property (strong, nonatomic, readonly) NSArray *sources;
 
 @end
 
@@ -17,13 +17,10 @@
     if (self != nil) {
         _sourcesController = [[SourcesController alloc] init];
         _articlesListVC = [[ArticlesListVC alloc] init];
+        _articlesListVC.articlesController = _sourcesController.articlesController;
         _sources = _sourcesController.sources;
     }
     return self;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -41,11 +38,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Source *source = self.sources[indexPath.row];
-    self.articlesListVC.articles = source.articles;
+    self.articlesListVC.source = source;
     self.articlesListVC.title = source.title;
-    
-    [self.sourcesController updateArticlesForSource:source];
-    
     [self.viewDeckController closeLeftViewAnimated:YES];
 }
 
