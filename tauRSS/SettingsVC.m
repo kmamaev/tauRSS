@@ -33,15 +33,15 @@ typedef NS_ENUM(NSInteger, ReadingSettings) {
     {
         NSDictionary *sectionClear =
             @{kSectionTitle: @"",
-              kSectionItems: @[@"Очистить кэш"]};
+              kSectionItems: @[NSLocalizedString(@"clearCache", )]};
         
         NSDictionary *sectionReading =
-            @{kSectionTitle: @"Чтение",
-              kSectionItems: @[@"Ночной режим", @"Размер шрифта"]};
+            @{kSectionTitle: NSLocalizedString(@"reading", ),
+              kSectionItems: @[NSLocalizedString(@"darkMode", ), NSLocalizedString(@"fontSize", )]};
         
         NSDictionary *sectionAbout =
         @{kSectionTitle: @"",
-          kSectionItems: @[@"О приложении"]};
+          kSectionItems: @[NSLocalizedString(@"about", )]};
         
         _sections = @[sectionClear, sectionReading, sectionAbout];
         
@@ -59,7 +59,7 @@ typedef NS_ENUM(NSInteger, ReadingSettings) {
                                               target:self
                                               action:@selector(didTouchDoneBarButtonItem:)];
         [self.navigationItem setRightBarButtonItem:doneBarButtonItem];
-        self.navigationItem.title = @"Настройки";
+        self.navigationItem.title = NSLocalizedString(@"settings", );
     }
     
     [self.tableView

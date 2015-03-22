@@ -6,8 +6,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewSourceVC">
             <connections>
+                <outlet property="addSourceButton" destination="eln-Xi-Sod" id="KLI-UC-eg3"/>
                 <outlet property="checkingIndicator" destination="QZu-so-zWr" id="vrz-62-nDr"/>
+                <outlet property="sourceAddressLable" destination="gwg-Jx-5eS" id="NBc-MG-buG"/>
                 <outlet property="sourceAddressTextField" destination="ogg-le-Mdd" id="MgN-gF-UEL"/>
+                <outlet property="sourceNameLable" destination="87w-zJ-Ulo" id="Rxl-hM-ij3"/>
                 <outlet property="sourceNameTextField" destination="zJW-6x-i08" id="r36-Qm-L0P"/>
                 <outlet property="sourceStatusImageView" destination="gKw-AV-ajS" id="cX4-Ic-raM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

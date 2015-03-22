@@ -2,3 +2,14 @@
 "favorites" = "Закладки";
 "errorLoadingPage" = "Не удалось загрузить страницу";
 "close" = "Закрыть";
+"settings" = "Настройки";
+"clearCache" = "Очистить кэш";
+"reading" = "Чтение";
+"darkMode" = "Ночной режим";
+"fontSize" = "Размер шрифта";
+"about" = "О приложении";
+"addSource" = "Добавить источник";
+"enterRSSaddress" = "Введите RSS адрес:";
+"sourceName" = "Название источника:";
+"newSource" = "Новый источник";
+"add" = "Добавить";

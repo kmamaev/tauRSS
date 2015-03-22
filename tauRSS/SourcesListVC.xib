@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SourcesListVC">
             <connections>
+                <outlet property="settingsBarButtonItem" destination="N28-tb-G5K" id="jb7-5K-S0i"/>
                 <outlet property="tableView" destination="qjg-jX-4rD" id="SJ8-ik-2bH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

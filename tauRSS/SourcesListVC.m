@@ -14,6 +14,8 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
 @property (strong, nonatomic) NSArray *regularSources;
 @property (strong, nonatomic) NSArray *sections;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *settingsBarButtonItem;
+
 
 - (IBAction)didTapSettingsBarButtonItem:(UIBarButtonItem *)sender;
 - (IBAction)didTapAddSourceBarButtonItem:(UIBarButtonItem *)sender;
@@ -51,6 +53,8 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
      registerNib:[UINib nibWithNibName:NSStringFromClass([SourcesListCell class])
                                 bundle:[NSBundle mainBundle]]
      forCellReuseIdentifier:reuseIDSourceCell];
+    
+    self.settingsBarButtonItem.title = NSLocalizedString(@"settings", );
 }
 
 

@@ -8,6 +8,9 @@
 @property (strong, nonatomic) IBOutlet UITextField *sourceNameTextField;
 @property (strong, nonatomic) IBOutlet UIImageView *sourceStatusImageView;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *checkingIndicator;
+@property (strong, nonatomic) IBOutlet UILabel *sourceAddressLable;
+@property (strong, nonatomic) IBOutlet UILabel *sourceNameLable;
+@property (strong, nonatomic) IBOutlet UIButton *addSourceButton;
 
 
 @property (nonatomic) BOOL isSourceAddressCorrect;
@@ -40,8 +43,12 @@
                                               target:self
                                               action:@selector(didTouchCancelBarButtonItem:)];
         [self.navigationItem setLeftBarButtonItem:cancelBarButtonItem];
-        self.navigationItem.title = @"Добавить источник";
+        self.navigationItem.title = NSLocalizedString(@"addSource", );
     }
+    self.sourceAddressLable.text = NSLocalizedString(@"enterRSSaddress", );
+    self.sourceNameLable.text = NSLocalizedString(@"sourceName", );
+    self.addSourceButton.titleLabel.text = NSLocalizedString(@"add", );
+    self.sourceNameTextField.placeholder = NSLocalizedString(@"newSource", );
 }
 
 - (void)didTouchCancelBarButtonItem:(UIBarButtonItem *)sender {
