@@ -21,7 +21,8 @@
     return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:self.url];
     [self.webView loadRequest:urlRequest];
@@ -37,7 +38,8 @@
     self.planetButton.customView = planetButton;
 }
 
-- (void)didTapPlanetButton:(UIButton *)sender {
+- (void)didTapPlanetButton:(UIButton *)sender
+{
     [self.articleDetailsVC didTapPlanetButton:sender];
 }
 

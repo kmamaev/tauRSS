@@ -82,17 +82,17 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
     return cell;
 }
 
-
 #pragma mark - UITableViewDelegate implementation
 
-- (void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)ip {
-    NSArray *sources = self.sections[ip.section];
-    
-    Source *source = sources[ip.row];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Source *source = self.sources[indexPath.row];
     self.articlesListVC.articles = source.articles;
     self.articlesListVC.title = source.title;
+    
+    [self.sourcesController updateArticlesForSource:source];
+    
     [self.viewDeckController closeLeftViewAnimated:YES];
-    [self.tableView deselectRowAtIndexPath:ip animated:YES];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - Actions
