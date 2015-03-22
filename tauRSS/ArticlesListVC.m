@@ -11,19 +11,13 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
 
 
 @interface ArticlesListVC ()
+
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
+
 @end
 
 
 @implementation ArticlesListVC
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self != nil) {
-        _articles = [NSArray array];
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -47,24 +41,28 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
         registerNib:[UINib nibWithNibName:NSStringFromClass([ArticlesListCell class])
             bundle:[NSBundle mainBundle]]
         forCellReuseIdentifier:reuseIDcellWithoutImage];
+    
+    // Initialize the refresh control
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refreshArticles)
+        forControlEvents:UIControlEventValueChanged];
+    [self.articlesTable addSubview:self.refreshControl];
+}
+
+- (void)setSource:(Source *)source {
+    _source = source;
+    [self.articlesTable reloadData];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.articles.count;
-}
-
-// Set articles array and reload data of articles table
-- (void)setArticles:(NSArray *)articles
-{
-    _articles = [articles copy];
-    [self.articlesTable reloadData];
+    return self.source.articles.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Article *article = self.articles[indexPath.row];
+    Article *article = self.source.articles[indexPath.row];
     
     NSString *reuseId = article.imageURL ? reuseIDcellWithImage : reuseIDcellWithoutImage;
     
@@ -83,9 +81,22 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    Article *article = self.articles[indexPath.row];
+    Article *article = self.source.articles[indexPath.row];
     [self.navigationController pushViewController:[[ArticleDetailsVC alloc] initWithArticle:article]
                                          animated:YES];
+}
+
+- (void)refreshArticles
+{
+    [self.articlesController
+        updateArticlesForSource:self.source
+        success:^() {
+            NSLog(@"All right");
+            [self.refreshControl endRefreshing];
+            [self.articlesTable reloadData];
+        } failure:^(NSError *error) {
+            NSLog(@"Something gone wrong");
+        }];
 }
 
 @end
