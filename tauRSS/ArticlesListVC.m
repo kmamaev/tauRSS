@@ -32,7 +32,8 @@ static const CGFloat cellHeight = 96.0f;
     
     // Initialize main menu button
     UIButton *mainMenuButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImage *barsIcon = [UIImage imageNamed:@"bars_icon.png"];
+    UIImage *barsIcon = [[UIImage imageNamed:@"bars.png"]
+        imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [mainMenuButton setImage:barsIcon forState:UIControlStateNormal];
     mainMenuButton.frame = (CGRect){0, 0, 20, 24};
     [mainMenuButton addTarget:self.viewDeckController
@@ -78,7 +79,7 @@ static const CGFloat cellHeight = 96.0f;
     ArticlesListCell *cell = [self.articlesTable dequeueReusableCellWithIdentifier:reuseId];
     cell.titleLabel.text = article.title;
     cell.infoLabel.text = [NSString stringWithFormat:@"%@・%@・%@",
-        [article.publishDate convertToSpecialString], article.category, article.source.title];
+        [article.publishDate convertToShortString], article.category, article.source.title];
     cell.descriptionLabel.text = article.articleDescription;
     if (article.imageURL == nil) {
         cell.imageWidth.constant = 0.0f;

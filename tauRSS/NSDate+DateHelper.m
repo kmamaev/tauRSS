@@ -3,7 +3,7 @@
 
 @implementation NSDate (DateHelper)
 
-- (NSString *)convertToSpecialString {
+- (NSString *)convertToShortString {
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ru_RU"];
     
@@ -22,6 +22,14 @@
         else {
             dateFormatter.dateStyle = NSDateFormatterShortStyle;
         }
+    return [dateFormatter stringFromDate:self];
+}
+
+- (NSString *)convertToLongString {
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ru_RU"];
+    dateFormatter.timeStyle = NSDateFormatterShortStyle;
+    dateFormatter.dateStyle = NSDateFormatterShortStyle;
     return [dateFormatter stringFromDate:self];
 }
 

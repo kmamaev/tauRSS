@@ -15,6 +15,10 @@
     CGRect windowFrame = [UIScreen mainScreen].bounds;
     self.window = [[UIWindow alloc] initWithFrame:windowFrame];
     
+    // Set base color for the application
+    self.window.tintColor = [UIColor orangeColor];
+    
+    // Initialize deck with sources list screen and articles list screen
     SourcesListVC *sourcesListVC = [[SourcesListVC alloc] init];
     ArticlesListVC *articlesListVC = sourcesListVC.articlesListVC;
     
