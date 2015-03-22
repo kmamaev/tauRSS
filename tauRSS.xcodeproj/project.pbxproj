@@ -373,15 +373,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
 				A8259ADB1ABC8299007D8B9E /* NewSourceVC.xib in Resources */,
-				B5D4BCE41ABBFA9900B31627 /* bars_icon.png in Resources */,
-				A81F6E921ABDA9A5002A96EB /* correct.png in Resources */,
-=======
 				B5D4BCE41ABBFA9900B31627 /* bars.png in Resources */,
+				A81F6E921ABDA9A5002A96EB /* correct.png in Resources */,
 				B5EDB3AA1ABD7370000DB04B /* star_empty.png in Resources */,
 				B5EDB3A91ABD7370000DB04B /* right_arrow.png in Resources */,
->>>>>>> master
 				B5463EAD1ABA05CF002AE579 /* ArticleWebVC.xib in Resources */,
 				A8259AE01ABC8912007D8B9E /* SourcesListCell.xib in Resources */,
 				C0DA933C1ABAEBF200A1F062 /* ArticlesListCell.xib in Resources */,
