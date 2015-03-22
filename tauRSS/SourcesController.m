@@ -61,7 +61,9 @@
     [manager GET:URLString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         RSSParser *rssParser = [[RSSParser alloc] init];
         NSArray *articles = [rssParser parseResponse:(NSXMLParser *)responseObject];
-        NSLog(@"Response: %@", articles);
+        for (Article *article in articles) {
+            NSLog(@"%@", article);
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
