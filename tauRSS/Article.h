@@ -16,10 +16,10 @@
 @property (nonatomic, weak) Source *source;
 
 - (instancetype)initWithTitle:(NSString *)title
-                      link:(NSURL *)link
-               description:(NSString *)articleDescription
-                  category:(NSString *)category
-                  imageURL:(NSURL *)imageURL
-               publishDate:(NSDate *)publishDate;
+    link:(NSURL *)link
+    description:(NSString *)articleDescription
+    category:(NSString *)category
+    imageURL:(NSURL *)imageURL
+    publishDate:(NSDate *)publishDate;
 
 @end

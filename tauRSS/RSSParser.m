@@ -14,6 +14,7 @@ static NSString *const nodeNamePublishDate = @"pubDate";
     Article *article;
     NSMutableArray *articles;
     NSMutableString *tmpString;
+    NSDateFormatter *formatter;
 }
 @end
 
@@ -24,6 +25,10 @@ static NSString *const nodeNamePublishDate = @"pubDate";
     self = [super init];
     if (self != nil) {
         articles = [NSMutableArray array];
+        formatter = [[NSDateFormatter alloc] init];
+        NSLocale *local = [[NSLocale alloc] initWithLocaleIdentifier:@"en_EN"];
+        formatter.locale = local;
+        formatter.dateFormat = @"EEE, dd MMM yyyy HH:mm:ss Z";
     }
     return self;
 }
@@ -71,10 +76,6 @@ static NSString *const nodeNamePublishDate = @"pubDate";
             article.category = tmpString;
         }
         else if ([elementName isEqualToString:nodeNamePublishDate]) {
-            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            NSLocale *local = [[NSLocale alloc] initWithLocaleIdentifier:@"en_EN"];
-            formatter.locale = local;
-            formatter.dateFormat = @"EEE, dd MMM yyyy HH:mm:ss Z";
             article.publishDate = [formatter dateFromString:tmpString];
         }
     }
