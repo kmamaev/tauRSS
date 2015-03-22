@@ -25,9 +25,12 @@
     UINavigationController *centerController = [[UINavigationController alloc]
                                                 initWithRootViewController:articlesListVC];
     
+    UINavigationController *leftController = [[UINavigationController alloc]
+                                                initWithRootViewController:sourcesListVC];
+    
     IIViewDeckController* deckController = [[IIViewDeckController alloc]
                                             initWithCenterViewController:centerController
-                                            leftViewController:sourcesListVC];
+                                            leftViewController:leftController];
     
     // Show sources list view at start by default
     [deckController openLeftViewAnimated:NO];
