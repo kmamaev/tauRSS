@@ -18,12 +18,7 @@
         _articlesController = [[ArticlesController alloc] init];
         _articlesController.sourcesController = self;
         
-        // Init sources list with all sources from db + "all News" + "favorites"
-        NSMutableArray *tmpSources = [NSMutableArray array];
-        [tmpSources addObject:[Source allNewsSourceWithArticlesController:_articlesController]];
-        [tmpSources addObject:[Source favoritesSourceWithArticlesController:_articlesController]];
-        [tmpSources addObjectsFromArray:[_storageController getAllSources]];
-        _sources = tmpSources;
+        _sources = [_storageController getAllSources];
     }
     return self;
 }

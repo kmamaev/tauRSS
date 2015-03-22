@@ -11,6 +11,7 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
 
 @property (strong, nonatomic) SourcesController *sourcesController;
 @property (weak, nonatomic, readonly) NSArray *sources;
+@property (strong, nonatomic, readonly) NSArray *regularSources;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 - (IBAction)didTapSettingsBarButtonItem:(UIBarButtonItem *)sender;
@@ -27,6 +28,10 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
         _sourcesController = [[SourcesController alloc] init];
         _articlesListVC = [[ArticlesListVC alloc] init];
         _sources = _sourcesController.sources;
+        Source *allNewsSource = [Source allNewsSourceWithArticlesController:_sourcesController.articlesController];
+        Source *favoritesSource = [Source favoritesSourceWithArticlesController:_sourcesController.articlesController];
+        _regularSources = @[allNewsSource, favoritesSource];
+
     }
     return self;
 }
