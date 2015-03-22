@@ -39,10 +39,13 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)ip {
-    Source *source = self.sources[ip.row];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Source *source = self.sources[indexPath.row];
     self.articlesListVC.articles = source.articles;
     self.articlesListVC.title = source.title;
+    
+    [self.sourcesController updateArticlesForSource:source];
+    
     [self.viewDeckController closeLeftViewAnimated:YES];
 }
 

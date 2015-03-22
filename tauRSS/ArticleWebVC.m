@@ -13,7 +13,8 @@
 
 @implementation ArticleWebVC
 
-- initWithURL:(NSURL *)url {
+- initWithURL:(NSURL *)url
+{
     self = [super init];
     if (self != nil) {
         _url = url;
@@ -21,7 +22,8 @@
     return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:self.url];
     [self.webView loadRequest:urlRequest];
@@ -37,7 +39,8 @@
     self.planetButton.customView = planetButton;
 }
 
-- (void)didTapPlanetButton:(UIButton *)sender {
+- (void)didTapPlanetButton:(UIButton *)sender
+{
     [self.articleDetailsVC didTapPlanetButton:sender];
 }
 
@@ -70,7 +73,8 @@
 
 #pragma mark - Dealloc
 
-- (void)dealloc {
+- (void)dealloc
+{
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
