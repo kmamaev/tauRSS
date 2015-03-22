@@ -10,12 +10,14 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
 @interface SourcesListVC () <NewSourceDelegate>
 
 @property (strong, nonatomic) SourcesController *sourcesController;
-@property (weak, nonatomic, readonly) NSArray *sources;
-@property (strong, nonatomic, readonly) NSArray *regularSources;
+@property (weak, nonatomic) NSArray *sources;
+@property (strong, nonatomic) NSArray *regularSources;
+@property (strong, nonatomic) NSArray *sections;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 - (IBAction)didTapSettingsBarButtonItem:(UIBarButtonItem *)sender;
 - (IBAction)didTapAddSourceBarButtonItem:(UIBarButtonItem *)sender;
+- (void)updateData;
 
 @end
 
@@ -31,6 +33,7 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
         Source *allNewsSource = [Source allNewsSourceWithArticlesController:_sourcesController.articlesController];
         Source *favoritesSource = [Source favoritesSourceWithArticlesController:_sourcesController.articlesController];
         _regularSources = @[allNewsSource, favoritesSource];
+        _sections = @[_regularSources, _sources];
 
     }
     return self;
@@ -53,6 +56,13 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
 
 #pragma mark - UITableViewDataSource implementation
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [self.sections count];
+}
+
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.sources.count;
 }
@@ -60,7 +70,9 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SourcesListCell *cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIDSourceCell];;
-    Source *source = self.sources[indexPath.row];
+    NSArray *sources = self.sections[indexPath.section];
+    
+    Source *source = sources[indexPath.row];
     cell.titleLabel.text = source.title;
     cell.countLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)[source.articles count]];
     return cell;
@@ -70,7 +82,9 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
 #pragma mark - UITableViewDelegate implementation
 
 - (void)tableView:(UITableView *)tv didSelectRowAtIndexPath:(NSIndexPath *)ip {
-    Source *source = self.sources[ip.row];
+    NSArray *sources = self.sections[ip.section];
+    
+    Source *source = sources[ip.row];
     self.articlesListVC.articles = source.articles;
     self.articlesListVC.title = source.title;
     [self.viewDeckController closeLeftViewAnimated:YES];
@@ -100,7 +114,8 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
 {
     sourse.sourceId = [self.sourcesController.sources count];
     [self.sourcesController addSource:sourse];
-    
+    [self.sourcesController updateAllArticles];
+    [self updateData];
     [self.tableView reloadData];
     
     [self dismissViewControllerAnimated:YES
@@ -108,4 +123,15 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
     
     
 }
+
+
+- (void)updateData
+{
+    Source *allNewsSource = [Source allNewsSourceWithArticlesController:_sourcesController.articlesController];
+    Source *favoritesSource = [Source favoritesSourceWithArticlesController:_sourcesController.articlesController];
+    self.regularSources = @[allNewsSource, favoritesSource];
+    self.sources = self.sourcesController.sources;
+    self.sections = @[self.regularSources, self.sources];
+}
+
 @end
