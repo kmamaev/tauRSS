@@ -14,6 +14,6 @@
 - (void)deleteSource:(Source *)source;
 - (void)getSourceById:(NSString *)sourceId;
 - (void)updateAllArticles;
-- (void)updateArticlesForSourceWithId:(NSString *)sourceId;
+- (void)updateArticlesForSource:(Source *)source;
 
 @end

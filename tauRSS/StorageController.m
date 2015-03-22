@@ -19,8 +19,10 @@
     
     Source *s1 = [[Source alloc] init];
     s1.title = @"Лента RSS";
+    s1.sourceURL = [NSURL URLWithString:@"http://lenta.ru/rss/news"];
     Source *s2 = [[Source alloc] init];
     s2.title = @"НГС RSS";
+    s2.sourceURL = [NSURL URLWithString:@"http://news.ngs.ru/rss/"];
     
     NSDateFormatter *dateFormetter = [[NSDateFormatter alloc] init];
     dateFormetter.dateFormat = @"ccc, dd MMM yyyy HH:mm:ss Z";

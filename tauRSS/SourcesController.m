@@ -1,4 +1,6 @@
 #import "SourcesController.h"
+#import <AFHTTPRequestOperationManager.h>
+#import "RSSParser.h"
 
 
 @interface SourcesController ()
@@ -43,9 +45,21 @@
     // TODO: Implement this
 };
 
-- (void)updateArticlesForSourceWithId:(NSString *)sourceId {
+- (void)updateArticlesForSource:(Source *)source
+{
 #warning resolve TODO mark
-    // TODO: Implement this
+    // TODO: Implement this properly
+    NSString *URLString = source.sourceURL.absoluteString;
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/rss+xml"];
+    [manager GET:URLString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        RSSParser *rssParser = [[RSSParser alloc] init];
+        NSArray *articles = [rssParser parseResponse:(NSXMLParser *)responseObject];
+        NSLog(@"Response: %@", articles);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
 };
 
 @end
