@@ -3,34 +3,47 @@
 
 @implementation NSDate (DateHelper)
 
-- (NSString *)convertToShortString {
-    NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ru_RU"];
+- (NSString *)shortString {
+    static NSDateFormatter *dateFormatterShortStyle = nil;
+    if (!dateFormatterShortStyle) {
+        dateFormatterShortStyle = [[NSDateFormatter alloc] init];
+    }
+    dateFormatterShortStyle.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ru_RU"];
     
-    NSDateComponents *selfDay = [[NSCalendar currentCalendar]
+    static NSCalendar *calendar = nil;
+    if (!calendar) {
+        calendar = [NSCalendar currentCalendar];
+    }
+    
+    NSDateComponents *selfDay = [calendar
         components:NSCalendarUnitEra|NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay
         fromDate:self];
-    NSDateComponents *today = [[NSCalendar currentCalendar]
+    NSDateComponents *today = [calendar
         components:NSCalendarUnitEra|NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay
         fromDate:[NSDate date]];
         if ([today day] == [selfDay day] &&
             [today month] == [selfDay month] &&
             [today year] == [selfDay year] &&
             [today era] == [selfDay era]) {
-            dateFormatter.timeStyle = NSDateFormatterShortStyle;
+            dateFormatterShortStyle.timeStyle = NSDateFormatterShortStyle;
+            dateFormatterShortStyle.dateStyle = NSDateFormatterNoStyle;
         }
         else {
-            dateFormatter.dateStyle = NSDateFormatterShortStyle;
+            dateFormatterShortStyle.dateStyle = NSDateFormatterShortStyle;
+            dateFormatterShortStyle.timeStyle = NSDateFormatterNoStyle;
         }
-    return [dateFormatter stringFromDate:self];
+    return [dateFormatterShortStyle stringFromDate:self];
 }
 
-- (NSString *)convertToLongString {
-    NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ru_RU"];
-    dateFormatter.timeStyle = NSDateFormatterShortStyle;
-    dateFormatter.dateStyle = NSDateFormatterShortStyle;
-    return [dateFormatter stringFromDate:self];
+- (NSString *)longString {
+    static NSDateFormatter *dateFormatterLongStyle = nil;
+    if (!dateFormatterLongStyle) {
+        dateFormatterLongStyle = [[NSDateFormatter alloc] init];
+    }
+    dateFormatterLongStyle.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"ru_RU"];
+    dateFormatterLongStyle.timeStyle = NSDateFormatterShortStyle;
+    dateFormatterLongStyle.dateStyle = NSDateFormatterShortStyle;
+    return [dateFormatterLongStyle stringFromDate:self];
 }
 
 @end

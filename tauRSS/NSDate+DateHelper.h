@@ -8,12 +8,12 @@
  *  today returns only hours and minutes or day, month and year otherwise.
  *  Examples: 12:51 (if today); 21.03.15  (if not today).
  */
-- (NSString *)convertToShortString;
+- (NSString *)shortString;
 
 /**
  *  Convert date to string containing day, month, year, hours and minutes.
  *  Example: 21.03.15, 12:51
  */
-- (NSString *)convertToLongString;
+- (NSString *)longString;
 
 @end

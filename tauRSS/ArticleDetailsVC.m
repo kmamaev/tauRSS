@@ -38,7 +38,7 @@
     self.titleLabel.text = self.article.title;
     self.descriptionLabel.text = self.article.articleDescription;
     self.infoLabel.text = [NSString stringWithFormat:@"%@・%@・%@",
-        [self.article.publishDate convertToLongString],
+        [self.article.publishDate longString],
         self.article.category, self.article.source.title];
     if (self.article.imageURL == nil) {
         self.imageHeight.constant = 0.0f;

@@ -8,7 +8,6 @@
 
 static NSString *const reuseIDcellWithImage = @"ArticlesListCell1";
 static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
-static const CGFloat cellHeight = 96.0f;
 
 
 @interface ArticlesListVC ()
@@ -64,11 +63,6 @@ static const CGFloat cellHeight = 96.0f;
     [self.articlesTable reloadData];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return cellHeight;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -79,7 +73,7 @@ static const CGFloat cellHeight = 96.0f;
     ArticlesListCell *cell = [self.articlesTable dequeueReusableCellWithIdentifier:reuseId];
     cell.titleLabel.text = article.title;
     cell.infoLabel.text = [NSString stringWithFormat:@"%@・%@・%@",
-        [article.publishDate convertToShortString], article.category, article.source.title];
+        [article.publishDate shortString], article.category, article.source.title];
     cell.descriptionLabel.text = article.articleDescription;
     if (article.imageURL == nil) {
         cell.imageWidth.constant = 0.0f;

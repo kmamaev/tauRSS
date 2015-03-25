@@ -35,7 +35,9 @@
     return articles;
 }
 
-- (NSArray *)favoriteArticles {
+- (NSArray *)favoriteArticles
+{
+#warning Need to optimize getting of favorites list
     NSArray *allArticles = [self allArticles];
     NSMutableArray *favoriteArticles = [NSMutableArray array];
     for (Article *article in allArticles) {

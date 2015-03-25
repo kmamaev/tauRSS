@@ -4,7 +4,6 @@
 
 @interface ArticleWebVC ()
 
-@property (strong, nonatomic) NSURL *url;
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *planetButton;
 
@@ -13,7 +12,7 @@
 
 @implementation ArticleWebVC
 
-- initWithURL:(NSURL *)url {
+- (instancetype)initWithURL:(NSURL *)url {
     self = [super init];
     if (self != nil) {
         _url = url;
