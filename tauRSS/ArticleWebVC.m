@@ -1,5 +1,6 @@
 #import "ArticleWebVC.h"
 #import "ArticleDetailsVC.h"
+#import "Utils.h"
 
 
 @interface ArticleWebVC ()
@@ -54,16 +55,9 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    UIAlertController *alert = [UIAlertController
-        alertControllerWithTitle:NSLocalizedString(@"errorLoadingPage",)
-        message:error.localizedDescription
-        preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *closeAlert = [UIAlertAction
-        actionWithTitle:NSLocalizedString(@"close",)
-        style:UIAlertActionStyleDefault
-        handler:nil];
-    [alert addAction:closeAlert];
-    [self presentViewController:alert animated:YES completion:nil];
+    [Utils showInfoAlertWithTitle:NSLocalizedString(@"errorLoadingPage",)
+        description:error.localizedDescription
+        delegate:self];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 

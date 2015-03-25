@@ -36,6 +36,7 @@
 		B549E4581AB054EC00371CBD /* Source.m in Sources */ = {isa = PBXBuildFile; fileRef = B549E4571AB054EC00371CBD /* Source.m */; };
 		B549E45B1AB059C500371CBD /* SourcesController.m in Sources */ = {isa = PBXBuildFile; fileRef = B549E45A1AB059C500371CBD /* SourcesController.m */; };
 		B549E45E1AB07C6F00371CBD /* StorageController.m in Sources */ = {isa = PBXBuildFile; fileRef = B549E45D1AB07C6F00371CBD /* StorageController.m */; };
+		B5AF3FC61AC2C4B000AC378D /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B5AF3FC51AC2C4B000AC378D /* Utils.m */; };
 		B5D4BCDE1ABB360100B31627 /* image_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D4BCDD1ABB360100B31627 /* image_placeholder.png */; };
 		B5D4BCE21ABB600100B31627 /* NSDate+DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D4BCE11ABB600100B31627 /* NSDate+DateHelper.m */; };
 		B5D4BCE41ABBFA9900B31627 /* bars.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D4BCE31ABBFA9900B31627 /* bars.png */; };
@@ -109,6 +110,8 @@
 		B549E45A1AB059C500371CBD /* SourcesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SourcesController.m; sourceTree = "<group>"; };
 		B549E45C1AB07C6F00371CBD /* StorageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageController.h; sourceTree = "<group>"; };
 		B549E45D1AB07C6F00371CBD /* StorageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageController.m; sourceTree = "<group>"; };
+		B5AF3FC41AC2C4AF00AC378D /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		B5AF3FC51AC2C4B000AC378D /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		B5D4BCDD1ABB360100B31627 /* image_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image_placeholder.png; path = Assets/image_placeholder.png; sourceTree = "<group>"; };
 		B5D4BCE01ABB600100B31627 /* NSDate+DateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateHelper.h"; sourceTree = "<group>"; };
 		B5D4BCE11ABB600100B31627 /* NSDate+DateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateHelper.m"; sourceTree = "<group>"; };
@@ -216,6 +219,8 @@
 				B5046D5A1AB733E7006D5183 /* ArticlesController.m */,
 				B549E45C1AB07C6F00371CBD /* StorageController.h */,
 				B549E45D1AB07C6F00371CBD /* StorageController.m */,
+				B5AF3FC41AC2C4AF00AC378D /* Utils.h */,
+				B5AF3FC51AC2C4B000AC378D /* Utils.m */,
 				B53CDBEE1AA78E3600CDD070 /* Images.xcassets */,
 				B53CDBF01AA78E3600CDD070 /* LaunchScreen.xib */,
 				B53CDBE11AA78E3600CDD070 /* Supporting Files */,
@@ -453,6 +458,7 @@
 				C0DA933B1ABAEBF200A1F062 /* ArticlesListCell.m in Sources */,
 				B549E4551AB054AC00371CBD /* Article.m in Sources */,
 				B53CDBE71AA78E3600CDD070 /* AppDelegate.m in Sources */,
+				B5AF3FC61AC2C4B000AC378D /* Utils.m in Sources */,
 				B53CDBE41AA78E3600CDD070 /* main.m in Sources */,
 				A8259ADF1ABC8912007D8B9E /* SourcesListCell.m in Sources */,
 				B549E45B1AB059C500371CBD /* SourcesController.m in Sources */,
