@@ -2,6 +2,7 @@
 #import "ArticleWebVC.h"
 #import "NSDate+DateHelper.h"
 #import "Source.h"
+#import "Utils.h"
 
 
 @interface ArticleDetailsVC ()
@@ -116,8 +117,9 @@
         [app openURL:self.article.link];
     }
     else {
-#warning resolve TODO mark
-    // TODO: make correct handling
+        [Utils showInfoAlertWithTitle:NSLocalizedString(@"cantOpenUrlTitle",)
+            description:NSLocalizedString(@"cantOpenUrlDescription",)
+            delegate:self];
     }
 }
 
