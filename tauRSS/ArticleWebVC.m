@@ -45,11 +45,13 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
+#warning Need to handle network activity indicator via AFNetworking
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+#warning Need to handle network activity indicator via AFNetworking
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
@@ -58,12 +60,14 @@
     [Utils showInfoAlertWithTitle:NSLocalizedString(@"errorLoadingPage",)
         description:error.localizedDescription
         delegate:self];
+#warning Need to handle network activity indicator via AFNetworking
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 #pragma mark - Dealloc
 
 - (void)dealloc {
+#warning Need to handle network activity indicator via AFNetworking
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
