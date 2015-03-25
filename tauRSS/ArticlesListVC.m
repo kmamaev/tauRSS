@@ -30,15 +30,13 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
     [super viewDidLoad];
     
     // Initialize main menu button
-    UIButton *mainMenuButton = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage *barsIcon = [[UIImage imageNamed:@"bars.png"]
         imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [mainMenuButton setImage:barsIcon forState:UIControlStateNormal];
-    mainMenuButton.frame = (CGRect){0, 0, 20, 24};
-    [mainMenuButton addTarget:self.viewDeckController
-        action:@selector(toggleLeftView) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-        initWithCustomView:mainMenuButton];
+        initWithImage:barsIcon
+        style:UIBarButtonItemStylePlain
+        target:self.viewDeckController
+        action:@selector(toggleLeftView)];
     
     // Initialize custom cells for articles table
     [self.articlesTable
