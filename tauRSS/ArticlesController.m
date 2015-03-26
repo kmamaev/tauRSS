@@ -89,17 +89,20 @@
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
 #warning I am not sure that only type "application/rss+xml" is necessary. Need to additional investigation.
-        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/rss+xml"];
+        manager.responseSerializer.acceptableContentTypes =
+            [NSSet setWithObject:@"application/rss+xml"];
         [manager GET:URLString
             parameters:nil
             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 RSSParser *rssParser = [[RSSParser alloc] init];
-                NSMutableSet *fetchedArticles = [rssParser parseResponse:(NSXMLParser *)responseObject];
+                NSMutableSet *fetchedArticles = [rssParser
+                    parseResponse:(NSXMLParser *)responseObject forSource:source];
                 NSSet *currentArticles = [NSSet setWithArray:source.articles];
                 [fetchedArticles minusSet:currentArticles];
                 NSArray *newArticles = [[self class] articlesArrayBySortingASet:fetchedArticles];
                 source.articles = [newArticles arrayByAddingObjectsFromArray:source.articles];
-                NSLog(@"Update for source \"%@\" has finished, %ld articles are added:", source.title, newArticles.count);
+                NSLog(@"Update for source \"%@\" has finished, %ld articles are added:",
+                    source.title, newArticles.count);
                 for (Article *a in newArticles) {
                     NSLog(@"%@", a);
                 }

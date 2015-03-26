@@ -16,6 +16,7 @@ static NSString *const nodeNameArticleId = @"guid";
     NSMutableSet *articles;
     NSMutableString *tmpString;
     NSDateFormatter *formatter;
+    Source *currentSource;
 }
 @end
 
@@ -34,8 +35,9 @@ static NSString *const nodeNameArticleId = @"guid";
     return self;
 }
 
-- (NSMutableSet *)parseResponse:(NSXMLParser *)xmlParser
+- (NSMutableSet *)parseResponse:(NSXMLParser *)xmlParser forSource:(Source *)source
 {
+    currentSource = source;
     xmlParser.delegate = self;
     [xmlParser parse];
     return articles;
@@ -66,6 +68,7 @@ static NSString *const nodeNameArticleId = @"guid";
             // Assume that value of 'link' node is primary key for items which have no 'guid' node
             article.articleId = article.link.absoluteString;
         }
+        article.source = currentSource;
         [articles addObject:article];
     }
     if (article != nil && tmpString != nil) {
