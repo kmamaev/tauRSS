@@ -72,7 +72,7 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SourcesListCell *cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIDSourceCell];;
+    SourcesListCell *cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIDSourceCell];
     NSArray *sources = self.sections[indexPath.section];
     
     Source *source = sources[indexPath.row];
@@ -84,7 +84,8 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
 #pragma mark - UITableViewDelegate implementation
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Source *source = self.sources[indexPath.row];
+    NSArray *sources = self.sections[indexPath.section];
+    Source *source = sources[indexPath.row];
     self.articlesListVC.source = source;
     self.articlesListVC.title = source.title;
     [self.viewDeckController closeLeftViewAnimated:YES];
