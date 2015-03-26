@@ -114,7 +114,8 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
 {
     sourse.sourceId = [self.sourcesController.sources count];
     [self.sourcesController addSource:sourse];
-    [self.sourcesController updateAllArticles];
+#warning Need to handle it correctly
+    //[self.sourcesController updateAllArticles];
     [self updateData];
     [self.tableView reloadData];
     

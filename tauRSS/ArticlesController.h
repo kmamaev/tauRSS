@@ -13,7 +13,7 @@
 - (NSArray *)allArticles;
 - (NSArray *)favoriteArticles;
 - (void)updateArticlesForSource:(Source *)source
-    success:(void (^)())success
+    success:(void (^)(BOOL))success
     failure:(void (^)(NSError *))failure;
 
 @end

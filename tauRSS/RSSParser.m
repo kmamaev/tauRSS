@@ -8,11 +8,12 @@ static NSString *const nodeNameDescription = @"description";
 static NSString *const nodeNameLink = @"link";
 static NSString *const nodeNameCategory = @"category";
 static NSString *const nodeNamePublishDate = @"pubDate";
+static NSString *const nodeNameArticleId = @"guid";
 
 
 @interface RSSParser () <NSXMLParserDelegate> {
     Article *article;
-    NSMutableArray *articles;
+    NSMutableSet *articles;
     NSMutableString *tmpString;
     NSDateFormatter *formatter;
 }
@@ -24,7 +25,7 @@ static NSString *const nodeNamePublishDate = @"pubDate";
 - (instancetype)init {
     self = [super init];
     if (self != nil) {
-        articles = [NSMutableArray array];
+        articles = [NSMutableSet set];
         formatter = [[NSDateFormatter alloc] init];
         NSLocale *local = [[NSLocale alloc] initWithLocaleIdentifier:@"en_EN"];
         formatter.locale = local;
@@ -33,7 +34,7 @@ static NSString *const nodeNamePublishDate = @"pubDate";
     return self;
 }
 
-- (NSArray *)parseResponse:(NSXMLParser *)xmlParser
+- (NSMutableSet *)parseResponse:(NSXMLParser *)xmlParser
 {
     xmlParser.delegate = self;
     [xmlParser parse];
@@ -49,6 +50,7 @@ static NSString *const nodeNamePublishDate = @"pubDate";
     attributes:(NSDictionary *)attributeDict
 {
     tmpString = [NSMutableString string];
+#warning Some RSS sources contain 'entry' node instead of 'item' (e.g. github RSS). Need to additional investigation.
     if ([elementName isEqualToString:@"item"]) {
         article = [[Article alloc] init];
     }
@@ -60,6 +62,10 @@ static NSString *const nodeNamePublishDate = @"pubDate";
     qualifiedName:(NSString *)qName
 {
     if ([elementName isEqualToString:nodeNameItem]) {
+        if (!article.articleId && article.link) {
+            // Assume that value of 'link' node is primary key for items which have no 'guid' node
+            article.articleId = article.link.absoluteString;
+        }
         [articles addObject:article];
     }
     if (article != nil && tmpString != nil) {
@@ -77,6 +83,9 @@ static NSString *const nodeNamePublishDate = @"pubDate";
         }
         else if ([elementName isEqualToString:nodeNamePublishDate]) {
             article.publishDate = [formatter dateFromString:tmpString];
+        }
+        else if ([elementName isEqualToString:nodeNameArticleId]) {
+            article.articleId = tmpString;
         }
     }
     [tmpString setString:@""];
