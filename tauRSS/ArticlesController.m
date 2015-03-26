@@ -27,7 +27,7 @@
             [articles addObjectsFromArray:source.articles];
         }
     }
-    return articles;
+    return [[self class] articlesArraySortedByPublishDate:articles];
 }
 
 - (NSArray *)favoriteArticles
@@ -40,7 +40,7 @@
             [favoriteArticles addObject:article];
         }
     }
-    return favoriteArticles;
+    return [[self class] articlesArraySortedByPublishDate:favoriteArticles];
 }
 
 - (void)updateArticlesForSource:(Source *)source
@@ -119,6 +119,14 @@
     NSSortDescriptor *publishDateSortDescriptor = [NSSortDescriptor
         sortDescriptorWithKey:@"publishDate" ascending:NO];
     return [unsortedArticlesSet sortedArrayUsingDescriptors:@[publishDateSortDescriptor]];
+}
+
+// Sort the specified articles array by publish date and returns the sorted array
++ (NSArray *)articlesArraySortedByPublishDate:(NSArray *)unsortedArticles
+{
+    NSSortDescriptor *publishDateSortDescriptor = [NSSortDescriptor
+        sortDescriptorWithKey:@"publishDate" ascending:NO];
+    return [unsortedArticles sortedArrayUsingDescriptors:@[publishDateSortDescriptor]];
 }
 
 @end
