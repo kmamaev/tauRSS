@@ -38,9 +38,17 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.titleLabel.text = self.article.title;
     self.descriptionLabel.text = self.article.articleDescription;
-    self.infoLabel.text = [NSString stringWithFormat:@"%@・%@・%@",
-        [self.article.publishDate longString],
-        self.article.category, self.article.source.title];
+    
+    NSMutableString *articleInfo = [[NSMutableString alloc]
+                                    initWithString:[self.article.publishDate longString]];
+    if (self.article.category) {
+        [articleInfo appendFormat:@"・%@", self.article.category];
+    }
+    if (self.article.source.title) {
+        [articleInfo appendFormat:@"・%@", self.article.source.title];
+    }
+    self.infoLabel.text = articleInfo;
+    
     if (self.article.imageURL == nil) {
         self.imageHeight.constant = 0.0f;
     }
