@@ -2,6 +2,7 @@
 #import "SourcesListVC.h"
 #import "ArticlesListVC.h"
 #import "IIViewDeckController.h"
+#import <AFNetworkActivityIndicatorManager.h>
 
 
 @interface AppDelegate ()
@@ -14,6 +15,9 @@
                                      didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     CGRect windowFrame = [UIScreen mainScreen].bounds;
     self.window = [[UIWindow alloc] initWithFrame:windowFrame];
+    
+    // Set up activity indicator
+    [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
     
     // Set base color for the application
     self.window.tintColor = [UIColor orangeColor];
