@@ -68,8 +68,15 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
     
     ArticlesListCell *cell = [self.articlesTable dequeueReusableCellWithIdentifier:reuseId];
     cell.titleLabel.text = article.title;
-    cell.infoLabel.text = [NSString stringWithFormat:@"%@・%@・%@",
-        [article.publishDate shortString], article.category, article.source.title];
+    NSMutableString *articleInfo = [[NSMutableString alloc]
+        initWithString:[article.publishDate shortString]];
+    if (article.category) {
+        [articleInfo appendFormat:@"・%@", article.category];
+    }
+    if (article.source.title) {
+        [articleInfo appendFormat:@"・%@", article.source.title];
+    }
+    cell.infoLabel.text = articleInfo;
     cell.descriptionLabel.text = article.articleDescription;
     if (article.imageURL == nil) {
         cell.imageWidth.constant = 0.0f;
