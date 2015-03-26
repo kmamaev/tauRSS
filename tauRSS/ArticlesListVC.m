@@ -91,15 +91,15 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
     [self.articlesController
         updateArticlesForSource:self.source
         success:^(BOOL areNewArticlesAdded) {
+            [self.refreshControl endRefreshing];
             if (areNewArticlesAdded) {
-                [self.refreshControl endRefreshing];
                 [self.articlesTable reloadData];
                 NSLog(@"Articles table has been refreshed.");
             }
             else {
                 NSLog(@"No need to reshresh the articles table.");
             }
-        } failure:^(NSError *error) {
+        } failure:^(NSArray *errors) {
 #warning Need to handle an error
             NSLog(@"Something gone wrong");
         }];

@@ -14,6 +14,6 @@
 - (NSArray *)favoriteArticles;
 - (void)updateArticlesForSource:(Source *)source
     success:(void (^)(BOOL))success
-    failure:(void (^)(NSError *))failure;
+    failure:(void (^)(NSArray *))failure;
 
 @end

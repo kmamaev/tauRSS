@@ -45,32 +45,69 @@
 
 - (void)updateArticlesForSource:(Source *)source
     success:(void (^)(BOOL))success
-    failure:(void (^)(NSError *))failure
+    failure:(void (^)(NSArray *))failure
 {
-#warning resolve TODO mark
-    // TODO: Handle updating of 'favorites' articles and 'all' articles
-    NSString *URLString = source.sourceURL.absoluteString;
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
-#warning I am not sure that only type "application/rss+xml" is necessary. Need to additional investigation.
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/rss+xml"];
-    [manager GET:URLString
-        parameters:nil
-        success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            RSSParser *rssParser = [[RSSParser alloc] init];
-            NSMutableSet *fetchedArticles = [rssParser parseResponse:(NSXMLParser *)responseObject];
-            NSSet *currentArticles = [NSSet setWithArray:source.articles];
-            [fetchedArticles minusSet:currentArticles];
-            NSArray *newArticles = [[self class] articlesArrayBySortingASet:fetchedArticles];
-            source.articles = [newArticles arrayByAddingObjectsFromArray:source.articles];
-            NSLog(@"Update has finished, %ld articles are added:", newArticles.count);
-            for (Article *a in newArticles) {
-                NSLog(@"%@", a);
+    // If source is equal to "All news"
+    if (source.sourceId == sourceIdAllNews) {
+        NSMutableArray *__block errors = [NSMutableArray array];
+        BOOL __block areAllArticlesHaveUpdates = NO;
+        dispatch_group_t group = dispatch_group_create();
+        for (Source *s in self.sourcesController.sources) {
+            dispatch_group_enter(group);
+            [self updateArticlesForSource:s
+                success:^(BOOL areNewArticlesAdded) {
+                    if (areNewArticlesAdded && !areAllArticlesHaveUpdates) {
+                        areAllArticlesHaveUpdates = YES;
+                    }
+                    dispatch_group_leave(group);
+                } failure:^(NSArray *error) {
+                    @synchronized(errors) {
+                        [errors addObjectsFromArray:error];
+                    }
+                    dispatch_group_leave(group);
+                }];
+        }
+        dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+            NSLog(@"All sources updated.");
+            if (errors.count > 0) {
+                failure(errors);
             }
-            success(newArticles.count > 0);
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            failure(error);
-        }];
+            else {
+                success(areAllArticlesHaveUpdates);
+            }
+        });
+    }
+    
+    // If source is equal to "Favorites"
+    else if (source.sourceId == sourceIdFavorites) {
+        success(NO);
+    }
+    
+    // If source is not equal to "All news" or "Favorites"
+    else {
+        NSString *URLString = source.sourceURL.absoluteString;
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
+#warning I am not sure that only type "application/rss+xml" is necessary. Need to additional investigation.
+        manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/rss+xml"];
+        [manager GET:URLString
+            parameters:nil
+            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                RSSParser *rssParser = [[RSSParser alloc] init];
+                NSMutableSet *fetchedArticles = [rssParser parseResponse:(NSXMLParser *)responseObject];
+                NSSet *currentArticles = [NSSet setWithArray:source.articles];
+                [fetchedArticles minusSet:currentArticles];
+                NSArray *newArticles = [[self class] articlesArrayBySortingASet:fetchedArticles];
+                source.articles = [newArticles arrayByAddingObjectsFromArray:source.articles];
+                NSLog(@"Update for source \"%@\" has finished, %ld articles are added:", source.title, newArticles.count);
+                for (Article *a in newArticles) {
+                    NSLog(@"%@", a);
+                }
+                success(newArticles.count > 0);
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                failure(@[error]);
+            }];
+    }
 }
 
 // Sort the specified articles set by publish date and returns the sorted set as array
