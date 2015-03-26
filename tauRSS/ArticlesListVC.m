@@ -90,11 +90,17 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
 {
     [self.articlesController
         updateArticlesForSource:self.source
-        success:^() {
-            NSLog(@"All right");
-            [self.refreshControl endRefreshing];
-            [self.articlesTable reloadData];
+        success:^(BOOL areNewArticlesAdded) {
+            if (areNewArticlesAdded) {
+                [self.refreshControl endRefreshing];
+                [self.articlesTable reloadData];
+                NSLog(@"Articles table has been refreshed.");
+            }
+            else {
+                NSLog(@"No need to reshresh the articles table.");
+            }
         } failure:^(NSError *error) {
+#warning Need to handle an error
             NSLog(@"Something gone wrong");
         }];
 }

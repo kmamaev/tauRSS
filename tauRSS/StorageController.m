@@ -65,6 +65,13 @@
                                      publishDate:[dateFormetter dateFromString:@"Wed, 11 Mar 2015 16:44:00 +0300"]];
     
     a1.source = a2.source = a3.source = a4.source = a5.source = s1;
+    
+    a1.articleId = [a1.link absoluteString];
+    a2.articleId = [a2.link absoluteString];
+    a3.articleId = [a3.link absoluteString];
+    a4.articleId = [a4.link absoluteString];
+    a5.articleId = [a5.link absoluteString];
+    
     s1.articles = @[a1, a2, a3, a4, a5];
     
     Article *a6 = [[Article alloc] initWithTitle:@"Фигурант по делу «Интерры» провел на свободе 13 дней"
@@ -105,6 +112,13 @@
                                       publishDate:[dateFormetter dateFromString:@"Wed, 11 Mar 2015 16:16:00 +0700"]];
     
     a6.source = a7.source = a8.source = a9.source = a10.source = s2;
+    
+    a6.articleId = [a6.link absoluteString];
+    a7.articleId = [a7.link absoluteString];
+    a8.articleId = [a8.link absoluteString];
+    a9.articleId = [a9.link absoluteString];
+    a10.articleId = [a10.link absoluteString];
+    
     s2.articles = @[a6, a7, a8, a9, a10];
     
     return @[s1, s2];

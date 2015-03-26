@@ -6,6 +6,6 @@
 /**
  *  Parses xml from the specified xml parser object and returns array of articles objects
  */
-- (NSArray *)parseResponse:(NSXMLParser *)xmlParser;
+- (NSMutableSet *)parseResponse:(NSXMLParser *)xmlParser;
 
 @end

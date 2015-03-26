@@ -5,6 +5,7 @@
 
 @interface Article : NSObject
 
+@property (nonatomic, copy) NSString *articleId;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, strong) NSURL *link;
 @property (nonatomic, copy) NSString *articleDescription;
