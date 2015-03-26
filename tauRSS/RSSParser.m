@@ -76,7 +76,8 @@ static NSString *const nodeNameArticleId = @"guid";
             article.title = tmpString;
         }
         else if ([elementName isEqualToString:nodeNameDescription]) {
-            article.articleDescription = tmpString;
+            article.articleDescription = [tmpString stringByTrimmingCharactersInSet:[NSCharacterSet
+                whitespaceAndNewlineCharacterSet]];
         }
         else if ([elementName isEqualToString:nodeNameLink]) {
             article.link = [NSURL URLWithString:tmpString];
