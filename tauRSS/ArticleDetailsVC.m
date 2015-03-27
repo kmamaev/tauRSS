@@ -2,6 +2,7 @@
 #import "ArticleWebVC.h"
 #import "Source.h"
 #import "Utils.h"
+#import <UIImageView+AFNetworking.h>
 
 
 @interface ArticleDetailsVC ()
@@ -9,6 +10,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (strong, nonatomic) IBOutlet UILabel *infoLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *articleImageView;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *imageHeight;
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *leftArrowButton;
@@ -16,18 +18,17 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *planetButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *starButton;
 
-
-@property (strong, nonatomic) Article *article;
-
 @end
 
 
 @implementation ArticleDetailsVC
 
-- (instancetype)initWithArticle:(Article *)article {
+- (instancetype)initWithArticle:(Article *)article image:(UIImage *)articleImage
+{
     self = [self init];
     if (self != nil) {
         _article = article;
+        _articleImage = articleImage;
     }
     return self;
 }
@@ -35,12 +36,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    // Initialize article's title, info and description
     self.titleLabel.text = self.article.title;
     self.descriptionLabel.text = self.article.articleDescription;
     self.infoLabel.text = [Utils buildLongArticleInfo:self.article];
     
     if (self.article.imageURL == nil) {
         self.imageHeight.constant = 0.0f;
+    }
+    
+    // Initialize article image
+    if (self.articleImage) {
+        self.articleImageView.image = self.articleImage;
+    }
+    else {
+        [self.articleImageView setImageWithURL:self.article.imageURL];
     }
     
     // Initialize toolbar items

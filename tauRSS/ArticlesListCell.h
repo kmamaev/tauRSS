@@ -10,4 +10,9 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *imageWidth;
 @property (strong, nonatomic) NSURL *urlForImage;
 
+/**
+ *  Returns static placeholder image instance that uses by cell when real image is not loaded yet
+ */
++ (UIImage *)placeholderImage;
+
 @end

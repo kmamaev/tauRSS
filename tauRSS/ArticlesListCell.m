@@ -17,11 +17,16 @@
 - (void)prepareForReuse
 {
     [super prepareForReuse];
+    self.articleImageView.image = [[self class] placeholderImage];
+}
+
++ (UIImage *)placeholderImage
+{
     static UIImage *placeholderImage = nil;
     if (!placeholderImage) {
         placeholderImage = [UIImage imageNamed:@"image_placeholder.png"];
     }
-    self.articleImageView.image = placeholderImage;
+    return placeholderImage;
 }
 
 @end

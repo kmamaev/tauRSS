@@ -4,7 +4,10 @@
 
 @interface ArticleDetailsVC : UIViewController
 
-- (instancetype)initWithArticle:(Article *)article;
+@property (strong, nonatomic) Article *article;
+@property (strong, nonatomic) UIImage *articleImage;
+
+- (instancetype)initWithArticle:(Article *)article image:(UIImage *)articleImage;
 - (void)didTapPlanetButton:(UIButton *)sender;
 
 @end

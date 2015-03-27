@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ArticleDetailsVC">
             <connections>
+                <outlet property="articleImageView" destination="5S2-NG-QRp" id="zRo-fk-sIZ"/>
                 <outlet property="descriptionLabel" destination="t74-Rs-RRt" id="XmB-tH-5Kn"/>
                 <outlet property="imageHeight" destination="O6U-bb-2cj" id="Uqu-cr-h7c"/>
                 <outlet property="infoLabel" destination="ErK-Mh-q2A" id="Zvq-hz-h7w"/>
@@ -28,7 +29,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7e-mo-261" userLabel="Title">
                             <rect key="frame" x="8" y="8" width="584" height="19.5"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ErK-Mh-q2A" userLabel="Info">
@@ -40,14 +41,13 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t74-Rs-RRt" userLabel="Description">
                             <rect key="frame" x="8" y="245" width="584" height="16.5"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="5S2-NG-QRp" userLabel="Image">
-                            <rect key="frame" x="210" y="57" width="180" height="180"/>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="5S2-NG-QRp" userLabel="Image">
+                            <rect key="frame" x="8" y="57" width="584" height="180"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="180" id="O6U-bb-2cj"/>
-                                <constraint firstAttribute="width" constant="180" id="Oxn-aJ-af9"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcT-IY-fks" userLabel="Link Button">
@@ -60,9 +60,9 @@
                             </connections>
                         </button>
                     </subviews>
->>>>>>> master
                     <constraints>
                         <constraint firstAttribute="centerX" secondItem="EcT-IY-fks" secondAttribute="centerX" id="0So-cK-38l"/>
+                        <constraint firstItem="5S2-NG-QRp" firstAttribute="leading" secondItem="FMZ-vt-lAd" secondAttribute="leading" constant="8" id="0mR-VX-7Ta"/>
                         <constraint firstItem="EcT-IY-fks" firstAttribute="top" secondItem="t74-Rs-RRt" secondAttribute="bottom" constant="8" id="3sh-eR-JdJ"/>
                         <constraint firstAttribute="centerX" secondItem="5S2-NG-QRp" secondAttribute="centerX" id="3xR-Wj-Iru"/>
                         <constraint firstItem="t74-Rs-RRt" firstAttribute="top" secondItem="5S2-NG-QRp" secondAttribute="bottom" constant="8" id="Cj4-G8-oCu"/>
@@ -72,6 +72,7 @@
                         <constraint firstItem="i7e-mo-261" firstAttribute="leading" secondItem="ErK-Mh-q2A" secondAttribute="leading" id="d1D-CP-RXU"/>
                         <constraint firstAttribute="bottom" secondItem="EcT-IY-fks" secondAttribute="bottom" constant="8" id="fct-Nn-oYJ"/>
                         <constraint firstItem="i7e-mo-261" firstAttribute="top" secondItem="FMZ-vt-lAd" secondAttribute="top" constant="8" id="n4E-66-jiq"/>
+                        <constraint firstAttribute="trailing" secondItem="5S2-NG-QRp" secondAttribute="trailing" constant="8" id="oyF-n3-asf"/>
                         <constraint firstItem="i7e-mo-261" firstAttribute="trailing" secondItem="ErK-Mh-q2A" secondAttribute="trailing" id="wGb-PY-4oa"/>
                         <constraint firstItem="5S2-NG-QRp" firstAttribute="top" secondItem="ErK-Mh-q2A" secondAttribute="bottom" constant="8" id="xtm-GF-Ni5"/>
                         <constraint firstItem="ErK-Mh-q2A" firstAttribute="top" secondItem="i7e-mo-261" secondAttribute="bottom" constant="8" id="ycQ-5n-xJT"/>

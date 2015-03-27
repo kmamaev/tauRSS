@@ -80,8 +80,17 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     Article *article = self.source.articles[indexPath.row];
-    [self.navigationController pushViewController:[[ArticleDetailsVC alloc] initWithArticle:article]
-                                         animated:YES];
+    
+    ArticlesListCell *selectedCell = (ArticlesListCell *)[tableView cellForRowAtIndexPath:indexPath];
+    UIImage *articleImage;
+    if (selectedCell.articleImageView.image != [ArticlesListCell placeholderImage]) {
+        articleImage = selectedCell.articleImageView.image;
+    }
+    
+    ArticleDetailsVC *articleDetailsVC = [[ArticleDetailsVC alloc]
+        initWithArticle:article image:articleImage];
+    
+    [self.navigationController pushViewController:articleDetailsVC animated:YES];
 }
 
 - (void)refreshArticles
