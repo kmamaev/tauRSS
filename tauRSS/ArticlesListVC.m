@@ -100,8 +100,10 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
                 NSLog(@"No need to reshresh the articles table.");
             }
         } failure:^(NSArray *errors) {
-#warning Need to handle an error
-            NSLog(@"Something gone wrong");
+            NSLog(@"Errors: %@", errors);
+            [Utils showInfoAlertWithTitle:NSLocalizedString(@"errorLoadingArticles",)
+                description:((NSError *)errors.firstObject).localizedDescription
+                delegate:(self)];
         }];
 }
 
