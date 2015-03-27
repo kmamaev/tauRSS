@@ -1,7 +1,51 @@
 #import "StorageController.h"
+#import "FMDB.h"
+
+
+static NSString *const sourcesTableName = @"sources";
+static NSString *const sourcesIdColumnName = @"sourceId";
+static NSString *const sourcesTitleColumnName = @"title";
+static NSString *const sourcesIconURLColumnName = @"iconURL";
+static NSString *const sourcesURLColumnName = @"sourceURL";
+
+static NSString *const articlesTableName = @"articles";
+static NSString *const articlesTitleColumnName = @"title";
+static NSString *const articlesLinkColumnName = @"link";
+static NSString *const articlesDescriptionColumnName = @"articleDescription";
+static NSString *const articlesCategoryColumnName = @"category";
+static NSString *const articlesImageURLColumnName = @"imageURL";
+static NSString *const articlesPublishDateColumnName = @"publishDate";
+static NSString *const articlesReadColumnName = @"isRead";
+static NSString *const articlesFavoriteColumnName = @"isFavorite";
+
+static NSString *const DefaultFileNameForDataBase = @"AwesomeDataBase.db";
+
+
+
+@interface StorageController ()
+
+@property (strong, nonatomic) FMDatabase *db;
+
+@end
 
 
 @implementation StorageController
+
+- (instancetype)init
+{
+    if (self = [super init])
+    {
+        NSURL *const documentDirectoryURL =
+        [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
+                                                inDomains:NSUserDomainMask] lastObject];
+        NSURL *fileURLForDataBase =
+        [documentDirectoryURL URLByAppendingPathComponent:DefaultFileNameForDataBase];
+        _db = [FMDatabase databaseWithPath:[fileURLForDataBase path]];
+        [self createTables];
+        
+    }
+    return self;
+}
 
 - (void)storeSource:(Source *)source {
 #warning resolve TODO mark
@@ -122,6 +166,37 @@
     s2.articles = @[a6, a7, a8, a9, a10];
     
     return @[s1, s2];
+}
+
+
+- (void)createTables
+{
+    NSString *createSourcesTableQuery = [NSString stringWithFormat:
+                                  @"CREATE TABLE IF NOT EXISTS %@ (%@ INTEGER PRIMARY KEY, %@ TEXT, %@ TEXT, %@ TEXT)",
+                                  sourcesTableName, sourcesIdColumnName, sourcesTitleColumnName, sourcesIconURLColumnName, sourcesURLColumnName];
+    
+    NSString *createArticlesTableQuery = [NSString stringWithFormat:
+                                  @"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT PRIMARY KEY, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ DATETIME, %@ INTEGER, %@ INTEGER, %@ INTEGER)",
+                                          articlesTableName,
+                                          articlesTitleColumnName,
+                                          articlesLinkColumnName,
+                                          articlesDescriptionColumnName,
+                                          articlesCategoryColumnName,
+                                          articlesImageURLColumnName,
+                                          articlesPublishDateColumnName,
+                                          articlesReadColumnName,
+                                          articlesFavoriteColumnName,
+                                          sourcesIdColumnName];
+    
+    [self.db open];
+    BOOL sourcesTableCreationResult = [self.db executeUpdate:createSourcesTableQuery];
+    BOOL articlesTableCreationResult = [self.db executeUpdate:createArticlesTableQuery];
+    if (sourcesTableCreationResult && articlesTableCreationResult) {
+        NSLog(@"Table 'sources' and 'articles' has been created.");
+    }
+    [self.db close];
+
+    
 }
 
 @end
