@@ -1,6 +1,5 @@
 #import "ArticleDetailsVC.h"
 #import "ArticleWebVC.h"
-#import "NSDate+DateHelper.h"
 #import "Source.h"
 #import "Utils.h"
 
@@ -38,16 +37,7 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.titleLabel.text = self.article.title;
     self.descriptionLabel.text = self.article.articleDescription;
-    
-    NSMutableString *articleInfo = [[NSMutableString alloc]
-                                    initWithString:[self.article.publishDate longString]];
-    if (self.article.category) {
-        [articleInfo appendFormat:@"・%@", self.article.category];
-    }
-    if (self.article.source.title) {
-        [articleInfo appendFormat:@"・%@", self.article.source.title];
-    }
-    self.infoLabel.text = articleInfo;
+    self.infoLabel.text = [Utils buildLongArticleInfo:self.article];
     
     if (self.article.imageURL == nil) {
         self.imageHeight.constant = 0.0f;
