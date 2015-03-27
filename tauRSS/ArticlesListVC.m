@@ -104,7 +104,7 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
                 NSLog(@"Articles table has been refreshed.");
             }
             else {
-                NSLog(@"No need to reshresh the articles table.");
+                NSLog(@"No need to refresh the articles table.");
             }
         } failure:^(NSArray *errors) {
             NSLog(@"Errors: %@", errors);

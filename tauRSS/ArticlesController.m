@@ -101,11 +101,8 @@
                 [fetchedArticles minusSet:currentArticles];
                 NSArray *newArticles = [[self class] articlesArrayBySortingASet:fetchedArticles];
                 source.articles = [newArticles arrayByAddingObjectsFromArray:source.articles];
-                NSLog(@"Update for source \"%@\" has finished, %ld articles are added:",
+                NSLog(@"Update for source \"%@\" has finished, %ld articles are added.",
                     source.title, newArticles.count);
-                for (Article *a in newArticles) {
-                    NSLog(@"%@", a);
-                }
                 success(newArticles.count > 0);
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 failure(@[error]);
