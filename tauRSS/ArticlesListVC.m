@@ -1,9 +1,9 @@
 #import "ArticlesListVC.h"
 #import <IIViewDeckController.h>
 #import "ArticlesListCell.h"
-#import "NSDate+DateHelper.h"
 #import "Source.h"
 #import "ArticleDetailsVC.h"
+#import "Utils.h"
 
 
 static NSString *const reuseIDcellWithImage = @"ArticlesListCell1";
@@ -68,15 +68,8 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
     
     ArticlesListCell *cell = [self.articlesTable dequeueReusableCellWithIdentifier:reuseId];
     cell.titleLabel.text = article.title;
-    NSMutableString *articleInfo = [[NSMutableString alloc]
-        initWithString:[article.publishDate shortString]];
-    if (article.category) {
-        [articleInfo appendFormat:@"・%@", article.category];
-    }
-    if (article.source.title) {
-        [articleInfo appendFormat:@"・%@", article.source.title];
-    }
-    cell.infoLabel.text = articleInfo;
+
+    cell.infoLabel.text = [Utils buildShortArticleInfo:article];
     cell.descriptionLabel.text = article.articleDescription;
     if (article.imageURL == nil) {
         cell.imageWidth.constant = 0.0f;

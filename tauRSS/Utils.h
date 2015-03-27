@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import "Article.h"
 
 
 @interface Utils : NSObject
@@ -9,5 +10,15 @@
 + (void)showInfoAlertWithTitle:(NSString *)title
     description:(NSString *)description
     delegate:(id)delegate;
+
+/**
+ *  Returns string containing article's publish date (date OR time), category and source
+ */
++ (NSString *)buildShortArticleInfo:(Article *)article;
+
+/**
+ *  Returns string containing article's publish date (date AND time), category and source
+ */
++ (NSString *)buildLongArticleInfo:(Article *)article;
 
 @end

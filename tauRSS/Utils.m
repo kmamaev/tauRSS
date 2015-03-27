@@ -1,5 +1,7 @@
 #import "Utils.h"
 #import <UIKit/UIKit.h>
+#import "NSDate+DateHelper.h"
+#import "Source.h"
 
 
 @implementation Utils
@@ -30,6 +32,36 @@
             otherButtonTitles:nil];
         [alertView show];
     }
+}
+
++ (NSString *)buildShortArticleInfo:(Article *)article
+{
+    NSMutableString *articleInfo = [[NSMutableString alloc] initWithString:@""];
+    if (article.publishDate) {
+        [articleInfo appendString:[article.publishDate shortString]];
+    }
+    if (article.category) {
+        [articleInfo appendFormat:@"・%@", article.category];
+    }
+    if (article.source.title) {
+        [articleInfo appendFormat:@"・%@", article.source.title];
+    }
+    return articleInfo;
+}
+
++ (NSString *)buildLongArticleInfo:(Article *)article
+{
+    NSMutableString *articleInfo = [[NSMutableString alloc] initWithString:@""];
+    if (article.publishDate) {
+        [articleInfo appendString:[article.publishDate longString]];
+    }
+    if (article.category) {
+        [articleInfo appendFormat:@"・%@", article.category];
+    }
+    if (article.source.title) {
+        [articleInfo appendFormat:@"・%@", article.source.title];
+    }
+    return articleInfo;
 }
 
 @end
