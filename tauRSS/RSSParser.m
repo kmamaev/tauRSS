@@ -1,5 +1,6 @@
 #import "RSSParser.h"
 #import "Article.h"
+#import "NSString+StringHelper.h"
 
 
 static NSString *const nodeNameItem = @"item";
@@ -9,6 +10,10 @@ static NSString *const nodeNameLink = @"link";
 static NSString *const nodeNameCategory = @"category";
 static NSString *const nodeNamePublishDate = @"pubDate";
 static NSString *const nodeNameArticleId = @"guid";
+static NSString *const nodeNameImage = @"image";
+static NSString *const nodeNameEnclosure = @"enclosure";
+static NSString *const attributeNameType = @"type";
+static NSString *const attributeNameUrl = @"url";
 
 
 @interface RSSParser () <NSXMLParserDelegate> {
@@ -53,8 +58,20 @@ static NSString *const nodeNameArticleId = @"guid";
 {
     tmpString = [NSMutableString string];
 #warning Some RSS sources contain 'entry' node instead of 'item' (e.g. github RSS). Need to additional investigation.
-    if ([elementName isEqualToString:@"item"]) {
+    if ([elementName isEqualToString:nodeNameItem]) {
         article = [[Article alloc] init];
+    }
+    if ([elementName isEqualToString:nodeNameEnclosure]) {
+        if (article != nil) {
+            if (!article.imageURL) {
+                NSString *type = [attributeDict valueForKey:attributeNameType];
+                // Examples of type: "image/jpeg", "video/wmv".
+                if ([type containsString:@"image"]) {
+                    NSString *url = [attributeDict valueForKey:attributeNameUrl];
+                    article.imageURL = [NSURL URLWithString:url];
+                }
+            }
+        }
     }
 }
 
@@ -90,6 +107,9 @@ static NSString *const nodeNameArticleId = @"guid";
         }
         else if ([elementName isEqualToString:nodeNameArticleId]) {
             article.articleId = tmpString;
+        }
+        else if ([elementName isEqualToString:nodeNameImage]) {
+            article.imageURL = [NSURL URLWithString: tmpString];
         }
     }
     [tmpString setString:@""];

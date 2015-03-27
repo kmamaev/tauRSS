@@ -39,7 +39,7 @@
                                             link:[NSURL URLWithString:@"http://lenta.ru/news/2015/03/11/sun/"]
                                      description:@"В России будет организована прямая трансляция солнечного затмения 20 марта 2015 года. Ее можно наблюдать на официальном канале AXE Russia на YouTube. Специально для этого организаторы отправили в поселок Баренцбург на архипелаг Шпицберген в Северном Ледовитом океане съемочную группу."
                                         category:@"Наука и техника"
-                                        imageURL:[NSURL URLWithString:@"http://icdn.lenta.ru/images/2015/03/11/16/201503111"]
+                                        imageURL:[NSURL URLWithString:@"http://icdn.lenta.ru/images/2015/03/11/16/20150311163021002/pic_fe068f829cb6bdd86f73e5b3b6ca84b2.jpg"]
                                      publishDate:[dateFormetter dateFromString:@"Wed, 11 Mar 2015 17:01:00 +0300"]];
     a2.isFavorite = YES;
     

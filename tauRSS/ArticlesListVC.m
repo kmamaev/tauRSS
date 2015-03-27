@@ -71,9 +71,7 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
 
     cell.infoLabel.text = [Utils buildShortArticleInfo:article];
     cell.descriptionLabel.text = article.articleDescription;
-    if (article.imageURL == nil) {
-        cell.imageWidth.constant = 0.0f;
-    }
+    cell.urlForImage = article.imageURL;
     
     return cell;
 }
