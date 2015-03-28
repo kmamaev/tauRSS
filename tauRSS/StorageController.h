@@ -7,7 +7,7 @@
 @interface StorageController : NSObject
 
 - (void)storeSource:(Source *)source;
-- (void)storeArticles:(NSArray *)articles forSourceWithId:(NSString *)sourceId;
+- (void)storeArticles:(NSArray *)articles forSourceWithId:(NSInteger)sourceId;
 - (NSArray *)getAllSources;
 
 @end

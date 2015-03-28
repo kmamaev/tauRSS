@@ -42,30 +42,145 @@ static NSString *const DefaultFileNameForDataBase = @"AwesomeDataBase.db";
         [documentDirectoryURL URLByAppendingPathComponent:DefaultFileNameForDataBase];
         _db = [FMDatabase databaseWithPath:[fileURLForDataBase path]];
         [self createTables];
+        //[self loadData];
         
     }
     return self;
 }
 
-- (void)storeSource:(Source *)source {
-#warning resolve TODO mark
-    // TODO: Implement this
-}
+- (void)storeSource:(Source *)source
+{
 
-- (void)storeArticles:(NSArray *)articles forSourceWithId:(NSString *)sourceId {
-#warning resolve TODO mark
-    // TODO: Implement this
-}
-
-- (NSArray *)getAllSources {
-#warning resolve TODO mark
-    // TODO: Implement get sources from database and remove hard code
+    NSString *queryString = [NSString stringWithFormat:
+                             @"INSERT OR REPLACE INTO %@ (%@, %@, %@, %@) VALUES (?, ?, ?, ?)",
+                             sourcesTableName, sourcesIdColumnName, sourcesTitleColumnName, sourcesIconURLColumnName, sourcesURLColumnName];
     
+    [self.db open];
+    [self.db executeUpdate:queryString, @(source.sourceId), source.title, [source.iconURL absoluteString], [source.sourceURL absoluteString]];
+    [self.db close];
+
+}
+
+- (void)storeArticles:(NSArray *)articles forSourceWithId:(NSInteger)sourceId
+{
+    NSString *queryString = [NSString stringWithFormat:
+                             @"INSERT OR REPLACE INTO %@ (%@, %@, %@, %@, %@, %@, %@, %@, %@) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                             articlesTableName,
+                             articlesTitleColumnName,
+                             articlesLinkColumnName,
+                             articlesDescriptionColumnName,
+                             articlesCategoryColumnName,
+                             articlesImageURLColumnName,
+                             articlesPublishDateColumnName,
+                             articlesReadColumnName,
+                             articlesFavoriteColumnName,
+                             sourcesIdColumnName];
+    
+    [self.db open];
+    for (Article *article in articles)
+    {
+        [self.db executeUpdate:queryString,
+         article.title,
+         [article.link absoluteString],
+         article.articleDescription,
+         article.category,
+         [article.imageURL absoluteString],
+         article.publishDate,
+         @(article.isRead),
+         @(article.isFavorite),
+         @(sourceId)];
+    }
+    [self.db close];
+}
+
+- (NSArray *)getAllSources
+{
+    NSMutableArray *sources = [NSMutableArray array];
+    
+    NSString *sourcesQueryString = [NSString stringWithFormat:
+                             @"SELECT * FROM %@", sourcesTableName];
+    
+    NSString *articlesQueryString = [NSString stringWithFormat:
+                                    @"SELECT * FROM %@ WHERE %@ = ?", articlesTableName, sourcesIdColumnName];
+    [self.db open];
+    FMResultSet *resultSourceSet = [self.db executeQuery:sourcesQueryString];
+    while ([resultSourceSet next])
+    {
+        Source *source = [[Source alloc]init];
+        source.sourceId = [resultSourceSet intForColumn:sourcesIdColumnName];
+        source.title = [resultSourceSet stringForColumn:sourcesTitleColumnName];
+        source.iconURL = [NSURL URLWithString:[resultSourceSet stringForColumn:sourcesIconURLColumnName]];
+        source.sourceURL = [NSURL URLWithString:[resultSourceSet stringForColumn:sourcesURLColumnName]];
+        NSMutableArray *articles = [NSMutableArray array];
+        
+        FMResultSet *resultArticleSet = [self.db executeQuery:articlesQueryString, @(source.sourceId)];
+        while ([resultArticleSet next])
+        {
+            Article *article = [[Article alloc]init];
+            article.title = [resultArticleSet stringForColumn:articlesTitleColumnName];
+            article.link = [NSURL URLWithString:[resultArticleSet stringForColumn:articlesLinkColumnName]];
+            article.articleDescription = [resultArticleSet stringForColumn:articlesDescriptionColumnName];
+            article.category = [resultArticleSet stringForColumn:articlesCategoryColumnName];
+            article.imageURL = [NSURL URLWithString:[resultArticleSet stringForColumn:articlesImageURLColumnName]];
+            article.publishDate = [resultArticleSet dateForColumn:articlesPublishDateColumnName];
+            article.isRead = @([resultArticleSet intForColumn:articlesReadColumnName]).boolValue;
+            article.isFavorite = @([resultArticleSet intForColumn:articlesFavoriteColumnName]).boolValue;
+            article.source = source;
+            [articles addObject:article];
+        }
+        
+        source.articles = articles;
+        [sources addObject:source];
+    }
+    [self.db close];
+    
+    return sources;
+}
+
+
+- (void)createTables
+{
+    NSString *createSourcesTableQuery = [NSString stringWithFormat:
+                                  @"CREATE TABLE IF NOT EXISTS %@ (%@ INTEGER PRIMARY KEY, %@ TEXT, %@ TEXT, %@ TEXT)",
+                                  sourcesTableName, sourcesIdColumnName, sourcesTitleColumnName, sourcesIconURLColumnName, sourcesURLColumnName];
+    
+    NSString *createArticlesTableQuery = [NSString stringWithFormat:
+                                  @"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT PRIMARY KEY, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ DATETIME, %@ INTEGER, %@ INTEGER, %@ INTEGER, FOREIGN KEY(%@) REFERENCES %@(%@))",
+                                          articlesTableName,
+                                          articlesTitleColumnName,
+                                          articlesLinkColumnName,
+                                          articlesDescriptionColumnName,
+                                          articlesCategoryColumnName,
+                                          articlesImageURLColumnName,
+                                          articlesPublishDateColumnName,
+                                          articlesReadColumnName,
+                                          articlesFavoriteColumnName,
+                                          sourcesIdColumnName,
+                                          sourcesIdColumnName,
+                                          sourcesTableName,
+                                          sourcesIdColumnName];
+    
+    [self.db open];
+    BOOL sourcesTableCreationResult = [self.db executeUpdate:createSourcesTableQuery];
+    BOOL articlesTableCreationResult = [self.db executeUpdate:createArticlesTableQuery];
+    if (sourcesTableCreationResult && articlesTableCreationResult) {
+        NSLog(@"Table 'sources' and 'articles' has been created.");
+    }
+    [self.db close];
+
+    
+}
+
+//to test implemented methods 
+- (void)loadData
+{
     Source *s1 = [[Source alloc] init];
     s1.title = @"Лента RSS";
+    s1.sourceId = 1;
     s1.sourceURL = [NSURL URLWithString:@"http://lenta.ru/rss/news"];
     Source *s2 = [[Source alloc] init];
     s2.title = @"НГС RSS";
+    s2.sourceId = 2;
     s2.sourceURL = [NSURL URLWithString:@"http://news.ngs.ru/rss/"];
     
     NSDateFormatter *dateFormetter = [[NSDateFormatter alloc] init];
@@ -165,37 +280,12 @@ static NSString *const DefaultFileNameForDataBase = @"AwesomeDataBase.db";
     
     s2.articles = @[a6, a7, a8, a9, a10];
     
-    return @[s1, s2];
-}
-
-
-- (void)createTables
-{
-    NSString *createSourcesTableQuery = [NSString stringWithFormat:
-                                  @"CREATE TABLE IF NOT EXISTS %@ (%@ INTEGER PRIMARY KEY, %@ TEXT, %@ TEXT, %@ TEXT)",
-                                  sourcesTableName, sourcesIdColumnName, sourcesTitleColumnName, sourcesIconURLColumnName, sourcesURLColumnName];
+    [self storeSource:s1];
+    [self storeSource:s2];
+    [self storeArticles:s1.articles forSourceWithId:s1.sourceId];
+    [self storeArticles:s2.articles forSourceWithId:s2.sourceId];
     
-    NSString *createArticlesTableQuery = [NSString stringWithFormat:
-                                  @"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT PRIMARY KEY, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ DATETIME, %@ INTEGER, %@ INTEGER, %@ INTEGER)",
-                                          articlesTableName,
-                                          articlesTitleColumnName,
-                                          articlesLinkColumnName,
-                                          articlesDescriptionColumnName,
-                                          articlesCategoryColumnName,
-                                          articlesImageURLColumnName,
-                                          articlesPublishDateColumnName,
-                                          articlesReadColumnName,
-                                          articlesFavoriteColumnName,
-                                          sourcesIdColumnName];
     
-    [self.db open];
-    BOOL sourcesTableCreationResult = [self.db executeUpdate:createSourcesTableQuery];
-    BOOL articlesTableCreationResult = [self.db executeUpdate:createArticlesTableQuery];
-    if (sourcesTableCreationResult && articlesTableCreationResult) {
-        NSLog(@"Table 'sources' and 'articles' has been created.");
-    }
-    [self.db close];
-
     
 }
 
