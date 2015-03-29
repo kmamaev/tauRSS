@@ -9,5 +9,6 @@
 - (void)storeSource:(Source *)source;
 - (void)storeArticles:(NSArray *)articles forSourceWithId:(NSInteger)sourceId;
 - (NSArray *)getAllSources;
+- (void)deleteSource:(Source *)source;
 
 @end

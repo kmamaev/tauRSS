@@ -23,14 +23,18 @@
     return self;
 }
 
-- (void)addSource:(Source *)source {
-#warning resolve TODO mark
-    // TODO: Implement this
+- (void)addSource:(Source *)source
+{
+    self.sources = [self.sources arrayByAddingObject:source];
+    [self.storageController storeSource:source];
 };
 
-- (void)deleteSource:(Source *)source {
-#warning resolve TODO mark
-    // TODO: Implement this
+- (void)deleteSource:(Source *)source
+{
+    NSMutableArray *newSources = [self.sources mutableCopy];
+    [newSources removeObject:source];
+    self.sources = [NSArray arrayWithArray:newSources];
+    [self.storageController deleteSource:source];
 };
 
 - (void)getSourceById:(NSString *)sourceId {

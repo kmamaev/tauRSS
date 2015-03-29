@@ -289,4 +289,18 @@ static NSString *const DefaultFileNameForDataBase = @"AwesomeDataBase.db";
     
 }
 
+- (void)deleteSource:(Source *)source
+{
+    NSString *sourceQueryString = [NSString stringWithFormat:
+                             @"DELETE FROM %@ WHERE %@ = ?", sourcesTableName, sourcesIdColumnName];
+    
+    NSString *articleQueryString = [NSString stringWithFormat:
+                                   @"DELETE * FROM %@ WHERE %@ = ?", articlesTableName, sourcesIdColumnName];
+    
+    [self.db open];
+    [self.db executeUpdate:sourceQueryString, @(source.sourceId)];
+    [self.db executeUpdate:articleQueryString, @(source.sourceId)];
+    [self.db close];
+}
+
 @end
