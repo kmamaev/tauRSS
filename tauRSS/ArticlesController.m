@@ -70,9 +70,15 @@
         dispatch_group_notify(group, dispatch_get_main_queue(), ^{
             NSLog(@"All sources updated.");
             if (errors.count > 0) {
+                if (!failure) {
+                    return;
+                }
                 failure(errors);
             }
             else {
+                if (!success) {
+                    return;
+                }
                 success(areAllArticlesHaveUpdates);
             }
         });
@@ -80,7 +86,9 @@
     
     // If source is equal to "Favorites"
     else if (source.sourceId == sourceIdFavorites) {
-        success(NO);
+        if (success) {
+            success(NO);
+        }
     }
     
     // If source is not equal to "All news" or "Favorites"
@@ -103,8 +111,14 @@
                 source.articles = [newArticles arrayByAddingObjectsFromArray:source.articles];
                 NSLog(@"Update for source \"%@\" has finished, %ld articles are added.",
                     source.title, newArticles.count);
+                if (!success) {
+                    return;
+                }
                 success(newArticles.count > 0);
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                if (!failure) {
+                    return;
+                }
                 failure(@[error]);
             }];
     }
