@@ -52,12 +52,14 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
 - (NSArray *)tableView:(UITableView *)tableView
     editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    typeof(self) __weak wself = self;
     UITableViewRowAction *markAsReadAction = [UITableViewRowAction
         rowActionWithStyle:UITableViewRowActionStyleDefault
         title:NSLocalizedString(@"markAsRead",)
         handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-            [self.articlesTable setEditing:NO];
+            [wself.articlesTable setEditing:NO];
 #warning Need to implement marking as read
+            //[wself.articlesController setRead:YES forArticle:wself.source.articles[indexPath.row]];
             NSLog(@"Marked as read");
         }];
     markAsReadAction.backgroundColor = [UIColor lightGrayColor];
@@ -100,6 +102,10 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
     cell.infoLabel.text = [Utils buildShortArticleInfo:article];
     cell.descriptionLabel.text = article.articleDescription;
     cell.urlForImage = article.imageURL;
+    
+    if (article.isRead) {
+        [cell setStyle:CellStyleMuted];
+    }
     
     return cell;
 }
