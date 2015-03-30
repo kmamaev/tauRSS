@@ -303,4 +303,13 @@ static NSString *const DefaultFileNameForDataBase = @"AwesomeDataBase.db";
     [self.db close];
 }
 
+- (void)setRead:(BOOL)isRead forArticle:(Article *)article
+{
+    NSString *queryString = [NSString stringWithFormat:
+                             @"UPDATE %@ SET %@ = ? WHERE %@ = ?", articlesTableName, articlesReadColumnName, articlesTitleColumnName];
+    [self.db open];
+    [self.db executeUpdate:queryString, @(isRead), article.title];
+    [self.db close];
+}
+
 @end
