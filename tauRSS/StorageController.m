@@ -17,6 +17,7 @@ static NSString *const articlesImageURLColumnName = @"imageURL";
 static NSString *const articlesPublishDateColumnName = @"publishDate";
 static NSString *const articlesReadColumnName = @"isRead";
 static NSString *const articlesFavoriteColumnName = @"isFavorite";
+static NSString *const articleIdColumnName = @"guid";
 
 static NSString *const DefaultFileNameForDataBase = @"AwesomeDataBase.db";
 
@@ -64,8 +65,9 @@ static NSString *const DefaultFileNameForDataBase = @"AwesomeDataBase.db";
 - (void)storeArticles:(NSArray *)articles forSourceWithId:(NSInteger)sourceId
 {
     NSString *queryString = [NSString stringWithFormat:
-                             @"INSERT OR REPLACE INTO %@ (%@, %@, %@, %@, %@, %@, %@, %@, %@) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                             @"INSERT OR REPLACE INTO %@ (%@, %@, %@, %@, %@, %@, %@, %@, %@, %@) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
                              articlesTableName,
+                             articleIdColumnName,
                              articlesTitleColumnName,
                              articlesLinkColumnName,
                              articlesDescriptionColumnName,
@@ -80,6 +82,7 @@ static NSString *const DefaultFileNameForDataBase = @"AwesomeDataBase.db";
     for (Article *article in articles)
     {
         [self.db executeUpdate:queryString,
+         article.articleId,
          article.title,
          [article.link absoluteString],
          article.articleDescription,
@@ -117,6 +120,7 @@ static NSString *const DefaultFileNameForDataBase = @"AwesomeDataBase.db";
         while ([resultArticleSet next])
         {
             Article *article = [[Article alloc]init];
+            article.articleId = [resultArticleSet stringForColumn:articleIdColumnName];
             article.title = [resultArticleSet stringForColumn:articlesTitleColumnName];
             article.link = [NSURL URLWithString:[resultArticleSet stringForColumn:articlesLinkColumnName]];
             article.articleDescription = [resultArticleSet stringForColumn:articlesDescriptionColumnName];
@@ -145,8 +149,9 @@ static NSString *const DefaultFileNameForDataBase = @"AwesomeDataBase.db";
                                   sourcesTableName, sourcesIdColumnName, sourcesTitleColumnName, sourcesIconURLColumnName, sourcesURLColumnName];
     
     NSString *createArticlesTableQuery = [NSString stringWithFormat:
-                                  @"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT PRIMARY KEY, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ DATETIME, %@ INTEGER, %@ INTEGER, %@ INTEGER, FOREIGN KEY(%@) REFERENCES %@(%@))",
+                                  @"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT PRIMARY KEY, %@TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ DATETIME, %@ INTEGER, %@ INTEGER, %@ INTEGER, FOREIGN KEY(%@) REFERENCES %@(%@))",
                                           articlesTableName,
+                                          articleIdColumnName,
                                           articlesTitleColumnName,
                                           articlesLinkColumnName,
                                           articlesDescriptionColumnName,
