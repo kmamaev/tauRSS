@@ -4,7 +4,7 @@
 
 @class Source;
 
-@interface ArticlesListVC : UIViewController
+@interface ArticlesListVC : UIViewController <UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *articlesTable;
 @property (strong, nonatomic) ArticlesController *articlesController;

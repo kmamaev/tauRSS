@@ -49,6 +49,34 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
     [self.articlesTable addSubview:self.refreshControl];
 }
 
+- (NSArray *)tableView:(UITableView *)tableView
+    editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewRowAction *markAsReadAction = [UITableViewRowAction
+        rowActionWithStyle:UITableViewRowActionStyleDefault
+        title:NSLocalizedString(@"markAsRead",)
+        handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+            [self.articlesTable setEditing:NO];
+#warning Need to implement marking as read
+            NSLog(@"Marked as read");
+        }];
+    markAsReadAction.backgroundColor = [UIColor lightGrayColor];
+    return @[markAsReadAction];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+    shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView
+    commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+    forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Need for working of row editing
+}
+
 - (void)setSource:(Source *)source {
     _source = source;
     [self.articlesTable reloadData];

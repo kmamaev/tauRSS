@@ -36,6 +36,13 @@
                                             initWithCenterViewController:centerController
                                             leftViewController:leftController];
     
+    // Give possibility to invoke row editing in articles table by swipe gesture
+    deckController.panningGestureDelegate = articlesListVC;
+    // There is nesessary to implement method
+    // 'gestureRecognizer:shouldRecognizeSimultaneouslyWithGestureRecognizer:otherGestureRecognizer'
+    // of UIGestureRecognizerDelegate in ArticlesListVC which should return 'YES' to force swipe
+    // work
+    
     // Show sources list view at start by default
     [deckController openLeftViewAnimated:NO];
 
