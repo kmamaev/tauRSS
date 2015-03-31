@@ -17,5 +17,7 @@
 - (void)setFavorite:(BOOL)isFavorite forArticle:(Article *)article;
 - (void)deleteAllArticles;
 
+- (NSArray *)getFavoriteArticles;
+
 
 @end

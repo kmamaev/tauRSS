@@ -336,4 +336,31 @@ static NSString *const DefaultFileNameForDataBase = @"AwesomeDataBase.db";
     [self.db close];
 }
 
+- (NSArray *)getFavoriteArticles
+{
+    NSMutableArray *articles = [NSMutableArray array];
+    
+    NSString *queryString = [NSString stringWithFormat:
+                                     @"SELECT * FROM %@ WHERE %@ = ?", articlesTableName, articlesFavoriteColumnName];
+    [self.db open];
+    FMResultSet *resultSet = [self.db executeQuery:queryString, @(YES)];
+    while ([resultSet next])
+    {
+        Article *article = [[Article alloc]init];
+        article.articleId = [resultSet stringForColumn:articleIdColumnName];
+        article.title = [resultSet stringForColumn:articlesTitleColumnName];
+        article.link = [NSURL URLWithString:[resultSet stringForColumn:articlesLinkColumnName]];
+        article.articleDescription = [resultSet stringForColumn:articlesDescriptionColumnName];
+        article.category = [resultSet stringForColumn:articlesCategoryColumnName];
+        article.imageURL = [NSURL URLWithString:[resultSet stringForColumn:articlesImageURLColumnName]];
+        article.publishDate = [resultSet dateForColumn:articlesPublishDateColumnName];
+        article.isRead = @([resultSet intForColumn:articlesReadColumnName]).boolValue;
+        article.isFavorite = @([resultSet intForColumn:articlesFavoriteColumnName]).boolValue;
+        [articles addObject:article];
+    }
+    
+    [self.db close];
+    return articles;
+}
+
 @end
