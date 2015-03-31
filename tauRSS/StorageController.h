@@ -14,6 +14,7 @@
 - (void)deleteSource:(Source *)source;
 
 - (void)setRead:(BOOL)isRead forArticle:(Article *)article;
+- (void)setFavorite:(BOOL)isFavorite forArticle:(Article *)article;
 
 
 @end

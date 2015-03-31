@@ -311,9 +311,18 @@ static NSString *const DefaultFileNameForDataBase = @"AwesomeDataBase.db";
 - (void)setRead:(BOOL)isRead forArticle:(Article *)article
 {
     NSString *queryString = [NSString stringWithFormat:
-                             @"UPDATE %@ SET %@ = ? WHERE %@ = ?", articlesTableName, articlesReadColumnName, articlesTitleColumnName];
+                             @"UPDATE %@ SET %@ = ? WHERE %@ = ?", articlesTableName, articlesReadColumnName, articleIdColumnName];
     [self.db open];
-    [self.db executeUpdate:queryString, @(isRead), article.title];
+    [self.db executeUpdate:queryString, @(isRead), article.articleId];
+    [self.db close];
+}
+
+- (void)setFavorite:(BOOL)isFavorite forArticle:(Article *)article
+{
+    NSString *queryString = [NSString stringWithFormat:
+                             @"UPDATE %@ SET %@ = ? WHERE %@ = ?", articlesTableName, articlesFavoriteColumnName, articleIdColumnName];
+    [self.db open];
+    [self.db executeUpdate:queryString, @(isFavorite), article.articleId];
     [self.db close];
 }
 
