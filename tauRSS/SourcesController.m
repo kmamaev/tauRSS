@@ -14,13 +14,20 @@
     self = [super init];
     if (self != nil) {
         _storageController = [[StorageController alloc] init];
-        
         _articlesController = [[ArticlesController alloc] init];
-        _articlesController.sourcesController = self;
-        
         _sources = [_storageController getAllSources];
     }
     return self;
+}
+
++ (SourcesController *)sharedInstance
+{
+    static SourcesController *sharedInstance = nil;
+    static dispatch_once_t predicate;
+    dispatch_once(&predicate, ^{
+        sharedInstance = [[SourcesController alloc] init];
+    });
+    return sharedInstance;
 }
 
 - (void)addSource:(Source *)source

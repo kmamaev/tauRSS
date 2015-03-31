@@ -34,6 +34,14 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
 
 @implementation ArticlesListVC
 
+- (ArticlesController *)articlesController
+{
+    if (!_articlesController) {
+        _articlesController = [ArticlesController sharedInstance];
+    }
+    return _articlesController;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

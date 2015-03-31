@@ -2,11 +2,7 @@
 #import "Article.h"
 
 
-@class SourcesController;
-
 @interface ArticlesController : NSObject
-
-@property (weak, nonatomic) SourcesController *sourcesController;
 
 - (void)setRead:(BOOL)isRead forArticle:(Article *)article;
 - (void)setFavorite:(BOOL)isFavorite forArticle:(Article *)article;
@@ -16,5 +12,6 @@
     success:(void (^)(BOOL))success
     failure:(void (^)(NSArray *))failure;
 - (NSArray *)unreadArticlesForSource:(Source *)source;
++ (ArticlesController *)sharedInstance;
 
 @end

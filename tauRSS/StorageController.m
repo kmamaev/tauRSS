@@ -43,7 +43,7 @@ static NSString *const DefaultFileNameForDataBase = @"AwesomeDataBase.db";
         [documentDirectoryURL URLByAppendingPathComponent:DefaultFileNameForDataBase];
         _db = [FMDatabase databaseWithPath:[fileURLForDataBase path]];
         [self createTables];
-        //[self loadData];
+        [self loadData];
         
     }
     return self;

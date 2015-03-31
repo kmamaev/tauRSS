@@ -13,5 +13,6 @@
 - (void)addSource:(Source *)source;
 - (void)deleteSource:(Source *)source;
 - (void)getSourceById:(NSString *)sourceId;
++ (instancetype)sharedInstance;
 
 @end

@@ -4,7 +4,30 @@
 #import "RSSParser.h"
 
 
+@interface ArticlesController ()
+@property (strong, nonatomic) SourcesController *sourcesController;
+@end
+
+
 @implementation ArticlesController
+
++ (ArticlesController *)sharedInstance
+{
+    static ArticlesController *sharedInstance = nil;
+    static dispatch_once_t predicate;
+    dispatch_once(&predicate, ^{
+        sharedInstance = [[ArticlesController alloc] init];
+    });
+    return sharedInstance;
+}
+
+- (SourcesController *)sourcesController
+{
+    if (!_sourcesController) {
+        _sourcesController = [SourcesController sharedInstance];
+    }
+    return _sourcesController;
+}
 
 - (void)setRead:(BOOL)isRead forArticle:(Article *)article
 {

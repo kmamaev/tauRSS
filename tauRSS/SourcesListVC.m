@@ -29,17 +29,22 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
 - (instancetype)init {
     self = [super init];
     if (self != nil) {
-        _sourcesController = [[SourcesController alloc] init];
         _articlesListVC = [[ArticlesListVC alloc] init];
-        _articlesListVC.articlesController = _sourcesController.articlesController;
-        _sources = _sourcesController.sources;
-        Source *allNewsSource = [Source allNewsSourceWithArticlesController:_sourcesController.articlesController];
-        Source *favoritesSource = [Source favoritesSourceWithArticlesController:_sourcesController.articlesController];
+        _sources = [SourcesController sharedInstance].sources;
+        Source *allNewsSource = [Source allNewsSource];
+        Source *favoritesSource = [Source favoritesSource];
         _regularSources = @[allNewsSource, favoritesSource];
         _sections = @[_regularSources, _sources];
-
     }
     return self;
+}
+
+- (SourcesController *)sourcesController
+{
+    if (!_sourcesController) {
+        _sourcesController = [SourcesController sharedInstance];
+    }
+    return _sourcesController;
 }
 
 - (void)viewDidLoad {
@@ -129,8 +134,8 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
 
 - (void)updateData
 {
-    Source *allNewsSource = [Source allNewsSourceWithArticlesController:_sourcesController.articlesController];
-    Source *favoritesSource = [Source favoritesSourceWithArticlesController:_sourcesController.articlesController];
+    Source *allNewsSource = [Source allNewsSource];
+    Source *favoritesSource = [Source favoritesSource];
     self.regularSources = @[allNewsSource, favoritesSource];
     self.sources = self.sourcesController.sources;
     self.sections = @[self.regularSources, self.sources];
