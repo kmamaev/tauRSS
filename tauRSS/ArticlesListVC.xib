@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ArticlesListVC">
             <connections>
                 <outlet property="articlesTable" destination="tL8-SH-Ek8" id="cV2-i8-bFr"/>
+                <outlet property="readFilterControl" destination="AcK-sd-cIH" id="PE9-8A-FBU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,8 +16,27 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hLM-GC-ffj">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                    <subviews>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="AcK-sd-cIH">
+                            <rect key="frame" x="8" y="8" width="584" height="29"/>
+                            <segments>
+                                <segment title="All"/>
+                                <segment title="Unread"/>
+                            </segments>
+                        </segmentedControl>
+                    </subviews>
+                    <color key="backgroundColor" name="quaternaryLabelColor" catalog="System" colorSpace="catalog"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="cZl-s0-H4s"/>
+                        <constraint firstAttribute="centerY" secondItem="AcK-sd-cIH" secondAttribute="centerY" id="gsI-dP-8dl"/>
+                        <constraint firstAttribute="trailing" secondItem="AcK-sd-cIH" secondAttribute="trailing" constant="8" id="m5j-DM-enX"/>
+                        <constraint firstItem="AcK-sd-cIH" firstAttribute="leading" secondItem="hLM-GC-ffj" secondAttribute="leading" constant="8" id="vzc-vy-6o2"/>
+                    </constraints>
+                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="96" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tL8-SH-Ek8">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <rect key="frame" x="0.0" y="44" width="600" height="556"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="iX0-Su-4iI"/>
@@ -27,10 +47,14 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="tL8-SH-Ek8" secondAttribute="trailing" id="30a-DM-gv3"/>
-                <constraint firstItem="tL8-SH-Ek8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="AbV-CS-mL0"/>
+                <constraint firstItem="hLM-GC-ffj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9zk-Kb-ByI"/>
                 <constraint firstItem="tL8-SH-Ek8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Edn-vD-QgB"/>
                 <constraint firstAttribute="bottom" secondItem="tL8-SH-Ek8" secondAttribute="bottom" id="FFX-5P-vVx"/>
+                <constraint firstAttribute="trailing" secondItem="hLM-GC-ffj" secondAttribute="trailing" id="Hv5-Ep-zLV"/>
+                <constraint firstItem="tL8-SH-Ek8" firstAttribute="top" secondItem="hLM-GC-ffj" secondAttribute="bottom" id="PO2-eU-fMF"/>
+                <constraint firstItem="hLM-GC-ffj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="gvl-8a-B6q"/>
             </constraints>
+            <point key="canvasLocation" x="407" y="100"/>
         </view>
     </objects>
 </document>

@@ -8,8 +8,9 @@
 
 - (void)setRead:(BOOL)isRead forArticle:(Article *)article
 {
+    article.isRead = isRead;
 #warning resolve TODO mark
-    // TODO: Implement this
+    // TODO: Implement working with db
 }
 
 - (void)setFavorite:(BOOL)isFavorite forArticle:(Article *)article
@@ -41,6 +42,17 @@
         }
     }
     return [[self class] articlesArraySortedByPublishDate:favoriteArticles];
+}
+
+- (NSArray *)unreadArticlesForSource:(Source *)source
+{
+    NSMutableArray *unreadArticles = [NSMutableArray array];
+    for (Article *article in source.articles) {
+        if (!article.isRead) {
+            [unreadArticles addObject:article];
+        }
+    }
+    return unreadArticles;
 }
 
 - (void)updateArticlesForSource:(Source *)source

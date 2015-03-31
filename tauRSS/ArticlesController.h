@@ -15,5 +15,6 @@
 - (void)updateArticlesForSource:(Source *)source
     success:(void (^)(BOOL))success
     failure:(void (^)(NSArray *))failure;
+- (NSArray *)unreadArticlesForSource:(Source *)source;
 
 @end

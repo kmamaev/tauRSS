@@ -15,6 +15,8 @@ typedef NS_ENUM(NSInteger, SourceId) {
 @property (strong, nonatomic) NSArray *articles;
 @property (strong, nonatomic) NSURL *iconURL;
 @property (strong, nonatomic) NSURL *sourceURL;
+@property (strong, nonatomic, readonly) NSArray *unreadArticles;
+@property (weak, nonatomic) ArticlesController *articlesController;
 
 /**
  *  Returns instance of source with predefined title and sourceId equaling to sourceTypeAllNews.

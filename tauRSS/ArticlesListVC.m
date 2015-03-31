@@ -6,13 +6,25 @@
 #import "Utils.h"
 
 
+typedef NS_ENUM(NSInteger, FilterType) {
+    filterTypeAll,
+    filterTypeUnread,
+    filterTypeDefault = filterTypeAll
+};
+
+static FilterType currentFilterType = filterTypeDefault;
 static NSString *const reuseIDcellWithImage = @"ArticlesListCell1";
 static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
+static NSString *const kSegmentTitle = @"segment_title";
+static NSString *const kSegmentFilterType = @"segment_filter_type";
 
 
 @interface ArticlesListVC ()
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *readFilterControl;
+@property (strong, nonatomic) NSArray *readFilterSegments;
+@property (strong, nonatomic, readonly) NSArray *articlesDatasource;
 
 @end
 
@@ -22,6 +34,7 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     // Initialize main menu button
     UIImage *barsIcon = [[UIImage imageNamed:@"bars.png"]
@@ -47,20 +60,44 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
     [self.refreshControl addTarget:self action:@selector(refreshArticles)
         forControlEvents:UIControlEventValueChanged];
     [self.articlesTable addSubview:self.refreshControl];
+    
+    // Initialize segmented control with read filter options
+    self.readFilterSegments = @[
+        @{kSegmentTitle: NSLocalizedString(@"all",), kSegmentFilterType: @(filterTypeAll)},
+        @{kSegmentTitle: NSLocalizedString(@"unread",), kSegmentFilterType: @(filterTypeUnread)}
+    ];
+    for (int i = 0; i < self.readFilterSegments.count; i++) {
+        [self.readFilterControl
+            setTitle:self.readFilterSegments[i][kSegmentTitle]
+            forSegmentAtIndex:i];
+    }
+    [self.readFilterControl addTarget:self
+        action:@selector(readFilterValueChanged:)
+        forControlEvents:UIControlEventValueChanged];
+}
+
+- (void)readFilterValueChanged:(UISegmentedControl *)sender
+{
+    NSDictionary *selectedSegment = self.readFilterSegments[[sender selectedSegmentIndex]];
+    currentFilterType = [selectedSegment[kSegmentFilterType] integerValue];
+    [self.articlesTable reloadData];
 }
 
 - (NSArray *)tableView:(UITableView *)tableView
     editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    Article *article = self.articlesDatasource[indexPath.row];
+    NSString *actionTitle =
+        article.isRead ? NSLocalizedString(@"markAsUnRead",) : NSLocalizedString(@"markAsRead",);
     typeof(self) __weak wself = self;
     UITableViewRowAction *markAsReadAction = [UITableViewRowAction
         rowActionWithStyle:UITableViewRowActionStyleDefault
-        title:NSLocalizedString(@"markAsRead",)
+        title:actionTitle
         handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-            [wself.articlesTable setEditing:NO];
-#warning Need to implement marking as read
-            //[wself.articlesController setRead:YES forArticle:wself.source.articles[indexPath.row]];
-            NSLog(@"Marked as read");
+            typeof(wself) __strong sself = wself;
+            Article *article = sself.articlesDatasource[indexPath.row];
+            [sself setRead:!article.isRead forArticle:article atIndexPath:indexPath];
+            [sself.articlesTable setEditing:NO];
         }];
     markAsReadAction.backgroundColor = [UIColor lightGrayColor];
     return @[markAsReadAction];
@@ -81,19 +118,22 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
 
 - (void)setSource:(Source *)source {
     _source = source;
+    if (!source.articlesController) {
+        source.articlesController = self.articlesController;
+    }
     [self.articlesTable reloadData];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.source.articles.count;
+    return self.articlesDatasource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Article *article = self.source.articles[indexPath.row];
-    
+    Article *article = self.articlesDatasource[indexPath.row];
+        
     NSString *reuseId = article.imageURL ? reuseIDcellWithImage : reuseIDcellWithoutImage;
     
     ArticlesListCell *cell = [self.articlesTable dequeueReusableCellWithIdentifier:reuseId];
@@ -113,7 +153,7 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    Article *article = self.source.articles[indexPath.row];
+    Article *article = self.articlesDatasource[indexPath.row];
     
     ArticlesListCell *selectedCell = (ArticlesListCell *)[tableView cellForRowAtIndexPath:indexPath];
     UIImage *articleImage;
@@ -125,6 +165,10 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
         initWithArticle:article image:articleImage];
     
     [self.navigationController pushViewController:articleDetailsVC animated:YES];
+    
+    if (!article.isRead) {
+        [self setRead:YES forArticle:article atIndexPath:indexPath];
+    }
 }
 
 - (void)refreshArticles
@@ -146,6 +190,35 @@ static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
                 description:((NSError *)errors.firstObject).localizedDescription
                 delegate:(self)];
         }];
+}
+
+- (void)setRead:(BOOL)isRead forArticle:(Article *)article atIndexPath:(NSIndexPath *)indexPath
+{
+    [self.articlesController setRead:isRead forArticle:article];
+    if (currentFilterType == filterTypeAll) {
+        ArticlesListCell *articlesListCell =
+            (ArticlesListCell *)[self.articlesTable cellForRowAtIndexPath:indexPath];
+        CellStyle cellStyleToBeApplied = article.isRead ? CellStyleMuted : CellStyleNormal;
+        [articlesListCell setStyle:cellStyleToBeApplied];
+    }
+    else if (currentFilterType == filterTypeUnread) {
+        [self.articlesTable deleteRowsAtIndexPaths:@[indexPath]
+            withRowAnimation:UITableViewRowAnimationTop];
+    }
+}
+
+- (NSArray *)articlesDatasource
+{
+    if (currentFilterType == filterTypeAll) {
+        return self.source.articles;
+    }
+    else if (currentFilterType == filterTypeUnread) {
+        return self.source.unreadArticles;
+    }
+    else {
+        NSLog(@"Unimplemented filterType %ld", currentFilterType);
+        return nil;
+    }
 }
 
 @end

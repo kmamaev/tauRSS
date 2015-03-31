@@ -1,13 +1,6 @@
 #import "Source.h"
 
 
-@interface Source()
-
-@property (weak, nonatomic, readonly) ArticlesController *articlesController;
-
-@end
-
-
 @implementation Source
 
 - (instancetype)initWithArticlesController:(ArticlesController *)articlesController {
@@ -40,6 +33,10 @@
     source.title = NSLocalizedString(@"favorites", );
     source.sourceId = sourceIdFavorites;
     return source;
+}
+
+- (NSArray *)unreadArticles {
+    return [self.articlesController unreadArticlesForSource:self];
 }
 
 @end
