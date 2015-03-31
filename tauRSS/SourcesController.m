@@ -10,7 +10,8 @@
 
 @implementation SourcesController
 
-- (instancetype)init {
+- (instancetype)init
+{
     self = [super init];
     if (self != nil) {
         _storageController = [[StorageController alloc] init];
@@ -34,7 +35,7 @@
 {
     self.sources = [self.sources arrayByAddingObject:source];
     [self.storageController storeSource:source];
-};
+}
 
 - (void)deleteSource:(Source *)source
 {
@@ -42,11 +43,11 @@
     [newSources removeObject:source];
     self.sources = [NSArray arrayWithArray:newSources];
     [self.storageController deleteSource:source];
-};
+}
 
 - (void)getSourceById:(NSString *)sourceId {
 #warning resolve TODO mark
     // TODO: Implement this
-};
+}
 
 @end

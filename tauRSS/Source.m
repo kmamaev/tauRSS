@@ -3,7 +3,8 @@
 
 @implementation Source
 
-- (NSArray *)articles {
+- (NSArray *)articles
+{
     if (self.sourceId == sourceIdAllNews) {
         return [self.articlesController allArticles];
     }
@@ -11,6 +12,11 @@
         return [self.articlesController favoriteArticles];
     }
     else return _articles;
+}
+
+- (NSArray *)unreadArticles
+{
+    return [self.articlesController unreadArticlesForSource:self];
 }
 
 + (instancetype)allNewsSource
@@ -27,10 +33,6 @@
     source.title = NSLocalizedString(@"favorites", );
     source.sourceId = sourceIdFavorites;
     return source;
-}
-
-- (NSArray *)unreadArticles {
-    return [self.articlesController unreadArticlesForSource:self];
 }
 
 @end

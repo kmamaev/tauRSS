@@ -20,13 +20,11 @@ typedef NS_ENUM(NSInteger, SourceId) {
 
 /**
  *  Returns instance of source with predefined title and sourceId equaling to sourceTypeAllNews.
- *  Needs not nil ArticlesController for proper working.
  */
 + (instancetype)allNewsSource;
 
 /**
  *  Returns instance of source with predefined title and sourceId equaling to sourceTypeFavorites.
- *  Needs not nil ArticlesController for proper working.
  */
 + (instancetype)favoritesSource;
 

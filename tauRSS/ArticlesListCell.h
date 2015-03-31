@@ -21,6 +21,9 @@ typedef NS_ENUM(NSInteger, CellStyle) {
  */
 + (UIImage *)placeholderImage;
 
+/**
+ *  Sets style of the cell in accordance with it's state (read or unread)
+ */
 - (void)setStyle:(CellStyle)cellStyle;
 
 @end

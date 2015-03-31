@@ -1,7 +1,6 @@
 #import "ArticlesListVC.h"
 #import <IIViewDeckController.h>
 #import "ArticlesListCell.h"
-#import "Source.h"
 #import "ArticleDetailsVC.h"
 #import "Utils.h"
 
@@ -23,16 +22,20 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
 
 @interface ArticlesListVC ()
 
-@property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) ArticlesController *articlesController;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *readFilterControl;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *readFilterHeight;
+@property (strong, nonatomic) IBOutlet UITableView *articlesTableView;
+@property (strong, nonatomic, readonly) NSArray *articlesTableDatasource;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSArray *readFilterSegments;
-@property (strong, nonatomic, readonly) NSArray *articlesDatasource;
 
 @end
 
 
 @implementation ArticlesListVC
+
+#pragma mark - Getters and setters
 
 - (ArticlesController *)articlesController
 {
@@ -42,9 +45,36 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
     return _articlesController;
 }
 
+- (NSArray *)articlesTableDatasource
+{
+    if (currentFilterType == filterTypeAll) {
+        return self.source.articles;
+    }
+    else if (currentFilterType == filterTypeUnread) {
+        return self.source.unreadArticles;
+    }
+    else {
+        NSLog(@"Unimplemented filterType %ld", currentFilterType);
+        return nil;
+    }
+}
+
+- (void)setSource:(Source *)source
+{
+    _source = source;
+    if (!source.articlesController) {
+        source.articlesController = self.articlesController;
+    }
+    [self.articlesTableView reloadData];
+}
+
+#pragma mark - View's lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Set up edges for navbar and toolbar for proper working of autolayout
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     // Initialize main menu button
@@ -68,20 +98,20 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
         initWithCustomView:filterButton];
     
     // Initialize custom cells for articles table
-    [self.articlesTable
+    [self.articlesTableView
         registerNib:[UINib nibWithNibName:NSStringFromClass([ArticlesListCell class])
             bundle:[NSBundle mainBundle]]
         forCellReuseIdentifier:reuseIDcellWithImage];
-    [self.articlesTable
+    [self.articlesTableView
         registerNib:[UINib nibWithNibName:NSStringFromClass([ArticlesListCell class])
             bundle:[NSBundle mainBundle]]
         forCellReuseIdentifier:reuseIDcellWithoutImage];
     
-    // Initialize the refresh control
+    // Initialize refresh control
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshArticles)
         forControlEvents:UIControlEventValueChanged];
-    [self.articlesTable addSubview:self.refreshControl];
+    [self.articlesTableView addSubview:self.refreshControl];
     
     // Initialize segmented control with read filter options
     self.readFilterSegments = @[
@@ -99,69 +129,43 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
     self.readFilterHeight.constant = isReadFilterShown ? readFilterHeight : 0.0f;
 }
 
+#pragma mark - Actions
+
 - (void)readFilterValueChanged:(UISegmentedControl *)sender
 {
     NSDictionary *selectedSegment = self.readFilterSegments[[sender selectedSegmentIndex]];
     currentFilterType = [selectedSegment[kSegmentFilterType] integerValue];
-    [self.articlesTable reloadData];
+    [self.articlesTableView reloadData];
 }
 
-- (NSArray *)tableView:(UITableView *)tableView
-    editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)toggleFilterControl:(UIButton *)sender
 {
-    Article *article = self.articlesDatasource[indexPath.row];
-    NSString *actionTitle =
-        article.isRead ? NSLocalizedString(@"markAsUnRead",) : NSLocalizedString(@"markAsRead",);
-    typeof(self) __weak wself = self;
-    UITableViewRowAction *markAsReadAction = [UITableViewRowAction
-        rowActionWithStyle:UITableViewRowActionStyleDefault
-        title:actionTitle
-        handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-            typeof(wself) __strong sself = wself;
-            Article *article = sself.articlesDatasource[indexPath.row];
-            [sself setRead:!article.isRead forArticle:article atIndexPath:indexPath];
-            [sself.articlesTable setEditing:NO];
-        }];
-    markAsReadAction.backgroundColor = [UIColor lightGrayColor];
-    return @[markAsReadAction];
+    self.readFilterHeight.constant = isReadFilterShown ? 0.0f : readFilterHeight;
+    isReadFilterShown = !isReadFilterShown;
+
+    [self.view setNeedsUpdateConstraints];
+    [UIView animateWithDuration:0.25f animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
-    shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-{
-    return YES;
-}
-
-- (void)tableView:(UITableView *)tableView
-    commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
-    forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Need for working of row editing
-}
-
-- (void)setSource:(Source *)source {
-    _source = source;
-    if (!source.articlesController) {
-        source.articlesController = self.articlesController;
-    }
-    [self.articlesTable reloadData];
-}
+#pragma mark - UITableViewDataSource implementation
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.articlesDatasource.count;
+    return self.articlesTableDatasource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Article *article = self.articlesDatasource[indexPath.row];
-        
+    Article *article = self.articlesTableDatasource[indexPath.row];
+    
     NSString *reuseId = article.imageURL ? reuseIDcellWithImage : reuseIDcellWithoutImage;
     
-    ArticlesListCell *cell = [self.articlesTable dequeueReusableCellWithIdentifier:reuseId];
+    ArticlesListCell *cell = [self.articlesTableView dequeueReusableCellWithIdentifier:reuseId];
     cell.titleLabel.text = article.title;
-
+    
     cell.infoLabel.text = [Utils buildShortArticleInfo:article];
     cell.descriptionLabel.text = article.articleDescription;
     cell.urlForImage = article.imageURL;
@@ -173,10 +177,19 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView
+    commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+    forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Need for working of row editing
+}
+
+#pragma mark - UITableViewDelegate implementation
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    Article *article = self.articlesDatasource[indexPath.row];
+    Article *article = self.articlesTableDatasource[indexPath.row];
     
     ArticlesListCell *selectedCell = (ArticlesListCell *)[tableView cellForRowAtIndexPath:indexPath];
     UIImage *articleImage;
@@ -194,6 +207,36 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
     }
 }
 
+- (NSArray *)tableView:(UITableView *)tableView
+    editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Article *article = self.articlesTableDatasource[indexPath.row];
+    NSString *actionTitle =
+        article.isRead ? NSLocalizedString(@"markAsUnRead",) : NSLocalizedString(@"markAsRead",);
+    typeof(self) __weak wself = self;
+    UITableViewRowAction *markAsReadAction = [UITableViewRowAction
+        rowActionWithStyle:UITableViewRowActionStyleDefault
+        title:actionTitle
+        handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+            typeof(wself) __strong sself = wself;
+            Article *article = sself.articlesTableDatasource[indexPath.row];
+            [sself setRead:!article.isRead forArticle:article atIndexPath:indexPath];
+            [sself.articlesTableView setEditing:NO];
+        }];
+    markAsReadAction.backgroundColor = [UIColor lightGrayColor];
+    return @[markAsReadAction];
+}
+
+#pragma mark - UIGestureRecognizerDelegate implementation
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+    shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+
+#pragma mark - Auxiliaries
+
 - (void)refreshArticles
 {
     [self.articlesController
@@ -201,7 +244,7 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
         success:^(BOOL areNewArticlesAdded) {
             [self.refreshControl endRefreshing];
             if (areNewArticlesAdded) {
-                [self.articlesTable reloadData];
+                [self.articlesTableView reloadData];
                 NSLog(@"Articles table has been refreshed.");
             }
             else {
@@ -220,44 +263,14 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
     [self.articlesController setRead:isRead forArticle:article];
     if (currentFilterType == filterTypeAll) {
         ArticlesListCell *articlesListCell =
-            (ArticlesListCell *)[self.articlesTable cellForRowAtIndexPath:indexPath];
+            (ArticlesListCell *)[self.articlesTableView cellForRowAtIndexPath:indexPath];
         CellStyle cellStyleToBeApplied = article.isRead ? CellStyleMuted : CellStyleNormal;
         [articlesListCell setStyle:cellStyleToBeApplied];
     }
     else if (currentFilterType == filterTypeUnread) {
-        [self.articlesTable deleteRowsAtIndexPaths:@[indexPath]
+        [self.articlesTableView deleteRowsAtIndexPaths:@[indexPath]
             withRowAnimation:UITableViewRowAnimationTop];
     }
-}
-
-- (NSArray *)articlesDatasource
-{
-    if (currentFilterType == filterTypeAll) {
-        return self.source.articles;
-    }
-    else if (currentFilterType == filterTypeUnread) {
-        return self.source.unreadArticles;
-    }
-    else {
-        NSLog(@"Unimplemented filterType %ld", currentFilterType);
-        return nil;
-    }
-}
-
-- (void)toggleFilterControl:(UIButton *)sender
-{
-    if (isReadFilterShown) {
-        isReadFilterShown = NO;
-        self.readFilterHeight.constant = 0.0f;
-    }
-    else {
-        isReadFilterShown = YES;
-        self.readFilterHeight.constant = readFilterHeight;
-    }
-    [self.view setNeedsUpdateConstraints];
-    [UIView animateWithDuration:0.25f animations:^{
-        [self.view layoutIfNeeded];
-    }];
 }
 
 @end

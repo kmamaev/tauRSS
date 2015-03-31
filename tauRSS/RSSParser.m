@@ -16,7 +16,8 @@ static NSString *const attributeNameType = @"type";
 static NSString *const attributeNameUrl = @"url";
 
 
-@interface RSSParser () <NSXMLParserDelegate> {
+@interface RSSParser () <NSXMLParserDelegate>
+{
     Article *article;
     NSMutableSet *articles;
     NSMutableString *tmpString;
@@ -28,7 +29,8 @@ static NSString *const attributeNameUrl = @"url";
 
 @implementation RSSParser
 
-- (instancetype)init {
+- (instancetype)init
+{
     self = [super init];
     if (self != nil) {
         articles = [NSMutableSet set];

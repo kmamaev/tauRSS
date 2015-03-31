@@ -1,18 +1,16 @@
 #import "AppDelegate.h"
 #import "SourcesListVC.h"
 #import "ArticlesListVC.h"
-#import "IIViewDeckController.h"
+#import <IIViewDeckController.h>
 #import <AFNetworkActivityIndicatorManager.h>
-
-
-@interface AppDelegate ()
-@end
 
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application
-                                     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    // Initialize app window
     CGRect windowFrame = [UIScreen mainScreen].bounds;
     self.window = [[UIWindow alloc] initWithFrame:windowFrame];
     
@@ -25,20 +23,17 @@
     // Initialize deck with sources list screen and articles list screen
     SourcesListVC *sourcesListVC = [[SourcesListVC alloc] init];
     ArticlesListVC *articlesListVC = sourcesListVC.articlesListVC;
-    
     UINavigationController *centerController = [[UINavigationController alloc]
-                                                initWithRootViewController:articlesListVC];
-    
+        initWithRootViewController:articlesListVC];
     UINavigationController *leftController = [[UINavigationController alloc]
-                                                initWithRootViewController:sourcesListVC];
-    
+        initWithRootViewController:sourcesListVC];
     IIViewDeckController* deckController = [[IIViewDeckController alloc]
-                                            initWithCenterViewController:centerController
-                                            leftViewController:leftController];
+        initWithCenterViewController:centerController
+        leftViewController:leftController];
     
     // Give possibility to invoke row editing in articles table by swipe gesture
     deckController.panningGestureDelegate = articlesListVC;
-    // There is nesessary to implement method
+    // There is necessary to implement method
     // 'gestureRecognizer:shouldRecognizeSimultaneouslyWithGestureRecognizer:otherGestureRecognizer'
     // of UIGestureRecognizerDelegate in ArticlesListVC which should return 'YES' to force swipe
     // work
@@ -46,6 +41,7 @@
     // Show sources list view at start by default
     [deckController openLeftViewAnimated:NO];
 
+    // Set up root view controller and make app window wisible
     self.window.rootViewController = deckController;
     [self.window makeKeyAndVisible];
     return YES;

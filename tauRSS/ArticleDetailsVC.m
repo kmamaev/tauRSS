@@ -23,6 +23,8 @@
 
 @implementation ArticleDetailsVC
 
+#pragma mark - Initialization
+
 - (instancetype)initWithArticle:(Article *)article image:(UIImage *)articleImage
 {
     self = [self init];
@@ -33,7 +35,10 @@
     return self;
 }
 
-- (void)viewDidLoad {
+#pragma mark - View's lifecycle
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
@@ -58,7 +63,8 @@
     [self initializeToolbarItems];
 }
 
-- (void)initializeToolbarItems {
+- (void)initializeToolbarItems
+{
     CGRect toolBarIconFrame = (CGRect){0, 0, 30, 30};
     
     // Initialize 'left arrow' button
@@ -104,23 +110,27 @@
 
 #pragma mark - Actions
 
-- (IBAction)didTapLinkButton:(UIButton *)sender {
+- (IBAction)didTapLinkButton:(UIButton *)sender
+{
     ArticleWebVC *articleWebVC = [[ArticleWebVC alloc] initWithURL:self.article.link];
     articleWebVC.articleDetailsVC = self;
     [self.navigationController pushViewController:articleWebVC animated:YES];
 }
 
-- (void)didTapLeftArrowButton:(UIButton *)sender {
+- (void)didTapLeftArrowButton:(UIButton *)sender
+{
 #warning resolve TODO mark
     // TODO: implement this
 }
 
-- (void)didTapRightArrowButton:(UIButton *)sender {
+- (void)didTapRightArrowButton:(UIButton *)sender
+{
 #warning resolve TODO mark
     // TODO: implement this
 }
 
-- (void)didTapPlanetButton:(UIButton *)sender {
+- (void)didTapPlanetButton:(UIButton *)sender
+{
     UIApplication *app = [UIApplication sharedApplication];
     if ([app canOpenURL:self.article.link]) {
         [app openURL:self.article.link];
@@ -132,12 +142,14 @@
     }
 }
 
-- (void)didTapEmptyStarButton:(UIButton *)sender {
+- (void)didTapEmptyStarButton:(UIButton *)sender
+{
 #warning resolve TODO mark
     // TODO: implement this
 }
 
-- (IBAction)didTapActionButton:(UIBarButtonItem *)sender {
+- (IBAction)didTapActionButton:(UIBarButtonItem *)sender
+{
 #warning resolve TODO mark
     // TODO: implement this
 }

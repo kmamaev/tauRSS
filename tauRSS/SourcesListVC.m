@@ -1,8 +1,9 @@
 #import "SourcesListVC.h"
-#import "IIViewDeckController.h"
 #import "SettingsVC.h"
 #import "NewSourceVC.h"
 #import "SourcesListCell.h"
+#import <IIViewDeckController.h>
+
 
 static NSString *const reuseIDSourceCell = @"SourceListCell";
 
@@ -10,12 +11,10 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
 @interface SourcesListVC () <NewSourceDelegate>
 
 @property (strong, nonatomic) SourcesController *sourcesController;
-@property (weak, nonatomic) NSArray *sources;
 @property (strong, nonatomic) NSArray *regularSources;
 @property (strong, nonatomic) NSArray *sections;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *settingsBarButtonItem;
-
 
 - (IBAction)didTapSettingsBarButtonItem:(UIBarButtonItem *)sender;
 - (IBAction)didTapAddSourceBarButtonItem:(UIBarButtonItem *)sender;
@@ -26,18 +25,23 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
 
 @implementation SourcesListVC
 
-- (instancetype)init {
+#pragma mark - Initialization
+
+- (instancetype)init
+{
     self = [super init];
     if (self != nil) {
         _articlesListVC = [[ArticlesListVC alloc] init];
-        _sources = [SourcesController sharedInstance].sources;
+        NSArray *sources = [SourcesController sharedInstance].sources;
         Source *allNewsSource = [Source allNewsSource];
         Source *favoritesSource = [Source favoritesSource];
         _regularSources = @[allNewsSource, favoritesSource];
-        _sections = @[_regularSources, _sources];
+        _sections = @[_regularSources, sources];
     }
     return self;
 }
+
+#pragma mark - Getters
 
 - (SourcesController *)sourcesController
 {
@@ -47,7 +51,10 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
     return _sourcesController;
 }
 
-- (void)viewDidLoad {
+#pragma mark - View's lifecycle
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     if (self.navigationItem)
@@ -56,13 +63,12 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
     }
     
     [self.tableView
-     registerNib:[UINib nibWithNibName:NSStringFromClass([SourcesListCell class])
-                                bundle:[NSBundle mainBundle]]
-     forCellReuseIdentifier:reuseIDSourceCell];
+        registerNib:[UINib nibWithNibName:NSStringFromClass([SourcesListCell class])
+            bundle:[NSBundle mainBundle]]
+        forCellReuseIdentifier:reuseIDSourceCell];
     
     self.settingsBarButtonItem.title = NSLocalizedString(@"settings", );
 }
-
 
 #pragma mark - UITableViewDataSource implementation
 
@@ -71,12 +77,14 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
     return [self.sections count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.sources.count;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.sourcesController.sources.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     SourcesListCell *cell = [self.tableView dequeueReusableCellWithIdentifier:reuseIDSourceCell];
     NSArray *sources = self.sections[indexPath.section];
     
@@ -88,7 +96,8 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
 
 #pragma mark - UITableViewDelegate implementation
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     NSArray *sources = self.sections[indexPath.section];
     Source *source = sources[indexPath.row];
     self.articlesListVC.source = source;
@@ -99,18 +108,19 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
 
 #pragma mark - Actions
 
-
 - (IBAction)didTapSettingsBarButtonItem:(UIBarButtonItem *)sender
 {
     SettingsVC *settingsVC = [[SettingsVC alloc]init];
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:settingsVC];
+    UINavigationController *navController = [[UINavigationController alloc]
+        initWithRootViewController:settingsVC];
     [self presentViewController:navController animated:YES completion:nil];
 }
 
 - (IBAction)didTapAddSourceBarButtonItem:(UIBarButtonItem *)sender
 {
     NewSourceVC *newVC = [[NewSourceVC alloc]init];
-    UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:newVC];
+    UINavigationController *navController = [[UINavigationController alloc]
+        initWithRootViewController:newVC];
     [self presentViewController:navController animated:YES completion:nil];
 }
 
@@ -124,21 +134,16 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
     //[self.sourcesController updateAllArticles];
     [self updateData];
     [self.tableView reloadData];
-    
-    [self dismissViewControllerAnimated:YES
-                             completion:nil];
-    
-    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
-
 
 - (void)updateData
 {
     Source *allNewsSource = [Source allNewsSource];
     Source *favoritesSource = [Source favoritesSource];
     self.regularSources = @[allNewsSource, favoritesSource];
-    self.sources = self.sourcesController.sources;
-    self.sections = @[self.regularSources, self.sources];
+    self.sourcesController.sources = self.sourcesController.sources;
+    self.sections = @[self.regularSources, self.sourcesController.sources];
 }
 
 @end

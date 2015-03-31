@@ -13,13 +13,18 @@
 
 @implementation ArticleWebVC
 
-- (instancetype)initWithURL:(NSURL *)url {
+#pragma mark - Initialization
+
+- (instancetype)initWithURL:(NSURL *)url
+{
     self = [super init];
     if (self != nil) {
         _url = url;
     }
     return self;
 }
+
+#pragma mark - View's lifecycle
 
 - (void)viewDidLoad
 {
@@ -37,6 +42,8 @@
         forControlEvents:UIControlEventTouchUpInside];
     self.planetButton.customView = planetButton;
 }
+
+#pragma mark - Actions
 
 - (void)didTapPlanetButton:(UIButton *)sender
 {
@@ -68,7 +75,8 @@
 
 #pragma mark - Dealloc
 
-- (void)dealloc {
+- (void)dealloc
+{
 #warning Need to handle network activity indicator via AFNetworking
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
