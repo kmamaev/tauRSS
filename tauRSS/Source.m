@@ -1,7 +1,20 @@
 #import "Source.h"
 
 
+@interface Source ()
+@property (strong, nonatomic) ArticlesController *articlesController;
+@end
+
+
 @implementation Source
+
+- (ArticlesController *)articlesController
+{
+    if (!_articlesController) {
+        _articlesController = [ArticlesController sharedInstance];
+    }
+    return _articlesController;
+}
 
 - (NSArray *)articles
 {
@@ -16,7 +29,10 @@
 
 - (NSArray *)unreadArticles
 {
-    return [self.articlesController unreadArticlesForSource:self];
+    if (!_unreadArticles) {
+        _unreadArticles = [self.articlesController unreadArticlesForSource:self];
+    }
+    return _unreadArticles;
 }
 
 + (instancetype)allNewsSource

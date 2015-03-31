@@ -32,6 +32,9 @@
 - (void)setRead:(BOOL)isRead forArticle:(Article *)article
 {
     article.isRead = isRead;
+    NSMutableArray *unreadArticles = [article.source.unreadArticles mutableCopy];
+    isRead ? [unreadArticles removeObject:article] : [unreadArticles addObject:article];
+    article.source.unreadArticles = unreadArticles;
 #warning resolve TODO mark
     // TODO: Implement working with db
 }

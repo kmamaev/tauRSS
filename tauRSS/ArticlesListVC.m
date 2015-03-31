@@ -62,9 +62,6 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
 - (void)setSource:(Source *)source
 {
     _source = source;
-    if (!source.articlesController) {
-        source.articlesController = self.articlesController;
-    }
     [self.articlesTableView reloadData];
 }
 
