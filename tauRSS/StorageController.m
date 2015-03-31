@@ -300,7 +300,7 @@ static NSString *const DefaultFileNameForDataBase = @"AwesomeDataBase.db";
                              @"DELETE FROM %@ WHERE %@ = ?", sourcesTableName, sourcesIdColumnName];
     
     NSString *articleQueryString = [NSString stringWithFormat:
-                                   @"DELETE * FROM %@ WHERE %@ = ?", articlesTableName, sourcesIdColumnName];
+                                   @"DELETE FROM %@ WHERE %@ = ?", articlesTableName, sourcesIdColumnName];
     
     [self.db open];
     [self.db executeUpdate:sourceQueryString, @(source.sourceId)];
@@ -323,6 +323,16 @@ static NSString *const DefaultFileNameForDataBase = @"AwesomeDataBase.db";
                              @"UPDATE %@ SET %@ = ? WHERE %@ = ?", articlesTableName, articlesFavoriteColumnName, articleIdColumnName];
     [self.db open];
     [self.db executeUpdate:queryString, @(isFavorite), article.articleId];
+    [self.db close];
+}
+
+- (void)deleteAllArticles
+{
+    NSString *queryString = [NSString stringWithFormat:
+                                    @"DELETE FROM %@", articlesTableName];
+    
+    [self.db open];
+    [self.db executeUpdate:queryString];
     [self.db close];
 }
 

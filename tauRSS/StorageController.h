@@ -15,6 +15,7 @@
 
 - (void)setRead:(BOOL)isRead forArticle:(Article *)article;
 - (void)setFavorite:(BOOL)isFavorite forArticle:(Article *)article;
+- (void)deleteAllArticles;
 
 
 @end
