@@ -65,7 +65,7 @@ static NSString *const DefaultFileNameForDataBase = @"AwesomeDataBase.db";
 - (void)storeArticles:(NSArray *)articles forSourceWithId:(NSInteger)sourceId
 {
     NSString *queryString = [NSString stringWithFormat:
-                             @"INSERT OR REPLACE INTO %@ (%@, %@, %@, %@, %@, %@, %@, %@, %@, %@) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                             @"INSERT OR REPLACE INTO %@ (%@, %@, %@, %@, %@, %@, %@, %@, %@, %@) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                              articlesTableName,
                              articleIdColumnName,
                              articlesTitleColumnName,
@@ -149,7 +149,7 @@ static NSString *const DefaultFileNameForDataBase = @"AwesomeDataBase.db";
                                   sourcesTableName, sourcesIdColumnName, sourcesTitleColumnName, sourcesIconURLColumnName, sourcesURLColumnName];
     
     NSString *createArticlesTableQuery = [NSString stringWithFormat:
-                                  @"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT PRIMARY KEY, %@TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ DATETIME, %@ INTEGER, %@ INTEGER, %@ INTEGER, FOREIGN KEY(%@) REFERENCES %@(%@))",
+                                  @"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT PRIMARY KEY, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ TEXT, %@ DATETIME, %@ INTEGER, %@ INTEGER, %@ INTEGER, FOREIGN KEY(%@) REFERENCES %@(%@))",
                                           articlesTableName,
                                           articleIdColumnName,
                                           articlesTitleColumnName,
