@@ -37,10 +37,11 @@
 		B549E45B1AB059C500371CBD /* SourcesController.m in Sources */ = {isa = PBXBuildFile; fileRef = B549E45A1AB059C500371CBD /* SourcesController.m */; };
 		B549E45E1AB07C6F00371CBD /* StorageController.m in Sources */ = {isa = PBXBuildFile; fileRef = B549E45D1AB07C6F00371CBD /* StorageController.m */; };
 		B5AF3FC61AC2C4B000AC378D /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B5AF3FC51AC2C4B000AC378D /* Utils.m */; };
+		B5AF3FC91AC54B4900AC378D /* NSString+StringHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5AF3FC81AC54B4900AC378D /* NSString+StringHelper.m */; };
 		B5AF3FD31AC57C0900AC378D /* tauRSS_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AF3FD01AC57C0900AC378D /* tauRSS_icon.png */; };
 		B5AF3FD41AC57C0900AC378D /* tauRSS_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AF3FD11AC57C0900AC378D /* tauRSS_icon@2x.png */; };
 		B5AF3FD51AC57C0900AC378D /* tauRSS_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5AF3FD21AC57C0900AC378D /* tauRSS_icon@3x.png */; };
-		B5AF3FC91AC54B4900AC378D /* NSString+StringHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5AF3FC81AC54B4900AC378D /* NSString+StringHelper.m */; };
+		B5CF25051ACAEF4500C3425B /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = B5CF25041ACAEF4500C3425B /* filter.png */; };
 		B5D4BCDE1ABB360100B31627 /* image_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D4BCDD1ABB360100B31627 /* image_placeholder.png */; };
 		B5D4BCE21ABB600100B31627 /* NSDate+DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5D4BCE11ABB600100B31627 /* NSDate+DateHelper.m */; };
 		B5D4BCE41ABBFA9900B31627 /* bars.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D4BCE31ABBFA9900B31627 /* bars.png */; };
@@ -117,11 +118,12 @@
 		B549E45D1AB07C6F00371CBD /* StorageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageController.m; sourceTree = "<group>"; };
 		B5AF3FC41AC2C4AF00AC378D /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		B5AF3FC51AC2C4B000AC378D /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		B5AF3FC71AC54B4900AC378D /* NSString+StringHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StringHelper.h"; sourceTree = "<group>"; };
+		B5AF3FC81AC54B4900AC378D /* NSString+StringHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringHelper.m"; sourceTree = "<group>"; };
 		B5AF3FD01AC57C0900AC378D /* tauRSS_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tauRSS_icon.png; path = Assets/tauRSS_icon.png; sourceTree = "<group>"; };
 		B5AF3FD11AC57C0900AC378D /* tauRSS_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tauRSS_icon@2x.png"; path = "Assets/tauRSS_icon@2x.png"; sourceTree = "<group>"; };
 		B5AF3FD21AC57C0900AC378D /* tauRSS_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tauRSS_icon@3x.png"; path = "Assets/tauRSS_icon@3x.png"; sourceTree = "<group>"; };
-		B5AF3FC71AC54B4900AC378D /* NSString+StringHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StringHelper.h"; sourceTree = "<group>"; };
-		B5AF3FC81AC54B4900AC378D /* NSString+StringHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringHelper.m"; sourceTree = "<group>"; };
+		B5CF25041ACAEF4500C3425B /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = filter.png; path = Assets/filter.png; sourceTree = "<group>"; };
 		B5D4BCDD1ABB360100B31627 /* image_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image_placeholder.png; path = Assets/image_placeholder.png; sourceTree = "<group>"; };
 		B5D4BCE01ABB600100B31627 /* NSDate+DateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateHelper.h"; sourceTree = "<group>"; };
 		B5D4BCE11ABB600100B31627 /* NSDate+DateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateHelper.m"; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 		B5D4BCDA1ABB358600B31627 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				B5CF25041ACAEF4500C3425B /* filter.png */,
 				A81F6E901ABDA9A5002A96EB /* correct.png */,
 				A81F6E911ABDA9A5002A96EB /* error.png */,
 				B5EDB3A21ABD7370000DB04B /* left_arrow.png */,
@@ -409,6 +412,7 @@
 				A8259AE01ABC8912007D8B9E /* SourcesListCell.xib in Resources */,
 				C0DA933C1ABAEBF200A1F062 /* ArticlesListCell.xib in Resources */,
 				A8259AD61ABC790A007D8B9E /* SettingsSwitchCell.xib in Resources */,
+				B5CF25051ACAEF4500C3425B /* filter.png in Resources */,
 				B53CDBF21AA78E3600CDD070 /* LaunchScreen.xib in Resources */,
 				B53CDBEF1AA78E3600CDD070 /* Images.xcassets in Resources */,
 				B5D4BCE71ABC416F00B31627 /* Localizable.strings in Resources */,

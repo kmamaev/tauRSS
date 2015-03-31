@@ -13,6 +13,8 @@ typedef NS_ENUM(NSInteger, FilterType) {
 };
 
 static FilterType currentFilterType = filterTypeDefault;
+static BOOL isReadFilterShown = NO;
+static float const readFilterHeight = 44.0f;
 static NSString *const reuseIDcellWithImage = @"ArticlesListCell1";
 static NSString *const reuseIDcellWithoutImage = @"ArticlesListCell2";
 static NSString *const kSegmentTitle = @"segment_title";
@@ -23,6 +25,7 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *readFilterControl;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *readFilterHeight;
 @property (strong, nonatomic) NSArray *readFilterSegments;
 @property (strong, nonatomic, readonly) NSArray *articlesDatasource;
 
@@ -44,6 +47,17 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
         style:UIBarButtonItemStylePlain
         target:self.viewDeckController
         action:@selector(toggleLeftView)];
+    
+    // Initialize filter button
+    UIImage *filterIcon = [[UIImage imageNamed:@"filter.png"]
+        imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIButton *filterButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    filterButton.frame = (CGRect){0, 0, 24, 20};
+    [filterButton setImage:filterIcon forState:UIControlStateNormal];
+    [filterButton addTarget:self action:@selector(toggleFilterControl:)
+        forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
+        initWithCustomView:filterButton];
     
     // Initialize custom cells for articles table
     [self.articlesTable
@@ -74,6 +88,7 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
     [self.readFilterControl addTarget:self
         action:@selector(readFilterValueChanged:)
         forControlEvents:UIControlEventValueChanged];
+    self.readFilterHeight.constant = isReadFilterShown ? readFilterHeight : 0.0f;
 }
 
 - (void)readFilterValueChanged:(UISegmentedControl *)sender
@@ -219,6 +234,22 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
         NSLog(@"Unimplemented filterType %ld", currentFilterType);
         return nil;
     }
+}
+
+- (void)toggleFilterControl:(UIButton *)sender
+{
+    if (isReadFilterShown) {
+        isReadFilterShown = NO;
+        self.readFilterHeight.constant = 0.0f;
+    }
+    else {
+        isReadFilterShown = YES;
+        self.readFilterHeight.constant = readFilterHeight;
+    }
+    [self.view setNeedsUpdateConstraints];
+    [UIView animateWithDuration:0.25f animations:^{
+        [self.view layoutIfNeeded];
+    }];
 }
 
 @end
