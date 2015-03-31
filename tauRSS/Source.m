@@ -29,7 +29,8 @@
 
 - (NSArray *)unreadArticles
 {
-    if (!_unreadArticles) {
+    BOOL isRegularSource = self.sourceId == sourceIdAllNews || self.sourceId == sourceIdFavorites;
+    if (!_unreadArticles || isRegularSource) {
         _unreadArticles = [self.articlesController unreadArticlesForSource:self];
     }
     return _unreadArticles;

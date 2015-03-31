@@ -73,12 +73,20 @@
 - (NSArray *)unreadArticlesForSource:(Source *)source
 {
     NSMutableArray *unreadArticles = [NSMutableArray array];
-    for (Article *article in source.articles) {
-        if (!article.isRead) {
-            [unreadArticles addObject:article];
+    if (source.sourceId == sourceIdAllNews) {
+        for (Source *s in self.sourcesController.sources) {
+            [unreadArticles addObjectsFromArray:s.unreadArticles];
         }
+        return [[self class] articlesArraySortedByPublishDate:unreadArticles];
     }
-    return unreadArticles;
+    else {
+        for (Article *article in source.articles) {
+            if (!article.isRead) {
+                [unreadArticles addObject:article];
+            }
+        }
+        return unreadArticles;
+    }
 }
 
 - (void)updateArticlesForSource:(Source *)source
@@ -147,6 +155,8 @@
                 [fetchedArticles minusSet:currentArticles];
                 NSArray *newArticles = [[self class] articlesArrayBySortingASet:fetchedArticles];
                 source.articles = [newArticles arrayByAddingObjectsFromArray:source.articles];
+                source.unreadArticles = [newArticles
+                    arrayByAddingObjectsFromArray:source.unreadArticles];
                 NSLog(@"Update for source \"%@\" has finished, %ld articles are added.",
                     source.title, newArticles.count);
                 if (!success) {

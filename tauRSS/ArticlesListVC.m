@@ -249,6 +249,7 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
             }
         } failure:^(NSArray *errors) {
             NSLog(@"Errors: %@", errors);
+            [self.refreshControl endRefreshing];
             [Utils showInfoAlertWithTitle:NSLocalizedString(@"errorLoadingArticles",)
                 description:((NSError *)errors.firstObject).localizedDescription
                 delegate:(self)];
