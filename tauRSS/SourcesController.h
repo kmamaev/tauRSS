@@ -9,6 +9,7 @@
 
 @property (strong, nonatomic) NSArray *sources;
 @property (strong, nonatomic) ArticlesController *articlesController;
+@property (nonatomic, strong) StorageController *storageController;
 
 - (void)addSource:(Source *)source;
 - (void)deleteSource:(Source *)source;

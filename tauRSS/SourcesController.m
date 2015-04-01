@@ -1,12 +1,6 @@
 #import "SourcesController.h"
 
 
-@interface SourcesController ()
-
-@property (nonatomic, strong) StorageController *storageController;
-
-@end
-
 
 @implementation SourcesController
 
@@ -15,7 +9,7 @@
     self = [super init];
     if (self != nil) {
         _storageController = [[StorageController alloc] init];
-        _articlesController = [[ArticlesController alloc] init];
+        _articlesController = [ArticlesController sharedInstance];
         _sources = [_storageController getAllSources];
     }
     return self;
