@@ -155,8 +155,22 @@
 
 - (void)didTapEmptyStarButton:(UIButton *)sender
 {
-#warning resolve TODO mark
-    // TODO: implement this
+    ArticlesController *articlesController = [ArticlesController sharedInstance];
+    [articlesController setFavorite:!(self.article.isFavorite) forArticle:self.article];
+    
+    UIImage *starImage;
+    
+    if (self.article.isFavorite == NO)
+    {
+        starImage = [[UIImage imageNamed:@"star_empty.png"]
+                     imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    }
+    else
+    {
+        starImage = [[UIImage imageNamed:@"star_filled.png"]
+                     imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    }
+    [(UIButton *)self.starButton.customView setImage:starImage forState:UIControlStateNormal];
 }
 
 - (IBAction)didTapActionButton:(UIBarButtonItem *)sender

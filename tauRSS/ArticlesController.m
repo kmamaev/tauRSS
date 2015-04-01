@@ -52,7 +52,7 @@
 
 - (void)setFavorite:(BOOL)isFavorite forArticle:(Article *)article
 {
-    article.isRead = isFavorite;
+    article.isFavorite = isFavorite;
     NSMutableArray *favoriteArticles = [self.favoriteArticles mutableCopy];
     isFavorite ? [favoriteArticles addObject:article] : [favoriteArticles removeObject:article];
     self.favoriteArticles = favoriteArticles;
