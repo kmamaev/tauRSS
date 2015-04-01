@@ -2,6 +2,7 @@
 #import "SourcesController.h"
 #import <AFHTTPRequestOperationManager.h>
 #import "RSSParser.h"
+#import "StorageController.h"
 
 
 @interface ArticlesController ()
@@ -69,15 +70,12 @@
 
 - (NSArray *)favoriteArticles
 {
-#warning Need to optimize getting of favorites list
-    NSArray *allArticles = [self allArticles];
-    NSMutableArray *favoriteArticles = [NSMutableArray array];
-    for (Article *article in allArticles) {
-        if (article.isFavorite) {
-            [favoriteArticles addObject:article];
-        }
+
+    if (_favoriteArticles == nil)
+    {
+        _favoriteArticles = [self.sourcesController.storageController getFavoriteArticles];
     }
-    return [[self class] articlesArraySortedByPublishDate:favoriteArticles];
+    return [[self class] articlesArraySortedByPublishDate:_favoriteArticles];
 }
 
 - (NSArray *)unreadArticlesForSource:(Source *)source
