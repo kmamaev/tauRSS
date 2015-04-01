@@ -98,8 +98,19 @@
     self.planetButton.customView = planetButton;
     
     // Initialize 'star' button
-    UIImage *starImage = [[UIImage imageNamed:@"star_empty.png"]
-        imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImage *starImage;
+    
+    if (self.article.isFavorite == NO)
+    {
+        starImage = [[UIImage imageNamed:@"star_empty.png"]
+                              imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    }
+    else
+    {
+        starImage = [[UIImage imageNamed:@"star_filled.png"]
+                              imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    }
+    
     UIButton *starButton = [UIButton buttonWithType:UIButtonTypeCustom];
     starButton.frame = toolBarIconFrame;
     [starButton setImage:starImage forState:UIControlStateNormal];
