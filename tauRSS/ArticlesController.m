@@ -52,8 +52,11 @@
 
 - (void)setFavorite:(BOOL)isFavorite forArticle:(Article *)article
 {
-#warning resolve TODO mark
-    // TODO: Implement this
+    article.isRead = isFavorite;
+    NSMutableArray *favoriteArticles = [self.favoriteArticles mutableCopy];
+    isFavorite ? [favoriteArticles addObject:article] : [favoriteArticles removeObject:article];
+    self.favoriteArticles = favoriteArticles;
+    [self.sourcesController.storageController setFavorite:isFavorite forArticle:article];
 }
 
 - (NSArray *)allArticles
