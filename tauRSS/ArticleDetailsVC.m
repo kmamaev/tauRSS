@@ -2,6 +2,7 @@
 #import "ArticleWebVC.h"
 #import "Source.h"
 #import "AlertUtils.h"
+#import "ArticlesListCell.h"
 #import <UIImageView+AFNetworking.h>
 
 
@@ -175,8 +176,31 @@
 
 - (IBAction)didTapActionButton:(UIBarButtonItem *)sender
 {
-#warning resolve TODO mark
-    // TODO: implement this
+    NSMutableArray *activityItems = [@[self.article.title, self.article.link] mutableCopy];
+    if (self.articleImageView.image) {
+        [activityItems addObject:self.articleImageView.image];
+    }
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc]
+        initWithActivityItems:activityItems applicationActivities:nil];
+    
+    activityViewController.excludedActivityTypes = @[
+        UIActivityTypePostToWeibo,
+        UIActivityTypeMessage,
+        UIActivityTypeMail,
+        UIActivityTypePrint,
+        UIActivityTypeCopyToPasteboard,
+        UIActivityTypeAssignToContact,
+        UIActivityTypeSaveToCameraRoll,
+        UIActivityTypeAddToReadingList,
+        UIActivityTypePostToFlickr,
+        UIActivityTypePostToVimeo,
+        UIActivityTypePostToTencentWeibo,
+        UIActivityTypeAirDrop
+    ];
+    
+    [self.navigationController presentViewController:activityViewController
+        animated:YES
+        completion:nil];
 }
 
 @end
