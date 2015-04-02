@@ -3,6 +3,7 @@
 #import "NewSourceVC.h"
 #import "SourcesListCell.h"
 #import <IIViewDeckController.h>
+#import "AlertUtils.h"
 
 
 static NSString *const reuseIDSourceCell = @"SourceListCell";
@@ -130,10 +131,24 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
 {
     sourse.sourceId = [self.sourcesController.sources count];
     [self.sourcesController addSource:sourse];
-#warning Need to handle it correctly
-    //[self.sourcesController updateAllArticles];
-    [self updateData];
-    [self.tableView reloadData];
+    ArticlesController *articlesController = [ArticlesController sharedInstance];
+    [articlesController updateArticlesForSource:sourse success:^(BOOL areNewArticlesAdded)
+    {
+        if (areNewArticlesAdded) {
+            [self updateData];
+            [self.tableView reloadData];;
+            NSLog(@"Sources table has been refreshed.");
+        }
+        else {
+            NSLog(@"No need to refresh the sources table.");
+        }
+    } failure:^(NSArray *errors)
+    {
+        NSLog(@"Errors: %@", errors);
+        NSString *alertDesctiption = ((NSError *)errors.firstObject).localizedDescription;
+        showInfoAlert(NSLocalizedString(@"errorLoadingArticles",), alertDesctiption, self);
+
+    }];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
