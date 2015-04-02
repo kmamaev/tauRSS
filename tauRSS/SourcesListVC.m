@@ -87,7 +87,7 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.sourcesController.sources.count;
+    return [self.sections[section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -100,6 +100,32 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
     cell.titleLabel.text = source.title;
     cell.countLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)[source.articles count]];
     return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if(indexPath.section == 0)
+        return NO;
+    else
+        return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        NSArray *sources = self.sections[indexPath.section];
+        Source *source = sources[indexPath.row];
+        [self.sourcesController deleteSource:source];
+        [self updateData];
+        NSIndexPath *allSourceIP = [NSIndexPath indexPathForRow:0 inSection:0];
+        NSIndexPath *favoriteSourceIP = [NSIndexPath indexPathForRow:1 inSection:0];
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tableView reloadRowsAtIndexPaths:@[allSourceIP, favoriteSourceIP] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+    }
 }
 
 #pragma mark - UITableViewDelegate implementation
