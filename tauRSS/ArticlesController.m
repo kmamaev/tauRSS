@@ -6,10 +6,20 @@
 
 @interface ArticlesController ()
 @property (strong, nonatomic) SourcesController *sourcesController;
+@property (strong, nonatomic) AFHTTPRequestOperationManager *manager;
 @end
 
 
 @implementation ArticlesController
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _manager = [AFHTTPRequestOperationManager manager];
+    }
+    return self;
+}
 
 + (ArticlesController *)sharedInstance
 {
@@ -140,12 +150,11 @@
     // If source is not equal to "All news" or "Favorites"
     else {
         NSString *URLString = source.sourceURL.absoluteString;
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
+        self.manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
 #warning I am not sure that only type "application/rss+xml" is necessary. Need to additional investigation.
-        manager.responseSerializer.acceptableContentTypes =
+        self.manager.responseSerializer.acceptableContentTypes =
             [NSSet setWithObject:@"application/rss+xml"];
-        [manager GET:URLString
+        [self.manager GET:URLString
             parameters:nil
             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 RSSParser *rssParser = [[RSSParser alloc] init];

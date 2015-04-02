@@ -1,4 +1,6 @@
 #import "Article.h"
+#import "Source.h"
+#import "NSDate+DateHelper.h"
 
 
 @implementation Article
@@ -68,6 +70,36 @@
 - (NSUInteger)hash
 {
     return [self.articleId hash];
+}
+
++ (NSString *)buildShortArticleInfo:(Article *)article
+{
+    NSMutableString *articleInfo = [[NSMutableString alloc] initWithString:@""];
+    if (article.publishDate) {
+        [articleInfo appendString:[article.publishDate shortString]];
+    }
+    if (article.category) {
+        [articleInfo appendFormat:@"・%@", article.category];
+    }
+    if (article.source.title) {
+        [articleInfo appendFormat:@"・%@", article.source.title];
+    }
+    return articleInfo;
+}
+
++ (NSString *)buildLongArticleInfo:(Article *)article
+{
+    NSMutableString *articleInfo = [[NSMutableString alloc] initWithString:@""];
+    if (article.publishDate) {
+        [articleInfo appendString:[article.publishDate longString]];
+    }
+    if (article.category) {
+        [articleInfo appendFormat:@"・%@", article.category];
+    }
+    if (article.source.title) {
+        [articleInfo appendFormat:@"・%@", article.source.title];
+    }
+    return articleInfo;
 }
 
 @end

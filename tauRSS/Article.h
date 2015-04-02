@@ -23,4 +23,14 @@
     imageURL:(NSURL *)imageURL
     publishDate:(NSDate *)publishDate;
 
+/**
+ *  Returns string containing article's publish date (date OR time), category and source
+ */
++ (NSString *)buildShortArticleInfo:(Article *)article;
+
+/**
+ *  Returns string containing article's publish date (date AND time), category and source
+ */
++ (NSString *)buildLongArticleInfo:(Article *)article;
+
 @end

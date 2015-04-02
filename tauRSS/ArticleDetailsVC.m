@@ -1,7 +1,7 @@
 #import "ArticleDetailsVC.h"
 #import "ArticleWebVC.h"
 #import "Source.h"
-#import "Utils.h"
+#import "AlertUtils.h"
 #import <UIImageView+AFNetworking.h>
 
 
@@ -45,7 +45,7 @@
     // Initialize article's title, info and description
     self.titleLabel.text = self.article.title;
     self.descriptionLabel.text = self.article.articleDescription;
-    self.infoLabel.text = [Utils buildLongArticleInfo:self.article];
+    self.infoLabel.text = [Article buildLongArticleInfo:self.article];
     
     if (self.article.imageURL == nil) {
         self.imageHeight.constant = 0.0f;
@@ -136,9 +136,9 @@
         [app openURL:self.article.link];
     }
     else {
-        [Utils showInfoAlertWithTitle:NSLocalizedString(@"cantOpenUrlTitle",)
-            description:NSLocalizedString(@"cantOpenUrlDescription",)
-            delegate:self];
+        showInfoAlert(NSLocalizedString(@"cantOpenUrlTitle",),
+            NSLocalizedString(@"cantOpenUrlDescription",),
+            self);
     }
 }
 

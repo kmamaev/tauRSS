@@ -1,6 +1,6 @@
 #import "ArticleWebVC.h"
 #import "ArticleDetailsVC.h"
-#import "Utils.h"
+#import "AlertUtils.h"
 
 
 @interface ArticleWebVC ()
@@ -66,9 +66,7 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
-    [Utils showInfoAlertWithTitle:NSLocalizedString(@"errorLoadingPage",)
-        description:error.localizedDescription
-        delegate:self];
+    showInfoAlert(NSLocalizedString(@"errorLoadingPage",), error.localizedDescription, self);
 #warning Need to handle network activity indicator via AFNetworking
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }

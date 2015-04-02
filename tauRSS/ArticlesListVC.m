@@ -2,7 +2,7 @@
 #import <IIViewDeckController.h>
 #import "ArticlesListCell.h"
 #import "ArticleDetailsVC.h"
-#import "Utils.h"
+#import "AlertUtils.h"
 
 
 typedef NS_ENUM(NSInteger, FilterType) {
@@ -163,7 +163,7 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
     ArticlesListCell *cell = [self.articlesTableView dequeueReusableCellWithIdentifier:reuseId];
     cell.titleLabel.text = article.title;
     
-    cell.infoLabel.text = [Utils buildShortArticleInfo:article];
+    cell.infoLabel.text = [Article buildShortArticleInfo:article];
     cell.descriptionLabel.text = article.articleDescription;
     cell.urlForImage = article.imageURL;
     
@@ -250,9 +250,8 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
         } failure:^(NSArray *errors) {
             NSLog(@"Errors: %@", errors);
             [self.refreshControl endRefreshing];
-            [Utils showInfoAlertWithTitle:NSLocalizedString(@"errorLoadingArticles",)
-                description:((NSError *)errors.firstObject).localizedDescription
-                delegate:(self)];
+            NSString *alertDesctiption = ((NSError *)errors.firstObject).localizedDescription;
+            showInfoAlert(NSLocalizedString(@"errorLoadingArticles",), alertDesctiption, self);
         }];
 }
 
