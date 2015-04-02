@@ -16,6 +16,7 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
 @property (strong, nonatomic) NSArray *sections;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *settingsBarButtonItem;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 - (IBAction)didTapSettingsBarButtonItem:(UIBarButtonItem *)sender;
 - (IBAction)didTapAddSourceBarButtonItem:(UIBarButtonItem *)sender;
@@ -69,6 +70,12 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
         forCellReuseIdentifier:reuseIDSourceCell];
     
     self.settingsBarButtonItem.title = NSLocalizedString(@"settings", );
+    
+    // Initialize refresh control
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refreshSources)
+                  forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
 }
 
 #pragma mark - UITableViewDataSource implementation
@@ -159,6 +166,28 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
     self.regularSources = @[allNewsSource, favoritesSource];
     self.sourcesController.sources = self.sourcesController.sources;
     self.sections = @[self.regularSources, self.sourcesController.sources];
+}
+
+- (void)refreshSources
+{
+    ArticlesController *articlesController = [ArticlesController sharedInstance];
+    [articlesController
+     updateArticlesForSource:self.regularSources.firstObject
+     success:^(BOOL areNewArticlesAdded) {
+         [self.refreshControl endRefreshing];
+         if (areNewArticlesAdded) {
+             [self.tableView reloadData];
+             NSLog(@"Sources table has been refreshed.");
+         }
+         else {
+             NSLog(@"No need to refresh the sources table.");
+         }
+     } failure:^(NSArray *errors) {
+         NSLog(@"Errors: %@", errors);
+         [self.refreshControl endRefreshing];
+         NSString *alertDesctiption = ((NSError *)errors.firstObject).localizedDescription;
+         showInfoAlert(NSLocalizedString(@"errorLoadingArticles",), alertDesctiption, self);
+     }];
 }
 
 @end
