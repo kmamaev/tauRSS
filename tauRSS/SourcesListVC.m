@@ -7,6 +7,7 @@
 
 
 static NSString *const reuseIDSourceCell = @"SourceListCell";
+static void *const sourcesListContext = (void *)&sourcesListContext;
 
 
 @interface SourcesListVC () <NewSourceDelegate>
@@ -39,8 +40,30 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
         Source *favoritesSource = [Source favoritesSource];
         _regularSources = @[allNewsSource, favoritesSource];
         _sections = @[_regularSources, sources];
+        
+        [self.sourcesController addObserver:self
+                        forKeyPath:@"sources"
+                           options:NSKeyValueObservingOptionNew
+                           context:sourcesListContext];
+        
+        [[ArticlesController sharedInstance] addObserver:self
+                                 forKeyPath:@"favoriteArticles"
+                                    options:NSKeyValueObservingOptionNew
+                                    context:sourcesListContext];
+
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [self.sourcesController removeObserver:self
+                       forKeyPath:@"sources"
+                          context:sourcesListContext];
+    
+    [[ArticlesController sharedInstance] removeObserver:self
+                                forKeyPath:@"favoriteArticles"
+                                   context:sourcesListContext];
 }
 
 #pragma mark - Getters
@@ -190,7 +213,7 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
     Source *allNewsSource = [Source allNewsSource];
     Source *favoritesSource = [Source favoritesSource];
     self.regularSources = @[allNewsSource, favoritesSource];
-    self.sourcesController.sources = self.sourcesController.sources;
+    //self.sourcesController.sources = self.sourcesController.sources;
     self.sections = @[self.regularSources, self.sourcesController.sources];
 }
 
@@ -215,5 +238,17 @@ static NSString *const reuseIDSourceCell = @"SourceListCell";
          showInfoAlert(NSLocalizedString(@"errorLoadingArticles",), alertDesctiption, self);
      }];
 }
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (context == sourcesListContext) {
+        [self updateData];
+        [self.tableView reloadData];
+    }
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
+
 
 @end

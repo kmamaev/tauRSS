@@ -45,7 +45,9 @@
     article.isRead = isRead;
     NSMutableArray *unreadArticles = [article.source.unreadArticles mutableCopy];
     isRead ? [unreadArticles removeObject:article] : [unreadArticles addObject:article];
+    [self.sourcesController willChangeValueForKey:@"sources"];
     article.source.unreadArticles = unreadArticles;
+    [self.sourcesController didChangeValueForKey:@"sources"];
 #warning resolve TODO mark
     // TODO: Implement working with db
 }
@@ -168,10 +170,13 @@
                     [fetchedArticles minusSet:currentArticles];
                     NSArray *newArticles = [[self class] articlesArrayBySortingASet:fetchedArticles];
                     dispatch_async(dispatch_get_main_queue(), ^{
+			[self.sourcesController willChangeValueForKey:@"sources"];
                         source.articles = [newArticles
                             arrayByAddingObjectsFromArray:source.articles];
                         source.unreadArticles = [newArticles
                             arrayByAddingObjectsFromArray:source.unreadArticles];
+			[self.sourcesController didChangeValueForKey:@"sources"];
+
                         NSLog(@"Update for source \"%@\" has finished, %ld articles are added.",
                               source.title, newArticles.count);
                         if (!success) {
