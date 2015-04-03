@@ -202,6 +202,15 @@ static float const defaultImageHeight = 180.0f;
 
 - (void)setUpArticle:(Article *)article
 {
+    // Set up article property
+    self.article = article;
+    
+    // Set read state
+    if (!article.isRead) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.index inSection:0];
+        [self.articlesListVC setRead:YES forArticle:article atIndexPath:indexPath];
+    }
+    
     // Initialize article's title, info and description
     self.titleLabel.text = article.title;
     self.descriptionLabel.text = article.articleDescription;
