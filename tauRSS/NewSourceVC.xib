@@ -1,99 +1,102 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewSourceVC">
             <connections>
-                <outlet property="addSourceButton" destination="eln-Xi-Sod" id="KLI-UC-eg3"/>
-                <outlet property="checkingIndicator" destination="QZu-so-zWr" id="vrz-62-nDr"/>
-                <outlet property="sourceAddressLable" destination="gwg-Jx-5eS" id="NBc-MG-buG"/>
-                <outlet property="sourceAddressTextField" destination="ogg-le-Mdd" id="MgN-gF-UEL"/>
-                <outlet property="sourceNameLable" destination="87w-zJ-Ulo" id="Rxl-hM-ij3"/>
-                <outlet property="sourceNameTextField" destination="zJW-6x-i08" id="r36-Qm-L0P"/>
-                <outlet property="sourceStatusImageView" destination="gKw-AV-ajS" id="cX4-Ic-raM"/>
+                <outlet property="addSourceButton" destination="6Te-10-1rV" id="d7q-b9-Bhd"/>
+                <outlet property="checkingIndicator" destination="C9t-Hw-vJi" id="oYm-hb-nou"/>
+                <outlet property="contentView" destination="Yqk-4q-1tQ" id="9fV-kG-W8o"/>
+                <outlet property="scrollView" destination="gbF-Yz-bPZ" id="8fC-CS-V61"/>
+                <outlet property="sourceAddressLable" destination="JNh-86-t3g" id="JZE-nk-CLQ"/>
+                <outlet property="sourceAddressTextField" destination="Cbk-Yp-w0T" id="nIA-8b-I8D"/>
+                <outlet property="sourceNameLable" destination="v2G-Yu-CHa" id="b4F-IM-EWl"/>
+                <outlet property="sourceNameTextField" destination="dhA-ic-SSc" id="32k-5H-Kk8"/>
+                <outlet property="sourceStatusImageView" destination="k7U-h7-4Gr" id="qIL-rc-FO4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="http://" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ogg-le-Mdd">
-                    <rect key="frame" x="28" y="98" width="511" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                    <connections>
-                        <action selector="doneEdittingSourceAddressTextField:" destination="-1" eventType="editingDidEndOnExit" id="3aw-bf-63K"/>
-                    </connections>
-                </textField>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gKw-AV-ajS">
-                    <rect key="frame" x="547" y="90" width="45" height="45"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="45" id="LyC-1h-2qj"/>
-                        <constraint firstAttribute="width" constant="45" id="xMK-W8-Dmg"/>
-                    </constraints>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введите RSS адрес:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gwg-Jx-5eS">
-                    <rect key="frame" x="28" y="69" width="549" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название источника:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87w-zJ-Ulo">
-                    <rect key="frame" x="28" y="148" width="549" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Новый источник" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zJW-6x-i08">
-                    <rect key="frame" x="28" y="177" width="564" height="30"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                    <connections>
-                        <action selector="didBeginEditingSourceNameTextField:" destination="-1" eventType="editingDidBegin" id="Hfn-uv-g1O"/>
-                        <action selector="doneEditingSourceNameTextField:" destination="-1" eventType="editingDidEndOnExit" id="rWl-k8-D1h"/>
-                    </connections>
-                </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eln-Xi-Sod">
-                    <rect key="frame" x="8" y="266" width="584" height="30"/>
-                    <state key="normal" title="Добавить источник">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="didTapAddSourceButton:" destination="-1" eventType="touchUpInside" id="BcA-bD-g74"/>
-                    </connections>
-                </button>
-                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="QZu-so-zWr">
-                    <rect key="frame" x="559" y="103" width="20" height="20"/>
-                </activityIndicatorView>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="gbF-Yz-bPZ">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" id="Yqk-4q-1tQ">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="225"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введите RSS адрес:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JNh-86-t3g">
+                                    <rect key="frame" x="15" y="34" width="164" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="http://" minimumFontSize="17" id="Cbk-Yp-w0T">
+                                    <rect key="frame" x="15" y="63" width="244" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                    <connections>
+                                        <action selector="didEditingBeginTextField:" destination="-1" eventType="editingDidBegin" id="W52-25-pnf"/>
+                                        <action selector="doneEdittingSourceAddressTextField:" destination="-1" eventType="editingDidEndOnExit" id="Okj-rJ-6qb"/>
+                                        <action selector="doneEdittingSourceAddressTextField:" destination="-1" eventType="editingDidEnd" id="qrM-uG-rRL"/>
+                                    </connections>
+                                </textField>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="k7U-h7-4Gr">
+                                    <rect key="frame" x="267" y="55" width="45" height="45"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название источника:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="v2G-Yu-CHa">
+                                    <rect key="frame" x="15" y="108" width="170" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="dhA-ic-SSc">
+                                    <rect key="frame" x="15" y="137" width="297" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                    <connections>
+                                        <action selector="didEditingBeginTextField:" destination="-1" eventType="editingDidBegin" id="k8k-qK-fHG"/>
+                                        <action selector="doneEditingSourceNameTextField:" destination="-1" eventType="editingDidEndOnExit" id="uz3-B9-cVO"/>
+                                    </connections>
+                                </textField>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6Te-10-1rV">
+                                    <rect key="frame" x="90" y="175" width="140" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Добавить источник">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="didTapAddSourceButton:" destination="-1" eventType="touchUpInside" id="bSY-Y5-5bb"/>
+                                    </connections>
+                                </button>
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="C9t-Hw-vJi">
+                                    <rect key="frame" x="279" y="68" width="20" height="20"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                </activityIndicatorView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="zJW-6x-i08" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="28" id="2rK-y9-8jm"/>
-                <constraint firstAttribute="trailing" secondItem="eln-Xi-Sod" secondAttribute="trailing" constant="8" id="3eO-EF-6VZ"/>
-                <constraint firstItem="QZu-so-zWr" firstAttribute="top" secondItem="gwg-Jx-5eS" secondAttribute="bottom" constant="13" id="4RI-HK-FXH"/>
-                <constraint firstAttribute="trailing" secondItem="gwg-Jx-5eS" secondAttribute="trailing" constant="23" id="4mh-20-cHg"/>
-                <constraint firstItem="eln-Xi-Sod" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="7iN-fe-qrU"/>
-                <constraint firstItem="87w-zJ-Ulo" firstAttribute="top" secondItem="ogg-le-Mdd" secondAttribute="bottom" constant="20" id="8UL-w0-5gr"/>
-                <constraint firstItem="gwg-Jx-5eS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="28" id="IrE-ka-dmn"/>
-                <constraint firstItem="ogg-le-Mdd" firstAttribute="top" secondItem="gwg-Jx-5eS" secondAttribute="bottom" constant="8" id="VCC-VA-tGP"/>
-                <constraint firstItem="eln-Xi-Sod" firstAttribute="top" secondItem="zJW-6x-i08" secondAttribute="bottom" constant="59" id="X62-Hi-YKb"/>
-                <constraint firstItem="ogg-le-Mdd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="28" id="a0T-FV-XA2"/>
-                <constraint firstAttribute="trailing" secondItem="QZu-so-zWr" secondAttribute="trailing" constant="21" id="bCT-mW-kNZ"/>
-                <constraint firstItem="gKw-AV-ajS" firstAttribute="leading" secondItem="ogg-le-Mdd" secondAttribute="trailing" constant="8" id="jS5-RR-Q9u"/>
-                <constraint firstAttribute="trailing" secondItem="87w-zJ-Ulo" secondAttribute="trailing" constant="23" id="lJd-OB-WKT"/>
-                <constraint firstItem="QZu-so-zWr" firstAttribute="leading" secondItem="ogg-le-Mdd" secondAttribute="trailing" constant="20" id="lje-YN-XcV"/>
-                <constraint firstItem="87w-zJ-Ulo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="28" id="n2N-Fi-dtJ"/>
-                <constraint firstItem="zJW-6x-i08" firstAttribute="top" secondItem="87w-zJ-Ulo" secondAttribute="bottom" constant="8" id="oTM-Dl-r4z"/>
-                <constraint firstAttribute="trailing" secondItem="zJW-6x-i08" secondAttribute="trailing" constant="8" id="vNf-N7-N1h"/>
-                <constraint firstAttribute="trailing" secondItem="gKw-AV-ajS" secondAttribute="trailing" constant="8" id="wRH-Cj-FA4"/>
-                <constraint firstItem="gwg-Jx-5eS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="69" id="z5o-lJ-049"/>
-                <constraint firstItem="gKw-AV-ajS" firstAttribute="top" secondItem="gwg-Jx-5eS" secondAttribute="bottom" id="zbF-N6-YB4"/>
-            </constraints>
             <point key="canvasLocation" x="529" y="521"/>
         </view>
     </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

@@ -4,6 +4,7 @@
 #import <AFHTTPRequestOperationManager.h>
 #import "AlertUtils.h"
 
+
 @interface NewSourceVC ()
 
 @property (strong, nonatomic) IBOutlet UITextField *sourceAddressTextField;
@@ -13,14 +14,18 @@
 @property (strong, nonatomic) IBOutlet UILabel *sourceAddressLable;
 @property (strong, nonatomic) IBOutlet UILabel *sourceNameLable;
 @property (strong, nonatomic) IBOutlet UIButton *addSourceButton;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UIView *contentView;
 
 
 @property (nonatomic) BOOL isSourceAddressCorrect;
+@property (nonatomic) CGSize contentSize;
+@property (strong, nonatomic) UITextField *activeTextField;
 
 - (IBAction)didTapAddSourceButton:(UIButton *)sender;
 - (IBAction)doneEdittingSourceAddressTextField:(UITextField *)sender;
 - (IBAction)doneEditingSourceNameTextField:(UITextField *)sender;
-- (IBAction)didBeginEditingSourceNameTextField:(UITextField *)sender;
+- (IBAction)didEditingBeginTextField:(UITextField *)sender;
 
 @end
 
@@ -52,6 +57,24 @@
     self.addSourceButton.titleLabel.text = NSLocalizedString(@"add", );
     self.sourceNameTextField.placeholder = NSLocalizedString(@"newSource", );
     self.checkingIndicator.hidden = YES;
+    self.contentSize = self.scrollView.contentSize;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:self.view.window];
+    // register for keyboard notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:self.view.window];
+    
 }
 
 - (void)didTouchCancelBarButtonItem:(UIBarButtonItem *)sender {
@@ -60,32 +83,50 @@
 
 
 
-#define kOFFSET_FOR_KEYBOARD 80.0
-
-
-//method to move the view up/down whenever the keyboard is shown/dismissed
--(void)setViewMovedUp:(BOOL)movedUp
+- (void)keyboardWillHide:(NSNotification *)notification
 {
+    NSDictionary* userInfo = [notification userInfo];
+    
+    CGSize keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    
+    CGRect rect = self.contentView.frame;
+    
+    rect.size.height -= keyboardSize.height;
+    self.contentView.frame = rect;
+    
     [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
-    
-    CGRect rect = self.view.frame;
-    if (movedUp)
-    {
-        // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
-        // 2. increase the size of the view so that the area behind the keyboard is covered up.
-        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
-        rect.size.height += kOFFSET_FOR_KEYBOARD;
-    }
-    else
-    {
-        // revert back to the normal state.
-        rect.origin.y += kOFFSET_FOR_KEYBOARD;
-        rect.size.height -= kOFFSET_FOR_KEYBOARD;
-    }
-    self.view.frame = rect;
-    
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    self.scrollView.contentSize = self.contentSize;
     [UIView commitAnimations];
+    
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+
+    NSDictionary* userInfo = [notification userInfo];
+    
+    CGSize keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    CGRect rect = self.contentView.frame;
+    rect.size.height += keyboardSize.height;
+    self.contentView.frame = rect;
+    
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    self.scrollView.contentSize = self.contentView.frame.size;
+    if ((self.activeTextField.frame.origin.y + self.activeTextField.frame.size.height) > (self.view.frame.size.height - keyboardSize.height))
+    {
+        CGPoint scrollPoint = CGPointMake(0.0, keyboardSize.height - self.activeTextField.frame.origin.y);
+        [self.scrollView setContentOffset:scrollPoint animated:YES];
+    }
+    [UIView commitAnimations];
+}
+
+- (void)orientationChanged:(NSNotification *)notification{
+    self.scrollView.contentSize = self.contentView.frame.size;
 }
 
 #pragma mark - Actions
@@ -122,45 +163,47 @@
     manager.responseSerializer.acceptableContentTypes =
     [NSSet setWithObject:@"application/rss+xml"];
     [manager GET:stringURL
-      parameters:nil
-         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             
-             self.isSourceAddressCorrect = YES;
-             [self.checkingIndicator stopAnimating];
-             self.checkingIndicator.hidden = YES;
-             UIImage *correctImage = [UIImage imageNamed:@"correct.png"];
-             self.sourceStatusImageView.image = correctImage;
-             self.sourceStatusImageView.hidden = NO;
-             
-             
-         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-             
-             self.isSourceAddressCorrect = NO;
-             [self.checkingIndicator stopAnimating];
-             self.checkingIndicator.hidden = YES;
-             UIImage *errorImage = [UIImage imageNamed:@"error.png"];
-             self.sourceStatusImageView.image = errorImage;
-             self.sourceStatusImageView.hidden = NO;
-             
-         }];
+           parameters:nil
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                
+                  self.isSourceAddressCorrect = YES;
+                  [self.checkingIndicator stopAnimating];
+                  self.checkingIndicator.hidden = YES;
+                  UIImage *correctImage = [UIImage imageNamed:@"correct.png"];
+                  self.sourceStatusImageView.image = correctImage;
+                  self.sourceStatusImageView.hidden = NO;
+                  
+                  
+              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  
+                  self.isSourceAddressCorrect = NO;
+                  [self.checkingIndicator stopAnimating];
+                  self.checkingIndicator.hidden = YES;
+                  UIImage *errorImage = [UIImage imageNamed:@"error.png"];
+                  self.sourceStatusImageView.image = errorImage;
+                  self.sourceStatusImageView.hidden = NO;
+                  
+              }];
     
+    self.activeTextField = nil;
     [sender resignFirstResponder];
 }
 
 - (IBAction)doneEditingSourceNameTextField:(UITextField *)sender
 {
-    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
-    {
-        [self setViewMovedUp:NO];
-    }
+    self.activeTextField = nil;
     [sender resignFirstResponder];
 }
 
-- (IBAction)didBeginEditingSourceNameTextField:(UITextField *)sender
+- (IBAction)didEditingBeginTextField:(UITextField *)sender
 {
-    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
-    {
-        [self setViewMovedUp:YES];
-    }
+    self.activeTextField = sender;
 }
+
+
+-(void)dismissKeyboard {
+    [self.sourceAddressTextField resignFirstResponder];
+    [self.sourceNameTextField resignFirstResponder];
+}
+
 @end
