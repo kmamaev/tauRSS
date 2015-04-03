@@ -1,6 +1,8 @@
 
 #import "NewSourceVC.h"
 #import "Source.h"
+#import <AFHTTPRequestOperationManager.h>
+#import "AlertUtils.h"
 
 @interface NewSourceVC ()
 
@@ -49,6 +51,7 @@
     self.sourceNameLable.text = NSLocalizedString(@"sourceName", );
     self.addSourceButton.titleLabel.text = NSLocalizedString(@"add", );
     self.sourceNameTextField.placeholder = NSLocalizedString(@"newSource", );
+    self.checkingIndicator.hidden = YES;
 }
 
 - (void)didTouchCancelBarButtonItem:(UIBarButtonItem *)sender {
@@ -89,13 +92,12 @@
 
 - (IBAction)didTapAddSourceButton:(UIButton *)sender
 {
-    if ((self.isSourceAddressCorrect == YES) && (self.sourceNameTextField.text !=nil))
+    if ((self.isSourceAddressCorrect == YES) && (self.sourceNameTextField.text !=nil || [self.sourceNameTextField.text isEqual:@""]))
     {
         Source *source = [[Source alloc]init];
         source.title = self.sourceNameTextField.text;
         
-        NSMutableString *stringURL = [@"http://" mutableCopy];
-        [stringURL appendString:self.sourceAddressTextField.text];
+        NSString *stringURL = [NSString stringWithFormat:@"http://%@", self.sourceAddressTextField.text];
         NSURL *sourceURL = [NSURL URLWithString:stringURL];
         
         source.sourceURL = sourceURL;
@@ -104,18 +106,43 @@
     }
     else
     {
-        
+        showInfoAlert(NSLocalizedString(@"errorAdditionSource",), NSLocalizedString(@"AllFieldMustBeFilled",), self);
     }
 }
 
 - (IBAction)doneEdittingSourceAddressTextField:(UITextField *)sender
 {
+    self.checkingIndicator.hidden = NO;
     [self.checkingIndicator startAnimating];
     self.sourceStatusImageView.hidden = YES;
+    NSString *stringURL = [NSString stringWithFormat:@"http://%@", self.sourceAddressTextField.text];
     
-    
-    #warning resolve TODO mark
-    // TODO: send a check request
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFXMLParserResponseSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes =
+    [NSSet setWithObject:@"application/rss+xml"];
+    [manager GET:stringURL
+      parameters:nil
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             
+             self.isSourceAddressCorrect = YES;
+             [self.checkingIndicator stopAnimating];
+             self.checkingIndicator.hidden = YES;
+             UIImage *correctImage = [UIImage imageNamed:@"correct.png"];
+             self.sourceStatusImageView.image = correctImage;
+             self.sourceStatusImageView.hidden = NO;
+             
+             
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             
+             self.isSourceAddressCorrect = NO;
+             [self.checkingIndicator stopAnimating];
+             self.checkingIndicator.hidden = YES;
+             UIImage *errorImage = [UIImage imageNamed:@"error.png"];
+             self.sourceStatusImageView.image = errorImage;
+             self.sourceStatusImageView.hidden = NO;
+             
+         }];
     
     [sender resignFirstResponder];
 }
