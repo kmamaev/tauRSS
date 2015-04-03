@@ -1,7 +1,9 @@
 #import <Foundation/Foundation.h>
 #import "Source.h"
 
-
+/**
+ *  The object might be used only one time. Create another one object for parsing each response.
+ */
 @interface RSSParser : NSObject
 
 /**

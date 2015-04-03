@@ -158,21 +158,28 @@
         [self.manager GET:URLString
             parameters:nil
             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                RSSParser *rssParser = [[RSSParser alloc] init];
-                NSMutableSet *fetchedArticles = [rssParser
-                    parseResponse:(NSXMLParser *)responseObject forSource:source];
-                NSSet *currentArticles = [NSSet setWithArray:source.articles];
-                [fetchedArticles minusSet:currentArticles];
-                NSArray *newArticles = [[self class] articlesArrayBySortingASet:fetchedArticles];
-                source.articles = [newArticles arrayByAddingObjectsFromArray:source.articles];
-                source.unreadArticles = [newArticles
-                    arrayByAddingObjectsFromArray:source.unreadArticles];
-                NSLog(@"Update for source \"%@\" has finished, %ld articles are added.",
-                    source.title, newArticles.count);
-                if (!success) {
-                    return;
-                }
-                success(newArticles.count > 0);
+                dispatch_queue_t queue =
+                    dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+                dispatch_async(queue, ^{
+                    RSSParser *rssParser = [[RSSParser alloc] init];
+                    NSMutableSet *fetchedArticles = [rssParser
+                        parseResponse:(NSXMLParser *)responseObject forSource:source];
+                    NSSet *currentArticles = [NSSet setWithArray:source.articles];
+                    [fetchedArticles minusSet:currentArticles];
+                    NSArray *newArticles = [[self class] articlesArrayBySortingASet:fetchedArticles];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        source.articles = [newArticles
+                            arrayByAddingObjectsFromArray:source.articles];
+                        source.unreadArticles = [newArticles
+                            arrayByAddingObjectsFromArray:source.unreadArticles];
+                        NSLog(@"Update for source \"%@\" has finished, %ld articles are added.",
+                              source.title, newArticles.count);
+                        if (!success) {
+                            return;
+                        }
+                        success(newArticles.count > 0);
+                    });
+                });
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 if (!failure) {
                     return;
