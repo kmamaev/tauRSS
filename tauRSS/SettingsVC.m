@@ -1,7 +1,7 @@
-
-
 #import "SettingsVC.h"
 #import "SettingsSwitchCell.h"
+#import "AboutVC.h"
+
 
 static NSString *const kSectionTitle = @"SectionTitle";
 static NSString *const kSectionItems = @"SectionItems";
@@ -19,7 +19,10 @@ typedef NS_ENUM(NSInteger, ReadingSettings) {
     fontSelect = 1
 };
 
-@interface SettingsVC () <UITableViewDataSource, UITableViewDelegate>
+@interface SettingsVC () <UITableViewDataSource, UITableViewDelegate> {
+    NSString *_aboutItem;
+}
+
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *sections;
 
@@ -39,9 +42,10 @@ typedef NS_ENUM(NSInteger, ReadingSettings) {
             @{kSectionTitle: NSLocalizedString(@"reading", ),
               kSectionItems: @[NSLocalizedString(@"darkMode", ), NSLocalizedString(@"fontSize", )]};
         
+        _aboutItem = NSLocalizedString(@"about", );
         NSDictionary *sectionAbout =
         @{kSectionTitle: @"",
-          kSectionItems: @[NSLocalizedString(@"about", )]};
+          kSectionItems: @[_aboutItem]};
         
         _sections = @[sectionClear, sectionReading, sectionAbout];
         
@@ -67,6 +71,8 @@ typedef NS_ENUM(NSInteger, ReadingSettings) {
                                 bundle:[NSBundle mainBundle]]
      forCellReuseIdentifier:reuseIDswitchCell];
     
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
+        style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
 - (void)didTouchDoneBarButtonItem:(UIBarButtonItem *)sender {
@@ -109,10 +115,25 @@ typedef NS_ENUM(NSInteger, ReadingSettings) {
     {
         UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:REUSABLE_CELL_ID];
         cell.textLabel.text = title;
-    
+        NSString *selectedItem = section[kSectionItems][indexPath.row];
+        if (selectedItem == _aboutItem) {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
         return cell;
     }
 }
 
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSDictionary *section = self.sections[indexPath.section];
+    NSString *selectedItem = section[kSectionItems][indexPath.row];
+    if (selectedItem == _aboutItem) {
+        AboutVC *aboutVC = [[AboutVC alloc] init];
+        [self.navigationController pushViewController:aboutVC animated:YES];
+    }
+}
 
 @end

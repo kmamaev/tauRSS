@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AboutVC">
+            <connections>
+                <outlet property="descriptionLabel" destination="XY3-3u-jMO" id="NG2-oe-SVj"/>
+                <outlet property="tableView" destination="ogS-f2-ViR" id="hm4-t9-XKl"/>
+                <outlet property="titleLabel" destination="hfH-89-Da5" id="S1B-5H-bcy"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tauRSS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfH-89-Da5">
+                    <rect key="frame" x="8" y="18" width="584" height="29"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XY3-3u-jMO">
+                    <rect key="frame" x="8" y="65" width="584" height="17"/>
+                    <attributedString key="attributedText">
+                        <fragment content="Description">
+                            <attributes>
+                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="ogS-f2-ViR">
+                    <rect key="frame" x="0.0" y="89.5" width="600" height="510.5"/>
+                    <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="mIQ-lw-wgU"/>
+                        <outlet property="delegate" destination="-1" id="6TO-gE-Zmh"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ogS-f2-ViR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2uX-bQ-qTB"/>
+                <constraint firstAttribute="trailing" secondItem="XY3-3u-jMO" secondAttribute="trailing" constant="8" id="65i-qR-qXi"/>
+                <constraint firstAttribute="trailing" secondItem="ogS-f2-ViR" secondAttribute="trailing" id="C0q-VC-O8z"/>
+                <constraint firstItem="hfH-89-Da5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="IyQ-w8-Akc"/>
+                <constraint firstItem="XY3-3u-jMO" firstAttribute="top" secondItem="hfH-89-Da5" secondAttribute="bottom" constant="18" id="NIP-8E-h4b"/>
+                <constraint firstAttribute="trailing" secondItem="hfH-89-Da5" secondAttribute="trailing" constant="8" id="Pwg-6q-Pa3"/>
+                <constraint firstAttribute="bottom" secondItem="ogS-f2-ViR" secondAttribute="bottom" id="TEm-ZU-Kk6"/>
+                <constraint firstItem="hfH-89-Da5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="18" id="W73-Bc-e3c"/>
+                <constraint firstItem="XY3-3u-jMO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="ZLz-Hh-zTI"/>
+                <constraint firstItem="ogS-f2-ViR" firstAttribute="top" secondItem="XY3-3u-jMO" secondAttribute="bottom" constant="8" id="oDL-wu-YpF"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
