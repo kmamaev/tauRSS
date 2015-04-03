@@ -95,10 +95,11 @@
     rect.size.height -= keyboardSize.height;
     self.contentView.frame = rect;
     
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationBeginsFromCurrentState:YES];
-    self.scrollView.contentSize = self.contentSize;
-    [UIView commitAnimations];
+    [UIView animateWithDuration:0.3 animations:^{
+        
+        self.scrollView.contentSize = self.contentSize;
+    }];
+
     
 }
 
@@ -114,15 +115,15 @@
     self.contentView.frame = rect;
     
     
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationBeginsFromCurrentState:YES];
-    self.scrollView.contentSize = self.contentView.frame.size;
-    if ((self.activeTextField.frame.origin.y + self.activeTextField.frame.size.height) > (self.view.frame.size.height - keyboardSize.height))
-    {
-        CGPoint scrollPoint = CGPointMake(0.0, keyboardSize.height - self.activeTextField.frame.origin.y);
-        [self.scrollView setContentOffset:scrollPoint animated:YES];
-    }
-    [UIView commitAnimations];
+    [UIView animateWithDuration:0.3 animations:^{
+        
+        self.scrollView.contentSize = self.contentView.frame.size;
+        if ((self.activeTextField.frame.origin.y + self.activeTextField.frame.size.height) > (self.view.frame.size.height - keyboardSize.height))
+        {
+            CGPoint scrollPoint = CGPointMake(0.0, keyboardSize.height - self.activeTextField.frame.origin.y);
+            [self.scrollView setContentOffset:scrollPoint animated:YES];
+        }
+    }];
 }
 
 - (void)orientationChanged:(NSNotification *)notification{
