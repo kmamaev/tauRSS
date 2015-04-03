@@ -195,7 +195,8 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
     }
     
     ArticleDetailsVC *articleDetailsVC = [[ArticleDetailsVC alloc]
-        initWithArticle:article image:articleImage];
+        initWithArticle:article];
+    articleDetailsVC.articlesListVC = self;
     
     [self.navigationController pushViewController:articleDetailsVC animated:YES];
     

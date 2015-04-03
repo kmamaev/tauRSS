@@ -3,7 +3,11 @@
 #import "Source.h"
 #import "AlertUtils.h"
 #import "ArticlesListCell.h"
+#import "ArticlesListVC.h"
 #import <UIImageView+AFNetworking.h>
+
+
+static float const defaultImageHeight = 180.0f;
 
 
 @interface ArticleDetailsVC ()
@@ -26,12 +30,11 @@
 
 #pragma mark - Initialization
 
-- (instancetype)initWithArticle:(Article *)article image:(UIImage *)articleImage
+- (instancetype)initWithArticle:(Article *)article
 {
     self = [self init];
     if (self != nil) {
         _article = article;
-        _articleImage = articleImage;
     }
     return self;
 }
@@ -43,25 +46,15 @@
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
-    // Initialize article's title, info and description
-    self.titleLabel.text = self.article.title;
-    self.descriptionLabel.text = self.article.articleDescription;
-    self.infoLabel.text = [Article buildLongArticleInfo:self.article];
-    
-    if (self.article.imageURL == nil) {
-        self.imageHeight.constant = 0.0f;
-    }
-    
-    // Initialize article image
-    if (self.articleImage) {
-        self.articleImageView.image = self.articleImage;
-    }
-    else {
-        [self.articleImageView setImageWithURL:self.article.imageURL];
-    }
+    // Initialize article's title, info, description and image
+    [self setUpArticle:self.article];
     
     // Initialize toolbar items
     [self initializeToolbarItems];
+    
+    // Set up index and disable "left/right" toolbar buttons if needed
+    self.index = [self.articlesListVC.source.articles indexOfObject:self.article];
+    [self setUpLeftRightButtonsStates];
 }
 
 - (void)initializeToolbarItems
@@ -131,14 +124,16 @@
 
 - (void)didTapLeftArrowButton:(UIButton *)sender
 {
-#warning resolve TODO mark
-    // TODO: implement this
+    self.index--;
+    [self setUpLeftRightButtonsStates];
+    [self setUpArticle:self.articlesListVC.source.articles[self.index]];
 }
 
 - (void)didTapRightArrowButton:(UIButton *)sender
 {
-#warning resolve TODO mark
-    // TODO: implement this
+    self.index++;
+    [self setUpLeftRightButtonsStates];
+    [self setUpArticle:self.articlesListVC.source.articles[self.index]];
 }
 
 - (void)didTapPlanetButton:(UIButton *)sender
@@ -201,6 +196,29 @@
     [self.navigationController presentViewController:activityViewController
         animated:YES
         completion:nil];
+}
+
+#pragma mark - Auxiliaries
+
+- (void)setUpArticle:(Article *)article
+{
+    // Initialize article's title, info and description
+    self.titleLabel.text = article.title;
+    self.descriptionLabel.text = article.articleDescription;
+    self.infoLabel.text = [Article buildLongArticleInfo:article];
+    
+    self.imageHeight.constant = article.imageURL == nil ? 0.0f : defaultImageHeight;
+    
+    // Initialize article image
+    [self.articleImageView setImageWithURL:article.imageURL
+        placeholderImage:[ArticlesListCell placeholderImage]];
+}
+
+- (void)setUpLeftRightButtonsStates
+{
+    NSInteger articlesCount = self.articlesListVC.source.articles.count;
+    self.leftArrowButton.enabled = self.index == 0 ? NO : YES;
+    self.rightArrowButton.enabled = self.index == articlesCount - 1 ? NO : YES;
 }
 
 @end

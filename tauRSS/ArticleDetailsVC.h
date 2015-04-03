@@ -2,12 +2,15 @@
 #import "Article.h"
 
 
+@class ArticlesListVC;
+
 @interface ArticleDetailsVC : UIViewController
 
 @property (strong, nonatomic) Article *article;
-@property (strong, nonatomic) UIImage *articleImage;
+@property (assign, nonatomic) NSInteger index;
+@property (weak, nonatomic) ArticlesListVC *articlesListVC;
 
-- (instancetype)initWithArticle:(Article *)article image:(UIImage *)articleImage;
+- (instancetype)initWithArticle:(Article *)article;
 - (void)didTapPlanetButton:(UIButton *)sender;
 
 @end
