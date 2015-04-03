@@ -52,6 +52,34 @@
     // TODO: Implement working with db
 }
 
+- (void)markAllArticlesAsReadForSource:(Source *)source
+{
+    if (source.sourceId == sourceIdAllNews) {
+        [self.sourcesController willChangeValueForKey:@"sources"];
+        for (Source *s in self.sourcesController.sources) {
+            [self markAllArticlesAsReadForSource:s];
+        }
+        [self.sourcesController didChangeValueForKey:@"sources"];
+    }
+    else if (source.sourceId == sourceIdFavorites) {
+        for (Article *article in self.favoriteArticles) {
+            [self setRead:YES forArticle:article];
+        }
+    }
+    else {
+        for (Article *article in source.articles) {
+            if (!article.isRead) {
+                article.isRead = YES;
+            }
+        }
+        [self.sourcesController willChangeValueForKey:@"sources"];
+        source.unreadArticles = [NSArray array];
+        [self.sourcesController didChangeValueForKey:@"sources"];
+    }
+#warning resolve TODO mark
+    // TODO: Implement working with db
+}
+
 - (void)setFavorite:(BOOL)isFavorite forArticle:(Article *)article
 {
     article.isFavorite = isFavorite;

@@ -7,6 +7,7 @@
 @property (strong, nonatomic) NSArray *favoriteArticles;
 
 - (void)setRead:(BOOL)isRead forArticle:(Article *)article;
+- (void)markAllArticlesAsReadForSource:(Source *)source;
 - (void)setFavorite:(BOOL)isFavorite forArticle:(Article *)article;
 - (NSArray *)allArticles;
 - (void)updateArticlesForSource:(Source *)source

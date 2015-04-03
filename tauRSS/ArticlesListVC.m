@@ -208,13 +208,15 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
 - (NSArray *)tableView:(UITableView *)tableView
     editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Article *article = self.articlesTableDatasource[indexPath.row];
-    NSString *actionTitle =
-        article.isRead ? NSLocalizedString(@"markAsUnRead",) : NSLocalizedString(@"markAsRead",);
     typeof(self) __weak wself = self;
+    
+    // Define mark as read action
+    Article *article = self.articlesTableDatasource[indexPath.row];
+    NSString *markAsReadTitle =
+        article.isRead ? NSLocalizedString(@"markAsUnRead",) : NSLocalizedString(@"markAsRead",);
     UITableViewRowAction *markAsReadAction = [UITableViewRowAction
         rowActionWithStyle:UITableViewRowActionStyleDefault
-        title:actionTitle
+        title:markAsReadTitle
         handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
             typeof(wself) __strong sself = wself;
             Article *article = sself.articlesTableDatasource[indexPath.row];
@@ -222,7 +224,34 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
             [sself.articlesTableView setEditing:NO];
         }];
     markAsReadAction.backgroundColor = [UIColor lightGrayColor];
-    return @[markAsReadAction];
+    
+    // Define mark all as read action
+    NSString *markAllAsReadTitle = NSLocalizedString(@"markAllAsRead",);
+    UITableViewRowAction *markAllAsReadAction = [UITableViewRowAction
+        rowActionWithStyle:UITableViewRowActionStyleDefault
+        title:markAllAsReadTitle
+        handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+            typeof(wself) __strong sself = wself;
+            NSArray *articles = sself.articlesTableDatasource;
+            for (int i=0; i<articles.count; i++) {
+                Article *article = articles[i];
+                if (!article.isRead) {
+                    NSIndexPath *ip = [NSIndexPath indexPathForRow:i inSection:0];
+                    if (currentFilterType == filterTypeAll) {
+                        ArticlesListCell *articlesListCell =
+                            (ArticlesListCell *)[sself.articlesTableView cellForRowAtIndexPath:ip];
+                        [articlesListCell setStyle:CellStyleMuted];
+                    }
+                }
+            }
+            [sself.articlesController markAllArticlesAsReadForSource:sself.source];
+            if (currentFilterType == filterTypeUnread) {
+                [sself.articlesTableView reloadData];
+            }
+            [sself.articlesTableView setEditing:NO];
+        }];
+    
+    return @[markAsReadAction, markAllAsReadAction];
 }
 
 #pragma mark - UIGestureRecognizerDelegate implementation
