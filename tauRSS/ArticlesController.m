@@ -170,12 +170,12 @@
                     [fetchedArticles minusSet:currentArticles];
                     NSArray *newArticles = [[self class] articlesArrayBySortingASet:fetchedArticles];
                     dispatch_async(dispatch_get_main_queue(), ^{
-			[self.sourcesController willChangeValueForKey:@"sources"];
+                        [self.sourcesController willChangeValueForKey:@"sources"];
                         source.articles = [newArticles
                             arrayByAddingObjectsFromArray:source.articles];
                         source.unreadArticles = [newArticles
                             arrayByAddingObjectsFromArray:source.unreadArticles];
-			[self.sourcesController didChangeValueForKey:@"sources"];
+                        [self.sourcesController didChangeValueForKey:@"sources"];
 
                         NSLog(@"Update for source \"%@\" has finished, %ld articles are added.",
                               source.title, newArticles.count);

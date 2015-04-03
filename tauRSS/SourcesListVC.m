@@ -167,7 +167,7 @@ static void *const sourcesListContext = (void *)&sourcesListContext;
 
 - (IBAction)didTapSettingsBarButtonItem:(UIBarButtonItem *)sender
 {
-    SettingsVC *settingsVC = [[SettingsVC alloc]init];
+    SettingsVC *settingsVC = [[SettingsVC alloc] init];
     UINavigationController *navController = [[UINavigationController alloc]
         initWithRootViewController:settingsVC];
     [self presentViewController:navController animated:YES completion:nil];
