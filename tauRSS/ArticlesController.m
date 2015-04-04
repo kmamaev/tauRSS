@@ -48,8 +48,7 @@
     [self.sourcesController willChangeValueForKey:@"sources"];
     article.source.unreadArticles = unreadArticles;
     [self.sourcesController didChangeValueForKey:@"sources"];
-#warning resolve TODO mark
-    // TODO: Implement working with db
+    [self.sourcesController.storageController setRead:isRead forArticle:article];
 }
 
 - (void)markAllArticlesAsReadForSource:(Source *)source
@@ -70,14 +69,13 @@
         for (Article *article in source.articles) {
             if (!article.isRead) {
                 article.isRead = YES;
+                [self.sourcesController.storageController setRead:YES forArticle:article];
             }
         }
         [self.sourcesController willChangeValueForKey:@"sources"];
         source.unreadArticles = [NSArray array];
         [self.sourcesController didChangeValueForKey:@"sources"];
     }
-#warning resolve TODO mark
-    // TODO: Implement working with db
 }
 
 - (void)setFavorite:(BOOL)isFavorite forArticle:(Article *)article
