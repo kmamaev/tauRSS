@@ -6,18 +6,13 @@
 static NSString *const kSectionTitle = @"SectionTitle";
 static NSString *const kSectionItems = @"SectionItems";
 
-static NSString *const reuseIDswitchCell = @"SettingsSwitchCell";
+static NSString *const reuseIDCell = @"ReuseID";
 
 typedef NS_ENUM(NSInteger, Sections) {
     sectionClear = 0,
-    sectionReading = 1,
-    sectionAbout = 2
+    sectionAbout = 1
 };
 
-typedef NS_ENUM(NSInteger, ReadingSettings) {
-    darkMode = 0,
-    fontSelect = 1
-};
 
 @interface SettingsVC () <UITableViewDataSource, UITableViewDelegate> {
     NSString *_aboutItem;
@@ -38,16 +33,13 @@ typedef NS_ENUM(NSInteger, ReadingSettings) {
             @{kSectionTitle: @"",
               kSectionItems: @[NSLocalizedString(@"clearCache", )]};
         
-        NSDictionary *sectionReading =
-            @{kSectionTitle: NSLocalizedString(@"reading", ),
-              kSectionItems: @[NSLocalizedString(@"darkMode", ), NSLocalizedString(@"fontSize", )]};
         
         _aboutItem = NSLocalizedString(@"about", );
         NSDictionary *sectionAbout =
         @{kSectionTitle: @"",
           kSectionItems: @[_aboutItem]};
         
-        _sections = @[sectionClear, sectionReading, sectionAbout];
+        _sections = @[sectionClear, sectionAbout];
         
     }
     return self;
@@ -65,11 +57,6 @@ typedef NS_ENUM(NSInteger, ReadingSettings) {
         [self.navigationItem setRightBarButtonItem:doneBarButtonItem];
         self.navigationItem.title = NSLocalizedString(@"settings", );
     }
-    
-    [self.tableView
-     registerNib:[UINib nibWithNibName:NSStringFromClass([SettingsSwitchCell class])
-                                bundle:[NSBundle mainBundle]]
-     forCellReuseIdentifier:reuseIDswitchCell];
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
         style:UIBarButtonItemStylePlain target:nil action:nil];
@@ -96,31 +83,19 @@ typedef NS_ENUM(NSInteger, ReadingSettings) {
     return sectionDict[kSectionTitle];
 }
 
-#define REUSABLE_CELL_ID @"ReuseID"
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *section = self.sections[indexPath.section];
     NSString *title = (section[kSectionItems])[indexPath.row];
-    
-    if ((indexPath.section == sectionReading) && (indexPath.row == darkMode))
-    {
-        SettingsSwitchCell *switchCell = [self.tableView dequeueReusableCellWithIdentifier:reuseIDswitchCell];
-        switchCell.titleLabel.text = title;
-        switchCell.cellSwitch.on = NO;
-        
-        return switchCell;
-    }
-    else
-    {
-        UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:REUSABLE_CELL_ID];
+
+        UITableViewCell *cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIDCell];
         cell.textLabel.text = title;
         NSString *selectedItem = section[kSectionItems][indexPath.row];
         if (selectedItem == _aboutItem) {
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         }
         return cell;
-    }
 }
 
 
