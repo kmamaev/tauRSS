@@ -94,7 +94,15 @@ static void *const sourcesListContext = (void *)&sourcesListContext;
             bundle:[NSBundle mainBundle]]
         forCellReuseIdentifier:reuseIDSourceCell];
     
-    self.settingsBarButtonItem.title = NSLocalizedString(@"settings", );
+    // Initialize 'planet' button
+    UIImage *gearImage = [[UIImage imageNamed:@"gear.png"]
+        imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIButton *gearButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    gearButton.frame = (CGRect){0, 0, 24, 24};
+    [gearButton setImage:gearImage forState:UIControlStateNormal];
+    [gearButton addTarget:self action:@selector(didTapSettingsBarButtonItem:)
+        forControlEvents:UIControlEventTouchUpInside];
+    self.settingsBarButtonItem.customView = gearButton;
     
     // Initialize refresh control
     self.refreshControl = [[UIRefreshControl alloc] init];
