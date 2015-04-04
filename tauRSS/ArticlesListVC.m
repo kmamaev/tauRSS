@@ -25,7 +25,6 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
 @property (strong, nonatomic) ArticlesController *articlesController;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *readFilterControl;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *readFilterHeight;
-@property (strong, nonatomic) IBOutlet UITableView *articlesTableView;
 @property (strong, nonatomic, readonly) NSArray *articlesTableDatasource;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) NSArray *readFilterSegments;

@@ -10,7 +10,10 @@
 static float const defaultImageHeight = 180.0f;
 
 
-@interface ArticleDetailsVC ()
+@interface ArticleDetailsVC () {
+    UIButton *_leftArrow;
+    UIButton *_rightArrow;
+}
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
@@ -64,22 +67,22 @@ static float const defaultImageHeight = 180.0f;
     // Initialize 'left arrow' button
     UIImage *leftArrowImage = [[UIImage imageNamed:@"left_arrow.png"]
         imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    UIButton *lestArrowButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    lestArrowButton.frame = toolBarIconFrame;
-    [lestArrowButton setImage:leftArrowImage forState:UIControlStateNormal];
-    [lestArrowButton addTarget:self action:@selector(didTapLeftArrowButton:)
+    _leftArrow = [UIButton buttonWithType:UIButtonTypeCustom];
+    _leftArrow.frame = toolBarIconFrame;
+    [_leftArrow setImage:leftArrowImage forState:UIControlStateNormal];
+    [_leftArrow addTarget:self action:@selector(didTapArrowButton:)
         forControlEvents:UIControlEventTouchUpInside];
-    self.leftArrowButton.customView = lestArrowButton;
+    self.leftArrowButton.customView = _leftArrow;
     
     // Initialize 'right arrow' button
     UIImage *rightArrowImage = [[UIImage imageNamed:@"right_arrow.png"]
         imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    UIButton *rightArrowButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightArrowButton.frame = toolBarIconFrame;
-    [rightArrowButton setImage:rightArrowImage forState:UIControlStateNormal];
-    [rightArrowButton addTarget:self action:@selector(didTapRightArrowButton:)
+    _rightArrow = [UIButton buttonWithType:UIButtonTypeCustom];
+    _rightArrow.frame = toolBarIconFrame;
+    [_rightArrow setImage:rightArrowImage forState:UIControlStateNormal];
+    [_rightArrow addTarget:self action:@selector(didTapArrowButton:)
         forControlEvents:UIControlEventTouchUpInside];
-    self.rightArrowButton.customView = rightArrowButton;
+    self.rightArrowButton.customView = _rightArrow;
     
     // Initialize 'planet' button
     UIImage *planetImage = [[UIImage imageNamed:@"planet.png"]
@@ -122,18 +125,19 @@ static float const defaultImageHeight = 180.0f;
     [self.navigationController pushViewController:articleWebVC animated:YES];
 }
 
-- (void)didTapLeftArrowButton:(UIButton *)sender
+- (void)didTapArrowButton:(UIButton *)sender
 {
-    self.index--;
+    if (sender == _leftArrow) {
+        self.index--;
+    }
+    else if (sender == _rightArrow) {
+        self.index++;
+    }
     [self setUpLeftRightButtonsStates];
     [self setUpArticle:self.articlesListVC.source.articles[self.index]];
-}
-
-- (void)didTapRightArrowButton:(UIButton *)sender
-{
-    self.index++;
-    [self setUpLeftRightButtonsStates];
-    [self setUpArticle:self.articlesListVC.source.articles[self.index]];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.index inSection:0];
+    [self.articlesListVC.articlesTableView scrollToRowAtIndexPath:indexPath
+        atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 
 - (void)didTapPlanetButton:(UIButton *)sender
