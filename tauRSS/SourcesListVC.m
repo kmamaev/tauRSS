@@ -144,13 +144,7 @@ static void *const sourcesListContext = (void *)&sourcesListContext;
         NSArray *sources = self.sections[indexPath.section];
         Source *source = sources[indexPath.row];
         [self.sourcesController deleteSource:source];
-        [self updateData];
-        NSIndexPath *allSourceIP = [NSIndexPath indexPathForRow:0 inSection:0];
-        NSIndexPath *favoriteSourceIP = [NSIndexPath indexPathForRow:1 inSection:0];
-        
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [tableView reloadRowsAtIndexPaths:@[allSourceIP, favoriteSourceIP] withRowAnimation:UITableViewRowAnimationAutomatic];
-        
+ 
     }
 }
 
