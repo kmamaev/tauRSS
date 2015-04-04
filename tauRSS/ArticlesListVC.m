@@ -11,7 +11,7 @@ typedef NS_ENUM(NSInteger, FilterType) {
     filterTypeDefault = filterTypeAll
 };
 
-static FilterType currentFilterType = filterTypeDefault;
+static FilterType currentFilterType;
 static BOOL isReadFilterShown = NO;
 static float const readFilterHeight = 44.0f;
 static NSString *const reuseIDcellWithImage = @"ArticlesListCell1";
@@ -73,6 +73,14 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
     // Set up edges for navbar and toolbar for proper working of autolayout
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
+    // Initialize filter type
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:kSegmentFilterType] != nil) {
+        currentFilterType = [[NSUserDefaults standardUserDefaults] integerForKey:kSegmentFilterType];
+    }
+    else {
+        currentFilterType = filterTypeDefault;
+    }
+    
     // Initialize main menu button
     UIImage *barsIcon = [[UIImage imageNamed:@"bars.png"]
         imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -118,6 +126,9 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
         [self.readFilterControl
             setTitle:self.readFilterSegments[i][kSegmentTitle]
             forSegmentAtIndex:i];
+        if ([self.readFilterSegments[i][kSegmentFilterType] integerValue] == currentFilterType) {
+            self.readFilterControl.selectedSegmentIndex = i;
+        }
     }
     [self.readFilterControl addTarget:self
         action:@selector(readFilterValueChanged:)
@@ -131,6 +142,7 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
 {
     NSDictionary *selectedSegment = self.readFilterSegments[[sender selectedSegmentIndex]];
     currentFilterType = [selectedSegment[kSegmentFilterType] integerValue];
+    [[NSUserDefaults standardUserDefaults] setInteger:currentFilterType forKey:kSegmentFilterType];
     [self.articlesTableView reloadData];
 }
 
