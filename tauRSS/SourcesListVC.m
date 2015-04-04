@@ -101,6 +101,7 @@ static void *const sourcesListContext = (void *)&sourcesListContext;
     [self.refreshControl addTarget:self action:@selector(refreshSources)
                   forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:self.refreshControl];
+    [self refreshSources];
 }
 
 #pragma mark - UITableViewDataSource implementation
