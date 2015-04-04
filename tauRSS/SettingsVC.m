@@ -1,6 +1,8 @@
 #import "SettingsVC.h"
 #import "SettingsSwitchCell.h"
 #import "AboutVC.h"
+#import "SourcesController.h"
+#import "StorageController.h"
 
 
 static NSString *const kSectionTitle = @"SectionTitle";
@@ -31,7 +33,7 @@ typedef NS_ENUM(NSInteger, Sections) {
     {
         NSDictionary *sectionClear =
             @{kSectionTitle: @"",
-              kSectionItems: @[NSLocalizedString(@"clearCache", )]};
+              kSectionItems: @[NSLocalizedString(@"deleteArticles", )]};
         
         
         _aboutItem = NSLocalizedString(@"about", );
@@ -108,6 +110,23 @@ typedef NS_ENUM(NSInteger, Sections) {
     if (selectedItem == _aboutItem) {
         AboutVC *aboutVC = [[AboutVC alloc] init];
         [self.navigationController pushViewController:aboutVC animated:YES];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"deleteArticles", )
+                                                           message:NSLocalizedString(@"confirmDeleting", )
+                                                          delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", )
+                                                        otherButtonTitles:NSLocalizedString(@"delete", ), nil];
+        [alertView show];
+    }
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        SourcesController *sourcesController = [SourcesController sharedInstance];
+        [sourcesController.storageController deleteAllArticles];
     }
 }
 
