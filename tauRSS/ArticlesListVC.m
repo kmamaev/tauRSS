@@ -277,6 +277,10 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
 
 - (void)refreshArticles
 {
+    if (!self.source) {
+        [self.refreshControl endRefreshing];
+        return;
+    }
     [self.articlesController
         updateArticlesForSource:self.source
         success:^(BOOL areNewArticlesAdded) {

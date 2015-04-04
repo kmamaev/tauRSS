@@ -34,12 +34,14 @@ static void *const sourcesListContext = (void *)&sourcesListContext;
 {
     self = [super init];
     if (self != nil) {
-        _articlesListVC = [[ArticlesListVC alloc] init];
         NSArray *sources = [SourcesController sharedInstance].sources;
         Source *allNewsSource = [Source allNewsSource];
         Source *favoritesSource = [Source favoritesSource];
         _regularSources = @[allNewsSource, favoritesSource];
         _sections = @[_regularSources, sources];
+        
+        _articlesListVC = [[ArticlesListVC alloc] init];
+        _articlesListVC.source = allNewsSource;
         
         [self.sourcesController addObserver:self
                         forKeyPath:@"sources"
