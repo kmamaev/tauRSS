@@ -29,7 +29,6 @@
 		B53CDBE71AA78E3600CDD070 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B53CDBE61AA78E3600CDD070 /* AppDelegate.m */; };
 		B53CDBEF1AA78E3600CDD070 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B53CDBEE1AA78E3600CDD070 /* Images.xcassets */; };
 		B53CDBF21AA78E3600CDD070 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B53CDBF01AA78E3600CDD070 /* LaunchScreen.xib */; };
-		B53CDBFE1AA78E3600CDD070 /* tauRSSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B53CDBFD1AA78E3600CDD070 /* tauRSSTests.m */; };
 		B5463EAC1ABA05CF002AE579 /* ArticleWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B5463EAA1ABA05CF002AE579 /* ArticleWebVC.m */; };
 		B5463EAD1ABA05CF002AE579 /* ArticleWebVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5463EAB1ABA05CF002AE579 /* ArticleWebVC.xib */; };
 		B549E4551AB054AC00371CBD /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = B549E4541AB054AC00371CBD /* Article.m */; };
@@ -57,16 +56,6 @@
 		C0DA933B1ABAEBF200A1F062 /* ArticlesListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C0DA93391ABAEBF200A1F062 /* ArticlesListCell.m */; };
 		C0DA933C1ABAEBF200A1F062 /* ArticlesListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0DA933A1ABAEBF200A1F062 /* ArticlesListCell.xib */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		B53CDBF81AA78E3600CDD070 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B53CDBD61AA78E3600CDD070 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B53CDBDD1AA78E3600CDD070;
-			remoteInfo = tauRSS;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3E3123729005DA975C61A5B4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -104,9 +93,6 @@
 		B53CDBE61AA78E3600CDD070 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		B53CDBEE1AA78E3600CDD070 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B53CDBF11AA78E3600CDD070 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		B53CDBF71AA78E3600CDD070 /* tauRSSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tauRSSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B53CDBFC1AA78E3600CDD070 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B53CDBFD1AA78E3600CDD070 /* tauRSSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tauRSSTests.m; sourceTree = "<group>"; };
 		B5463EA91ABA05CF002AE579 /* ArticleWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleWebVC.h; sourceTree = "<group>"; };
 		B5463EAA1ABA05CF002AE579 /* ArticleWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleWebVC.m; sourceTree = "<group>"; };
 		B5463EAB1ABA05CF002AE579 /* ArticleWebVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleWebVC.xib; sourceTree = "<group>"; };
@@ -155,13 +141,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B53CDBF41AA78E3600CDD070 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -177,7 +156,6 @@
 			isa = PBXGroup;
 			children = (
 				B53CDBE01AA78E3600CDD070 /* tauRSS */,
-				B53CDBFA1AA78E3600CDD070 /* tauRSSTests */,
 				B53CDBDF1AA78E3600CDD070 /* Products */,
 				C7810488F06A96528750DEAF /* Pods */,
 				56CE7699206F242164400D80 /* Frameworks */,
@@ -188,7 +166,6 @@
 			isa = PBXGroup;
 			children = (
 				B53CDBDE1AA78E3600CDD070 /* tauRSS.app */,
-				B53CDBF71AA78E3600CDD070 /* tauRSSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -264,23 +241,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B53CDBFA1AA78E3600CDD070 /* tauRSSTests */ = {
-			isa = PBXGroup;
-			children = (
-				B53CDBFD1AA78E3600CDD070 /* tauRSSTests.m */,
-				B53CDBFB1AA78E3600CDD070 /* Supporting Files */,
-			);
-			path = tauRSSTests;
-			sourceTree = "<group>";
-		};
-		B53CDBFB1AA78E3600CDD070 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				B53CDBFC1AA78E3600CDD070 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		B5D4BCDA1ABB358600B31627 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,24 +308,6 @@
 			productReference = B53CDBDE1AA78E3600CDD070 /* tauRSS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B53CDBF61AA78E3600CDD070 /* tauRSSTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B53CDC041AA78E3600CDD070 /* Build configuration list for PBXNativeTarget "tauRSSTests" */;
-			buildPhases = (
-				B53CDBF31AA78E3600CDD070 /* Sources */,
-				B53CDBF41AA78E3600CDD070 /* Frameworks */,
-				B53CDBF51AA78E3600CDD070 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B53CDBF91AA78E3600CDD070 /* PBXTargetDependency */,
-			);
-			name = tauRSSTests;
-			productName = tauRSSTests;
-			productReference = B53CDBF71AA78E3600CDD070 /* tauRSSTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -377,10 +319,6 @@
 				TargetAttributes = {
 					B53CDBDD1AA78E3600CDD070 = {
 						CreatedOnToolsVersion = 6.1;
-					};
-					B53CDBF61AA78E3600CDD070 = {
-						CreatedOnToolsVersion = 6.1;
-						TestTargetID = B53CDBDD1AA78E3600CDD070;
 					};
 				};
 			};
@@ -398,7 +336,6 @@
 			projectRoot = "";
 			targets = (
 				B53CDBDD1AA78E3600CDD070 /* tauRSS */,
-				B53CDBF61AA78E3600CDD070 /* tauRSSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -434,13 +371,6 @@
 				B5EDB3AB1ABD7370000DB04B /* star_filled.png in Resources */,
 				B52CCF281AAEED6900E7828A /* ArticlesListVC.xib in Resources */,
 				A8259AD11ABC4D3C007D8B9E /* SettingsVC.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B53CDBF51AA78E3600CDD070 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,23 +438,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B53CDBF31AA78E3600CDD070 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B53CDBFE1AA78E3600CDD070 /* tauRSSTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		B53CDBF91AA78E3600CDD070 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B53CDBDD1AA78E3600CDD070 /* tauRSS */;
-			targetProxy = B53CDBF81AA78E3600CDD070 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		B53CDBF01AA78E3600CDD070 /* LaunchScreen.xib */ = {
@@ -636,40 +550,6 @@
 			};
 			name = Release;
 		};
-		B53CDC051AA78E3600CDD070 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = tauRSSTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tauRSS.app/tauRSS";
-			};
-			name = Debug;
-		};
-		B53CDC061AA78E3600CDD070 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = tauRSSTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/tauRSS.app/tauRSS";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -687,15 +567,6 @@
 			buildConfigurations = (
 				B53CDC021AA78E3600CDD070 /* Debug */,
 				B53CDC031AA78E3600CDD070 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B53CDC041AA78E3600CDD070 /* Build configuration list for PBXNativeTarget "tauRSSTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B53CDC051AA78E3600CDD070 /* Debug */,
-				B53CDC061AA78E3600CDD070 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
