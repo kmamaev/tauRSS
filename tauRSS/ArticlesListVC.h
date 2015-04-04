@@ -5,7 +5,7 @@
 
 @interface ArticlesListVC : UIViewController <UIGestureRecognizerDelegate>
 
-@property (weak, nonatomic) Source *source;
+@property (strong, nonatomic) Source *source;
 @property (strong, nonatomic) IBOutlet UITableView *articlesTableView;
 
 - (void)setRead:(BOOL)isRead forArticle:(Article *)article atIndexPath:(NSIndexPath *)indexPath;

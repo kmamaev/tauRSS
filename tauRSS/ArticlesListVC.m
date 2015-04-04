@@ -281,22 +281,25 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
         [self.refreshControl endRefreshing];
         return;
     }
+    typeof(self) __weak wself = self;
     [self.articlesController
         updateArticlesForSource:self.source
         success:^(BOOL areNewArticlesAdded) {
-            [self.refreshControl endRefreshing];
+            typeof(wself) __strong sself = wself;
+            [sself.refreshControl endRefreshing];
             if (areNewArticlesAdded) {
-                [self.articlesTableView reloadData];
+                [sself.articlesTableView reloadData];
                 NSLog(@"Articles table has been refreshed.");
             }
             else {
                 NSLog(@"No need to refresh the articles table.");
             }
         } failure:^(NSArray *errors) {
+            typeof(wself) __strong sself = wself;
             NSLog(@"Errors: %@", errors);
-            [self.refreshControl endRefreshing];
-            NSString *alertDesctiption = ((NSError *)errors.firstObject).localizedDescription;
-            showInfoAlert(NSLocalizedString(@"errorLoadingArticles",), alertDesctiption, self);
+            [sself.refreshControl endRefreshing];
+            NSString *alertDescription = ((NSError *)errors.firstObject).localizedDescription;
+            showInfoAlert(NSLocalizedString(@"errorLoadingArticles",), alertDescription, sself);
         }];
 }
 
