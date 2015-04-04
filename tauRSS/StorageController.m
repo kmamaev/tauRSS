@@ -44,6 +44,7 @@ static NSString *const DefaultFileNameForDataBase = @"AwesomeDataBase.db";
         _db = [FMDatabase databaseWithPath:[fileURLForDataBase path]];
         [self createTables];
         [self loadData];
+        [self deleteReadArticles];
         
     }
     return self;
