@@ -334,10 +334,21 @@ static NSString *const DefaultFileNameForDataBase = @"AwesomeDataBase.db";
 - (void)deleteAllArticles
 {
     NSString *queryString = [NSString stringWithFormat:
-                                    @"DELETE FROM %@", articlesTableName];
+                                    @"DELETE FROM %@ WHERE %@ = ?", articlesTableName, articlesFavoriteColumnName];
     
     [self.db open];
-    [self.db executeUpdate:queryString];
+    [self.db executeUpdate:queryString, @(NO)];
+    [self.db close];
+}
+
+// Delete read articles from DB except favorite articles
+- (void)deleteReadArticles
+{
+    NSString *queryString = [NSString stringWithFormat:
+                             @"DELETE FROM %@ WHERE %@ = ? AND %@ = ?", articlesTableName, articlesReadColumnName, articlesFavoriteColumnName];
+    
+    [self.db open];
+    [self.db executeUpdate:queryString, @(YES), @(NO)];
     [self.db close];
 }
 
