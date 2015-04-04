@@ -199,6 +199,7 @@
                     NSArray *newArticles = [[self class] articlesArrayBySortingASet:fetchedArticles];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.sourcesController willChangeValueForKey:@"sources"];
+                        [self.sourcesController.storageController storeArticles:newArticles forSourceWithId:source.sourceId];
                         source.articles = [newArticles
                             arrayByAddingObjectsFromArray:source.articles];
                         source.unreadArticles = [newArticles
