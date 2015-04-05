@@ -217,9 +217,17 @@ static float const defaultImageHeight = 180.0f;
     
     // Initialize article's title, info and description
     self.titleLabel.text = article.title;
-    self.descriptionLabel.text = article.articleDescription;
+    NSMutableAttributedString *attributedDescription = [[NSMutableAttributedString alloc]
+        initWithString:article.articleDescription];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 4.0f;
+    [attributedDescription addAttribute:NSParagraphStyleAttributeName
+        value:paragraphStyle
+        range:NSMakeRange(0, article.articleDescription.length)];
+    self.descriptionLabel.attributedText = attributedDescription;
     self.infoLabel.text = [Article buildLongArticleInfo:article];
     
+    // Set up image height
     self.imageHeight.constant = article.imageURL == nil ? 0.0f : defaultImageHeight;
     
     // Initialize article image
