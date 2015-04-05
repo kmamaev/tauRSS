@@ -135,6 +135,7 @@ static NSString *const DefaultFileNameForDataBase = @"AwesomeDataBase.db";
         }
         
         source.articles = articles;
+        source.unreadArticles = articles;
         [sources addObject:source];
     }
     [self.db close];

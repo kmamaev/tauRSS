@@ -46,7 +46,13 @@
     NSMutableArray *unreadArticles = [article.source.unreadArticles mutableCopy];
     isRead ? [unreadArticles removeObject:article] : [unreadArticles addObject:article];
     [self.sourcesController willChangeValueForKey:@"sources"];
-    article.source.unreadArticles = unreadArticles;
+    if (!isRead) {
+        article.source.unreadArticles = [[self class]
+            articlesArraySortedByPublishDate:unreadArticles];
+    }
+    else {
+        article.source.unreadArticles = unreadArticles;
+    }
     [self.sourcesController didChangeValueForKey:@"sources"];
     [self.sourcesController.storageController setRead:isRead forArticle:article];
 }

@@ -221,7 +221,7 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
 {
     typeof(self) __weak wself = self;
     
-    // Define mark as read action
+    // Define mark as read/unread action
     Article *article = self.articlesTableDatasource[indexPath.row];
     NSString *markAsReadTitle =
         article.isRead ? NSLocalizedString(@"markAsUnRead",) : NSLocalizedString(@"markAsRead",);

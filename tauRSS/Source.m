@@ -30,10 +30,12 @@
 - (NSArray *)unreadArticles
 {
     BOOL isRegularSource = self.sourceId == sourceIdAllNews || self.sourceId == sourceIdFavorites;
-    if (!_unreadArticles || isRegularSource) {
-        _unreadArticles = [self.articlesController unreadArticlesForSource:self];
+    if (isRegularSource) {
+        return [self.articlesController unreadArticlesForSource:self];
     }
-    return _unreadArticles;
+    else {
+        return _unreadArticles;
+    }
 }
 
 + (instancetype)allNewsSource
