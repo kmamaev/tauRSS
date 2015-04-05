@@ -171,6 +171,9 @@ static float const defaultImageHeight = 180.0f;
                      imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     }
     [(UIButton *)self.starButton.customView setImage:starImage forState:UIControlStateNormal];
+    if (self.articlesListVC.source.sourceId == sourceIdFavorites) {
+        [self.articlesListVC.articlesTableView reloadData];
+    }
 }
 
 - (IBAction)didTapActionButton:(UIBarButtonItem *)sender
