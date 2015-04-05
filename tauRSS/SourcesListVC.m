@@ -164,6 +164,10 @@ static void *const sourcesListContext = (void *)&sourcesListContext;
     Source *source = sources[indexPath.row];
     self.articlesListVC.source = source;
     self.articlesListVC.title = source.title;
+    if (self.articlesListVC.navigationController.topViewController != self.articlesListVC)
+    {
+        [self.articlesListVC.navigationController popToRootViewControllerAnimated:YES];
+    }
     [self.viewDeckController closeLeftViewAnimated:YES];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
