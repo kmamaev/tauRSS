@@ -185,6 +185,7 @@ static void *const sourcesListContext = (void *)&sourcesListContext;
 - (IBAction)didTapAddSourceBarButtonItem:(UIBarButtonItem *)sender
 {
     NewSourceVC *newVC = [[NewSourceVC alloc]init];
+    newVC.delegate = self;
     UINavigationController *navController = [[UINavigationController alloc]
         initWithRootViewController:newVC];
     [self presentViewController:navController animated:YES completion:nil];
@@ -194,7 +195,7 @@ static void *const sourcesListContext = (void *)&sourcesListContext;
 
 - (void)newSourceViewController:(NewSourceVC *)sender didFinishWithSource:(Source *)sourse
 {
-    sourse.sourceId = [self.sourcesController.sources count];
+    sourse.sourceId = [self.sourcesController.sources count] + 1;
     [self.sourcesController addSource:sourse];
     ArticlesController *articlesController = [ArticlesController sharedInstance];
     [articlesController updateArticlesForSource:sourse success:^(BOOL areNewArticlesAdded)
@@ -214,7 +215,7 @@ static void *const sourcesListContext = (void *)&sourcesListContext;
         showInfoAlert(NSLocalizedString(@"errorLoadingArticles",), alertDesctiption, self);
 
     }];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [sender dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)updateData
