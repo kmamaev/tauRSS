@@ -3,6 +3,8 @@
 #import "ArticlesListCell.h"
 #import "ArticleDetailsVC.h"
 #import "AlertUtils.h"
+#import "Source.h"
+#import "Article.h"
 
 
 typedef NS_ENUM(NSInteger, FilterType) {
@@ -20,7 +22,7 @@ static NSString *const kSegmentTitle = @"segment_title";
 static NSString *const kSegmentFilterType = @"segment_filter_type";
 
 
-@interface ArticlesListVC ()
+@interface ArticlesListVC () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) ArticlesController *articlesController;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *readFilterControl;
@@ -136,6 +138,18 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
     self.readFilterHeight.constant = isReadFilterShown ? readFilterHeight : 0.0f;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.viewDeckController.panningMode = IIViewDeckFullViewPanning;
+}
+
+- (void)setEditing:(BOOL)editing
+{
+    [super setEditing:editing];
+    self.articlesTableView.userInteractionEnabled = editing;
+}
+
 #pragma mark - Actions
 
 - (void)readFilterValueChanged:(UISegmentedControl *)sender
@@ -210,15 +224,25 @@ static NSString *const kSegmentFilterType = @"segment_filter_type";
     articleDetailsVC.articlesListVC = self;
     
     [self.navigationController pushViewController:articleDetailsVC animated:YES];
+    self.viewDeckController.panningMode = IIViewDeckNoPanning;
     
     if (!article.isRead) {
         [self setRead:YES forArticle:article atIndexPath:indexPath];
     }
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return self.editing;
+}
+
 - (NSArray *)tableView:(UITableView *)tableView
     editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (!self.editing) {
+        return nil;
+    }
+    
     typeof(self) __weak wself = self;
     
     // Define mark as read/unread action

@@ -31,6 +31,8 @@
         initWithCenterViewController:centerController
         leftViewController:leftController];
     
+    deckController.delegate = sourcesListVC;
+    
     // Give possibility to invoke row editing in articles table by swipe gesture
     deckController.panningGestureDelegate = articlesListVC;
     // There is necessary to implement method

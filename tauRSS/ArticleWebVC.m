@@ -1,6 +1,7 @@
 #import "ArticleWebVC.h"
 #import "ArticleDetailsVC.h"
 #import "AlertUtils.h"
+#import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 
 
 @interface ArticleWebVC ()
@@ -54,29 +55,25 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-#warning Need to handle network activity indicator via AFNetworking
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    [[AFNetworkActivityIndicatorManager sharedManager] incrementActivityCount];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-#warning Need to handle network activity indicator via AFNetworking
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [[AFNetworkActivityIndicatorManager sharedManager] decrementActivityCount];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
     showInfoAlert(NSLocalizedString(@"errorLoadingPage",), error.localizedDescription, self);
-#warning Need to handle network activity indicator via AFNetworking
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [[AFNetworkActivityIndicatorManager sharedManager] decrementActivityCount];
 }
 
 #pragma mark - Dealloc
 
 - (void)dealloc
 {
-#warning Need to handle network activity indicator via AFNetworking
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [[AFNetworkActivityIndicatorManager sharedManager] decrementActivityCount];
 }
 
 @end

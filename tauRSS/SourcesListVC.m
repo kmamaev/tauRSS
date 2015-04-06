@@ -112,6 +112,16 @@ static void *const sourcesListContext = (void *)&sourcesListContext;
     [self refreshSources];
 }
 
+- (void)viewDeckController:(IIViewDeckController *)viewDeckController didOpenViewSide:(IIViewDeckSide)viewDeckSide animated:(BOOL)animated
+{
+    self.articlesListVC.editing = NO;
+}
+
+- (void)viewDeckController:(IIViewDeckController *)viewDeckController didCloseViewSide:(IIViewDeckSide)viewDeckSide animated:(BOOL)animated
+{
+    self.articlesListVC.editing = YES;
+}
+
 #pragma mark - UITableViewDataSource implementation
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
