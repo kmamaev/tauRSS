@@ -134,7 +134,7 @@
 
 - (IBAction)didTapAddSourceButton:(UIButton *)sender
 {
-    if ((self.isSourceAddressCorrect == YES) && (self.sourceNameTextField.text !=nil || [self.sourceNameTextField.text isEqual:@""]))
+    if ((self.isSourceAddressCorrect == YES) && (self.sourceNameTextField.text !=nil || ![self.sourceNameTextField.text isEqualToString:@""]))
     {
         Source *source = [[Source alloc]init];
         source.title = self.sourceNameTextField.text;
