@@ -3,6 +3,7 @@
 #import "Source.h"
 #import <AFHTTPRequestOperationManager.h>
 #import "AlertUtils.h"
+#import <IIViewDeckController.h>
 
 
 @interface NewSourceVC ()
@@ -77,7 +78,12 @@
     
 }
 
-- (void)didTouchCancelBarButtonItem:(UIBarButtonItem *)sender {
+- (void)didTouchCancelBarButtonItem:(UIBarButtonItem *)sender
+{
+    if ([self.presentingViewController isKindOfClass:[IIViewDeckController class]])
+    {
+        [(IIViewDeckController *)self.presentingViewController openLeftViewAnimated:NO];
+    }
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -134,7 +140,7 @@
 
 - (IBAction)didTapAddSourceButton:(UIButton *)sender
 {
-    if ((self.isSourceAddressCorrect == YES) && (self.sourceNameTextField.text !=nil || ![self.sourceNameTextField.text isEqualToString:@""]))
+    if ((self.isSourceAddressCorrect == YES) && (self.sourceNameTextField.text !=nil && !([self.sourceNameTextField.text isEqualToString:@""])))
     {
         Source *source = [[Source alloc]init];
         source.title = self.sourceNameTextField.text;

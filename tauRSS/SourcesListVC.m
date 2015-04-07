@@ -225,6 +225,7 @@ static void *const sourcesListContext = (void *)&sourcesListContext;
         showInfoAlert(NSLocalizedString(@"errorLoadingArticles",), alertDesctiption, self);
 
     }];
+    [self.viewDeckController openLeftViewAnimated:NO];
     [sender dismissViewControllerAnimated:YES completion:nil];
 }
 

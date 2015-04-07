@@ -3,6 +3,7 @@
 #import "AboutVC.h"
 #import "SourcesController.h"
 #import "StorageController.h"
+#import <IIViewDeckController.h>
 
 
 static NSString *const kSectionTitle = @"SectionTitle";
@@ -64,7 +65,12 @@ typedef NS_ENUM(NSInteger, Sections) {
         style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
-- (void)didTouchDoneBarButtonItem:(UIBarButtonItem *)sender {
+- (void)didTouchDoneBarButtonItem:(UIBarButtonItem *)sender
+{
+    if ([self.presentingViewController isKindOfClass:[IIViewDeckController class]])
+    {
+        [(IIViewDeckController *)self.presentingViewController openLeftViewAnimated:NO];
+    }
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
